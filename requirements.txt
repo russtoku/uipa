@@ -1,28 +1,28 @@
-Django==1.6.1
+Django==1.8.3
 Markdown==2.3.1
 South==0.8.4
 celery==3.1.8
-django-celery==3.1.1
+django-celery==3.1.16
 -e git://github.com/stefanw/django-haystack.git@update-index-language#egg=django_haystack
-django-taggit==0.10
+django-taggit==0.16.2
 lxml==3.2.4
-psycopg2==2.5.1
-pytz==2013.8
-requests==2.0.1
-django-floppyforms==1.1
-django_overextends==0.3.0
+psycopg2==2.6.1
+pytz==2015.4
+requests==2.7.0
+django-floppyforms==1.5.1
+django-overextends==0.4.0
 python-magic==0.4.6
-django-tastypie==0.10.0
+django-tastypie==0.12.2
 python-mimeparse>=0.1.4
-django-tastypie-swagger==0.1.1
+-e git://github.com/stefanw/django-tastypie-swagger.git@python-3#egg=django_tastypie_swagger
+-e git://github.com/jezdez/django-configurations.git@master#egg=configurations
 unicodecsv==0.9.4
-django-configurations==0.7
 django-storages==1.1.8
-dj-database-url==0.2.2
-django-cache-url==0.6.0
+dj-database-url==0.3.0
+django-cache-url==1.0.0
 gunicorn==18.0
 dj-static==0.0.5
 boto==2.20.0
 honcho==0.5.0
-https://github.com/django-compressor/django-compressor/archive/develop.zip#egg=django_compressor
--e git://github.com/stefanw/froide.git@master#egg=froide
+-e git://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
+-e git://github.com/codeforhawaii/froide/froide.git@master#egg=froide
