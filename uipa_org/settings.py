@@ -105,6 +105,8 @@ class Beta(UipaOrgThemeBase, Base):
         }
     }
 
+    HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
+
     ALLOWED_HOSTS = values.TupleValue(('beta.uipa.org',))
 
     FOI_EMAIL_TEMPLATE = values.Value('request+{secret}@{domain}')
