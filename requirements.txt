@@ -8,7 +8,6 @@ celery_haystack
 django-celery-email==1.1.2
 django-haystack==2.4.0
 django-taggit==0.16.2
-psycopg2==2.6.1
 pytz==2015.4
 requests==2.7.0
 django-floppyforms==1.5.1
@@ -23,13 +22,14 @@ django-storages==1.1.8
 django-contrib-comments==1.6.1
 dj-database-url==0.3.0
 django-cache-url==1.0.0
-gunicorn==18.0
 dj-static==0.0.5
-boto==2.20.0
-pysolr==3.3.2
 honcho==0.6.6
-lxml==3.4.4
 django-tinymce==2.0.2
 anyjson==0.3.3
--e git://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
--e git://github.com/codeforhawaii/froide/froide.git@master#egg=froide
+-e git://github.com/codeforhawaii/froide.git@master#egg=froide
+
+# pysolr==3.3.2
+# boto==2.20.0
+# -e git://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
+#psycopg2==2.6.1
+#lxml==3.4.4
