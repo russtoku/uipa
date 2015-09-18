@@ -25,14 +25,14 @@ def find_version(*file_paths):
 
 
 setup(
-    name="froide_theme",
-    version=find_version("froide_theme", "__init__.py"),
-    url='https://github.com/okfn/froide_theme',
+    name="uipa_org",
+    version=find_version("uipa_org", "__init__.py"),
+    url='https://github.com/CodeforHawaii/uipa_org',
     license='MIT',
-    description="Template theme for Froide install",
+    description="Template theme for uipa.org install",
     long_description=read('README.md'),
-    author='Stefan Wehrmeyer',
-    author_email='mail@stefanwehrmeyer.com',
+    author='Code for Hawaii',
+    author_email='tech@codeforhawaii.org',
     packages=find_packages(),
     install_requires=['froide'],
     include_package_data=True,
