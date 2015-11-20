@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/CodeforHawaii/uipa_org.png?label=ready&title=Ready)](https://waffle.io/CodeforHawaii/uipa_org)
 [![Stories in Ready](https://badge.waffle.io/codeforhawaii/uipa_org.png?label=ready&title=Ready)](https://waffle.io/codeforhawaii/uipa_org)
 # Froide Base Theme
 
