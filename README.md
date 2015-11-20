@@ -1,5 +1,5 @@
-[![Stories in Ready](https://badge.waffle.io/CodeforHawaii/uipa_org.png?label=ready&title=Ready)](https://waffle.io/CodeforHawaii/uipa_org)
 [![Stories in Ready](https://badge.waffle.io/codeforhawaii/uipa_org.png?label=ready&title=Ready)](https://waffle.io/codeforhawaii/uipa_org)
+
 # Froide Base Theme
 
 This is a basic Django project with a theme app that plugs into [Froide](https://github.com/stefanw/froide).
