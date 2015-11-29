@@ -17,10 +17,6 @@ class UipaOrgThemeBase(ThemeBase):
     SITE_EMAIL = "info@example.com"
     SITE_URL = 'http://localhost:8000'
 
-    SECRET_URLS = {
-        "admin": "admin",
-    }
-
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     STATIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, "..", "public"))
 
