@@ -6,9 +6,11 @@ This is a basic Django project with a theme app that plugs into [Froide](https:/
 
 ## Get started easily
 
+
 In a Python virtualenv run:
 
     pip install -r requirements.txt -e .
+    pip uninstall South (Make sure to uninstall South!)
     python manage.py syncdb --migrate
     python manage.py runserver
 
