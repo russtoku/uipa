@@ -11,12 +11,16 @@ In a Python virtualenv run:
 
     pip install -r requirements.txt -e .
     pip uninstall South (Make sure to uninstall South!)
-    python manage.py syncdb --migrate
+    python manage.py syncdb 
     python manage.py runserver
 
 
 [Here is a complete guide of how to set this up on Heroku.](http://froide.readthedocs.org/en/latest/herokudeployment/)
 
+
+## Froide documentation
+
+http://froide.readthedocs.org/en/latest/gettingstarted/
 
 ## License
 
