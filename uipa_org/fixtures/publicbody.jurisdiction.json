@@ -1,1 +1,57 @@
-[{"fields": {"description": "The bodies represented in this jurisdiction fall under the State of Hawaii.", "hidden": false, "name": "State of Hawaii", "rank": 1, "slug": "state-of-hawaii"}, "model": "publicbody.jurisdiction", "pk": 1}]
+[
+{
+  "fields": {
+    "description": "The bodies represented in this jurisdiction fall under the State of Hawaii.",
+    "hidden": false,
+    "name": "State of Hawaii",
+    "rank": 1,
+    "slug": "state-of-hawaii"
+  },
+  "model": "publicbody.jurisdiction",
+  "pk": 1
+},
+{
+  "fields": {
+    "description": "",
+    "hidden": false,
+    "name": "City and County of Honolulu",
+    "rank": 2,
+    "slug": "city-and-county-of-honolulu"
+  },
+  "model": "publicbody.jurisdiction",
+  "pk": 2
+},
+{
+  "fields": {
+    "description": "",
+    "hidden": false,
+    "name": "County of Hawaii",
+    "rank": 3,
+    "slug": "county-of-hawaii"
+  },
+  "model": "publicbody.jurisdiction",
+  "pk": 3
+},
+{
+  "fields": {
+    "description": "",
+    "hidden": false,
+    "name": "County of Kauai",
+    "rank": 5,
+    "slug": "county-of-kauai"
+  },
+  "model": "publicbody.jurisdiction",
+  "pk": 4
+},
+{
+  "fields": {
+    "description": "",
+    "hidden": false,
+    "name": "County of Maui",
+    "rank": 4,
+    "slug": "county-of-maui"
+  },
+  "model": "publicbody.jurisdiction",
+  "pk": 5
+}
+]
