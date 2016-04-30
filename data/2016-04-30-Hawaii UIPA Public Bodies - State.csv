@@ -1,93 +1,93 @@
-name,email,address,contact,jurisdiction__slug,other_names,description,topic__slug,parent__name,classification,url,website_dump,request_note,testing_email
+name,email,address,contact,jurisdiction__slug,other_names,description,topic__slug,parent__name,classification,url,website_dump,request_note
 ACCOUNTING  GENERAL SERVICES,dags@hawaii.gov,"Kalanimoku Building
 1151 Punchbowl Street
 Honolulu, HI 96813","Ph: 808 586-0400
-Fax: 808 586-0775",state-of-hawaii,State of Hawaii,,,,,http://ags.hawaii.gov/,,,tech+dags_at_hawaii.gov@codeforhawaii.org
+Fax: 808 586-0775",state-of-hawaii,State of Hawaii,,,,,http://ags.hawaii.gov/,,
 AGRICULTURE,hdoa.info@hawaii.gov,"Office of the Chairperson
 1428 S. King Street
-Honolulu, HI 96814",Ph: 808 973-9560,SOH,State of Hawaii,,,,,http://hdoa.hawaii.gov/,,,tech+hdoa.info_at_hawaii.gov@codeforhawaii.org
+Honolulu, HI 96814",Ph: 808 973-9560,state-of-hawaii,State of Hawaii,,,,,http://hdoa.hawaii.gov/,,
 ATTORNEY GENERAL,hawaiiag@hawaii.gov,"425 Queen Street
 Honolulu, HI 96813","Ph: 808 586-1500
-Fax: 808 586-1239",SOH,State of Hawaii,,,,,http://ag.hawaii.gov/,,,tech+hawaiiag_at_hawaii.gov@codeforhawaii.org
+Fax: 808 586-1239",state-of-hawaii,State of Hawaii,,,,,http://ag.hawaii.gov/,,
 BUDGET  FINANCE,HI.BudgetandFinance@hawaii.gov,"Department of Budget and Finance
 P. O. Box 150
-Honolulu, Hawaii 96810",Ph: 808 586-1518,SOH,State of Hawaii,,,,,http://budget.hawaii.gov/,,,tech+HI.BudgetandFinance_at_hawaii.gov@codeforhawaii.org
+Honolulu, Hawaii 96810",Ph: 808 586-1518,state-of-hawaii,State of Hawaii,,,,,http://budget.hawaii.gov/,,
 BUSINESS ECON DEV  TOURISM,director@dbedt.hawaii.gov,"P.O. Box 2359
 Honolulu, Hawaii 96804
-",Ph: 808 586-2355,SOH,State of Hawaii,,,,,http://dbedt.hawaii.gov/,,,tech+director_at_dbedt.hawaii.gov@codeforhawaii.org
+",Ph: 808 586-2355,state-of-hawaii,State of Hawaii,,,,,http://dbedt.hawaii.gov/,,
 COMMERCE  CONSUMER AFFAIRS,dcca@dcca.hawaii.gov,"335 Merchant Street
-Honolulu, Hawaii 96813",Ph: 808 587-3222,SOH,State of Hawaii,,,,,http://cca.hawaii.gov/,,,tech+dcca_at_dcca.hawaii.gov@codeforhawaii.org
+Honolulu, Hawaii 96813",Ph: 808 587-3222,state-of-hawaii,State of Hawaii,,,,,http://cca.hawaii.gov/,,
 DEFENSE,charles.anthony@us.af.mil,"3949 Diamond Head Road 
 Honolulu, HI 96816","Ph: 808 733-4258
-Fax: 808 733-4236",SOH,State of Hawaii,,,,,http://dod.hawaii.gov/,,,tech+charles.anthony_at_us.af.mil@codeforhawaii.org
+Fax: 808 733-4236",state-of-hawaii,State of Hawaii,,,,,http://dod.hawaii.gov/,,
 EDUCATION,doe_info@hawaiidoe.org,"1390 Miller St. 
-Honolulu, HI 96813",Ph: 808 586-3230,SOH,State of Hawaii,,,,,http://www.hawaiipublicschools.org/Pages/Home.aspx,,,tech+doe_info_at_hawaiidoe.org@codeforhawaii.org
+Honolulu, HI 96813",Ph: 808 586-3230,state-of-hawaii,State of Hawaii,,,,,http://www.hawaiipublicschools.org/Pages/Home.aspx,,
 GOVERNOR'S OFFICE,none,"Alan Sarhan
 Office of the Governor
 Information Services
 415 South Beretania Street 
-Honolulu, HI 96813",Ph: 808 586-0034,SOH,State of Hawaii,,,,,http://governor.hawaii.gov/,,"There is no email, all requests should be sent to this address",tech+none@codeforhawaii.org
+Honolulu, HI 96813",Ph: 808 586-0034,state-of-hawaii,State of Hawaii,,,,,http://governor.hawaii.gov/,,"There is no email, all requests should be sent to this address"
 HAWAIIAN HOME LANDS,info@oha.org,"Hale Kalaniana’ole
 91-5420 Kapolei Parkway
-Kapolei, Hawaii  96707",Ph: 808 620-9590,SOH,State of Hawaii,,,,,http://www.oha.org/,,,tech+info_at_oha.org@codeforhawaii.org
+Kapolei, Hawaii  96707",Ph: 808 620-9590,state-of-hawaii,State of Hawaii,,,,,http://www.oha.org/,,
 HEALTH,NOT webmail@doh.hawaii.gov,"1250 Punchbowl St.
 Honolulu, Hawaii 96813","Ph: 808 586-4400
-Fax 808 586-4444",SOH,State of Hawaii,,,,,http://health.hawaii.gov/,,,tech+NOT webmail_at_doh.hawaii.gov@codeforhawaii.org
+Fax 808 586-4444",state-of-hawaii,State of Hawaii,,,,,http://health.hawaii.gov/,,
 HOUSE OF REPRESENTATIVES,hclerk@capitol.hawaii.gov,"House Clerk's Office State Capitol, Room 27
 415 South Beretania Street
 Honolulu, HI 96813","Ph: 808 586-6400 
-Fax 808 586-6401 ",SOH,State of Hawaii,,,,,http://www.capitol.hawaii.gov/house.aspx,,,tech+hclerk_at_capitol.hawaii.gov@codeforhawaii.org
+Fax 808 586-6401 ",state-of-hawaii,State of Hawaii,,,,,http://www.capitol.hawaii.gov/house.aspx,,
 HUMAN RESOURCES DEVELOPMENT,dhrd@hawaii.gov,"235 S Beretania St.
 Honolulu, HI 96813","Ph: 808 587-1100
-Fax: 808 587-1106",SOH,State of Hawaii,,,,,http://dhrd.hawaii.gov/,,,tech+dhrd_at_hawaii.gov@codeforhawaii.org
+Fax: 808 587-1106",state-of-hawaii,State of Hawaii,,,,,http://dhrd.hawaii.gov/,,
 HUMAN SERVICES,dhs@dhs.hawaii.gov,"P.O. Box 339
-Honolulu, HI 96809-0339",Fax: 808 586-4890,SOH,State of Hawaii,,,,,http://humanservices.hawaii.gov/,,,tech+dhs_at_dhs.hawaii.gov@codeforhawaii.org
+Honolulu, HI 96809-0339",Fax: 808 586-4890,state-of-hawaii,State of Hawaii,,,,,http://humanservices.hawaii.gov/,,
 JUDICIARY,none,"Ali`iolani Hale
 417 South King Street
-Honolulu, Hawai`i 96813-2943",Ph: 808 539-4909,SOH,State of Hawaii,,,,,http://www.courts.state.hi.us/,,,tech+none@codeforhawaii.org
+Honolulu, Hawai`i 96813-2943",Ph: 808 539-4909,state-of-hawaii,State of Hawaii,,,,,http://www.courts.state.hi.us/,,
 LABOR  INDUSTRIAL RELATIONS,dlir.director@hawaii.gov,"830 Punchbowl St. #321
-Honolulu, HI 96813",Ph: 808 586-8844,SOH,State of Hawaii,,,,,http://labor.hawaii.gov/,,,tech+dlir.director_at_hawaii.gov@codeforhawaii.org
+Honolulu, HI 96813",Ph: 808 586-8844,state-of-hawaii,State of Hawaii,,,,,http://labor.hawaii.gov/,,
 LAND  NATURAL RESOURCES,dlnr@hawaii.gov,"Kalanimoku Building
 1151 Punchbowl St.
-Honolulu, HI 96813",Ph: 808 587-0400,SOH,State of Hawaii,,,,,dlnr.hawaii.gov/,,,tech+dlnr_at_hawaii.gov@codeforhawaii.org
+Honolulu, HI 96813",Ph: 808 587-0400,state-of-hawaii,State of Hawaii,,,,,dlnr.hawaii.gov/,,
 LEGISLATIVE AUDITOR,auditors2@auditor.state.hi.us,"Kekūanāoʻa Building
 465 S. King St., Rm. 500
 Honolulu, HI 96813-2917","Ph:  808 587-0800
-Fax: 808 587-0830",SOH,State of Hawaii,,,,,http://auditor.hawaii.gov/,,,tech+auditors2_at_auditor.state.hi.us@codeforhawaii.org
+Fax: 808 587-0830",state-of-hawaii,State of Hawaii,,,,,http://auditor.hawaii.gov/,,
 LEGISLATIVE REFERENCE BUREAU,none,"Charlotte Carter-Yamauchi, 
  Acting Director 
 State Capitol, Rm 446 ","Ph: 808 587-0666 
-Fax: 808 587-0681",SOH,State of Hawaii,,,,,http://lrbhawaii.org/,,"We are prohibited from revealing the contents of any request for services, except to the requester. This assures the confidentiality of every request a legislator sends to the Bureau.
-see, §23G-4, HRS",
+Fax: 808 587-0681",state-of-hawaii,State of Hawaii,,,,,http://lrbhawaii.org/,,"We are prohibited from revealing the contents of any request for services, except to the requester. This assures the confidentiality of every request a legislator sends to the Bureau.
+see, §23G-4, HRS"
 LT GOVERNOR'S OFFICE,shan.tsutsui@hawaii.gov,"The Honorable Shan S. Tsutsui
 Lieutenant Governor, State of Hawai`i
 State Capitol
 Honolulu, Hawai`i 96813","Ph: 808 586-0255
-Fax: 808 586-0231",SOH,State of Hawaii,,,,,http://ltgov.hawaii.gov/,,,tech+shan.tsutsui_at_hawaii.gov@codeforhawaii.org
+Fax: 808 586-0231",state-of-hawaii,State of Hawaii,,,,,http://ltgov.hawaii.gov/,,
 OMBUDSMAN,complaints@ombudsman.hawaii.gov,"Office of the Ombudsman
 465 South King Street, 4th Floor
 Honolulu, Hawaii  96813","Ph: 808 587-0770
-Fax: 808 587-0773",SOH,State of Hawaii,,,,,http://ombudsman.hawaii.gov/,,,tech+complaints_at_ombudsman.hawaii.gov@codeforhawaii.org
+Fax: 808 587-0773",state-of-hawaii,State of Hawaii,,,,,http://ombudsman.hawaii.gov/,,
 PUBLIC SAFETY,psd.office.of.the.director@hawaii.gov,"919 Ala Moana Boulevard
 Honolulu, HI 96814
-",Ph: 808 587-1288,SOH,State of Hawaii,,,,,http://dps.hawaii.gov/,,,tech+psd.office.of.the.director_at_hawaii.gov@codeforhawaii.org
+",Ph: 808 587-1288,state-of-hawaii,State of Hawaii,,,,,http://dps.hawaii.gov/,,
 SENATE,sclerk@capitol.hawaii.gov,"Hawaii State Capitol
 415 South Beretania St.
 Honolulu, HI 96813","Ph: 808 586-6720
-Fax: 808 586-6719 ",SOH,State of Hawaii,,,,,http://www.capitol.hawaii.gov/senate.aspx,,,tech+sclerk_at_capitol.hawaii.gov@codeforhawaii.org
+Fax: 808 586-6719 ",state-of-hawaii,State of Hawaii,,,,,http://www.capitol.hawaii.gov/senate.aspx,,
 TAXATION,tax.directors.office@hawaii.gov,"Director of Taxation
 Room 221
 Department of Taxation
 830 Punchbowl Street
-Honolulu, HI 96813-5094",Ph: 808 587-4242,SOH,State of Hawaii,,,,,http://tax.hawaii.gov/,,,tech+tax.directors.office_at_hawaii.gov@codeforhawaii.org
+Honolulu, HI 96813-5094",Ph: 808 587-4242,state-of-hawaii,State of Hawaii,,,,,http://tax.hawaii.gov/,,
 TRANSPORTATION,dotpao@hawaii.gov,"Information Specialist Aliiaimoku Building
 869 Punchbowl Street Rm 506 
 Honolulu, HI  96813","Ph: 808 587-2160
-Fax: 808 587-2313",SOH,State of Hawaii,,,,,http://hidot.hawaii.gov/,,,tech+dotpao_at_hawaii.gov@codeforhawaii.org
+Fax: 808 587-2313",state-of-hawaii,State of Hawaii,,,,,http://hidot.hawaii.gov/,,
 UNIVERSITY OF HAWAII,ur@hawaii.edu,"External Affairs and University Relations
 2444 Dole Street
 Bachman 109H
-Honolulu, HI 96822",Ph: 808 956-8856,SOH,State of Hawaii,,,,,https://www.hawaii.edu/offices/eaur/,,,tech+ur_at_hawaii.edu@codeforhawaii.org
+Honolulu, HI 96822",Ph: 808 956-8856,state-of-hawaii,State of Hawaii,,,,,https://www.hawaii.edu/offices/eaur/,,
 OFFICE OF HAWAIIAN AFFAIRS,info@oha.org,"560 N. Nimitz Highway, Suite 200 
 Honolulu, HI 96817","Ph: 808 594-1892
-Fax: 808 594-0240",SOH,State of Hawaii,,,,,http://www.oha.org/,,,tech+info_at_oha.org@codeforhawaii.org
+Fax: 808 594-0240",state-of-hawaii,State of Hawaii,,,,,http://www.oha.org/,,
