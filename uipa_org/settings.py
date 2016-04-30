@@ -59,8 +59,8 @@ class UipaOrgThemeBase(ThemeBase):
     def FROIDE_CONFIG(self):
         config = super(UipaOrgThemeBase, self).FROIDE_CONFIG
         config.update(dict(
-            create_new_publicbody=True,
-            publicbody_empty=True,
+            create_new_publicbody=False,
+            publicbody_empty=False,
             user_can_hide_web=True,
             public_body_officials_public=True,
             public_body_officials_email_public=False,
@@ -68,7 +68,7 @@ class UipaOrgThemeBase(ThemeBase):
             payment_possible=False,
             default_law=1,
             greetings=[rec(u"Dear (?:Mr\.?|Ms\.? .*?)")],
-            closings=[rec(u"Sincerely yours,?")],
+            closings=[rec(u"Mahalo,?")],
             public_body_boosts={},
             dryrun=False,
             dryrun_domain="beta.uipa.org",
