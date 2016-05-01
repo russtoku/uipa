@@ -6,7 +6,6 @@ This is a basic Django project with a theme app that plugs into [Froide](https:/
 
 ## Get started easily
 
-
 In a Python virtualenv run:
 
     pip install -r requirements.txt -e .
@@ -17,15 +16,11 @@ In a Python virtualenv run:
 
 Be sure to remember the password for the admin user you created in the last command above. You will need it to create pages later.
 
-[Here is a complete guide of how to set this up on Heroku.](http://froide.readthedocs.org/en/latest/herokudeployment/)
-
-
 ## Froide documentation
 
 http://froide.readthedocs.org/en/latest/gettingstarted/
 
 For details about working with Froide Themes see [Theming Froide](http://froide.readthedocs.org/en/latest/theming/).
-
 
 ## Creating page content for the About, Help, Terms of Use, and Privacy Statement links
 
@@ -39,7 +34,6 @@ To create these pages initially, we:
 * Copy the section of JSON data for the model, "flatpages.flatpage" (see below).
 * Put the JSON data in a file under the fixtures directory named **\<page\>.json**. For example, **about.json** for the About page.
 
-
 ### Loading the page data
 
 Once the page data files have been created under the fixtures directory, they can be loaded whenever a new instance of uipa.org is created. This is done by loading the page data files using this command:
@@ -52,12 +46,16 @@ where **\<page\>** is the name of the page data file without the **.json** exten
 
 ### Dumping the database
 
-Dumping the database in JSON format is done using the command:
+Dumping the entire database in JSON format is done using the command:
 
 ```
-python manage.py dumpdata | python -m json.tool > db-dump.json
+python manage.py dumpdata --indent=2 > db-dump.json
 ```
 
+Dumping data from a Django app in JSON format is done using the command:
+```
+python manage.py dumpdata --indent=2 \[<app_name>\] > db-dump.json
+```
 
 ### Page data in JSON format
 
@@ -80,7 +78,6 @@ Here's an example of the page data in JSON format for the About page:
     "pk": 1
 }
 ```
-
 
 ## License
 
