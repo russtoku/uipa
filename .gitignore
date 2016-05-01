@@ -97,3 +97,4 @@ ENV/
 
 # UIPA
 dev.db
+public/
