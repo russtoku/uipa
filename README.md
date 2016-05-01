@@ -39,7 +39,7 @@ To create these pages initially, we:
 Once the page data files have been created under the fixtures directory, they can be loaded whenever a new instance of uipa.org is created. This is done by loading the page data files using this command:
 
 ```
-python manage.py loaddata <page> \[<page>\]
+python manage.py loaddata <page> [<page>]
 ```
 where **\<page\>** is the name of the page data file without the **.json** extension. Multiple pages can be loaded at the same time.
 
@@ -54,7 +54,7 @@ python manage.py dumpdata --indent=2 > db-dump.json
 
 Dumping data from a Django app in JSON format is done using the command:
 ```
-python manage.py dumpdata --indent=2 \[<app_name>\] > db-dump.json
+python manage.py dumpdata --indent=2 <app_name> [<app_name>] > db-dump.json
 ```
 
 ### Page data in JSON format
