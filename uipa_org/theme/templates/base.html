@@ -1,0 +1,8 @@
+{% overextends "base.html" %}
+
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "css/uipa-style.css" %}"/>
+{% endblock %}
