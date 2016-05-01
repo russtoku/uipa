@@ -1,6 +1,81 @@
 {% overextends "index.html" %}
+{% load i18n %}
 
-{% block index_banner %}
-<div class="container">
-</div>
+{% block site_description %}
+<p>
+    The Uniform Information Practices Act (Modified), chapter 92F, Hawaii
+    Revised Statutes commonly known as UIPA, is Hawaii’s public records law.
+</p>
+<p>
+    This site publishes Freedom of Information requests made in Hawaii and helps you to make your own!
+</p>
+{% endblock %}
+
+{% block example_search_terms %}
+    {% blocktrans %}Try the following:{% endblocktrans %}
+    <a href="{% url 'foirequest-search' %}?q={% trans "Salary" %}">{% trans "Salary" %}</a>
+    {% trans "or" %}
+    <a href="{% url 'foirequest-search' %}?q={% trans "Crimes" %}">{% trans "Crimes" %}</a>
+{% endblock %}
+
+{% block first_index_row_featured %}
+      <div id="main-foirequests" class="well">
+        {% if featured %}
+        <div class="frontpage-teaser">
+          <h3>
+            <small>{% trans "Featured Request" %}</small><br/>
+            {{ featured.title }}
+          </h3>
+          <p>
+            {{ featured.text|truncatewords:55|linebreaksbr }}
+          </p>
+          {% if featured.url %}
+            <p>
+              <a href="{{ featured.url }}">
+                <span class="glyphicon glyphicon-bullhorn"></span>
+                {% blocktrans %}Read the blog post{% endblocktrans %}
+              </a>
+            </p>
+          {% endif %}
+          {% if featured.request %}
+            <p>
+              <a href="{% url 'foirequest-show' slug=featured.request.slug %}">
+                <span class="glyphicon glyphicon-envelope"></span>
+                {% blocktrans %}Visit this request{% endblocktrans %}
+              </a>
+            </p>
+          {% endif %}
+        </div>
+        {% else %}
+        <div id="sample-letter" class="frontpage-teaser">{% blocktrans %}Freedom of Information Request
+
+    To: Hawaii Tourism Authority
+
+    Aloha,
+
+    I request information about the following:
+    ...
+    ...
+    
+    {% endblocktrans %}
+      <a class="make-request-icon" href="{% url 'foirequest-make_request' %}">{% blocktrans %}Write a Request Now!{% endblocktrans %}</a>
+      </div>
+      {% endif %}
+      </div>
+  {% endblock first_index_row_featured %}
+
+{% block index_sub_left %}
+    <h3>{% blocktrans %}What is Freedom of Information?{% endblocktrans %}</h3>
+    <p>{% blocktrans %}Every citizen has the right under the Freedom of Information Laws to ask for and receive access to information from Public Bodies concerning public affairs.{% endblocktrans %}
+        <br/>
+        <a class="target-new" href="https://en.wikipedia.org/wiki/Freedom_of_information_laws_by_country">{% blocktrans %}Read more about the Freedom of Information!{% endblocktrans %}</a>
+    </p>
+{% endblock %}
+
+{% block index_sub_right %}
+    <h3>{% blocktrans %}What does this site do?{% endblocktrans %}</h3>
+    <p>{% blocktrans %}This site publishes Freedom of Information requests and replies so that others don't have to ask for the same information and replies can be scrutinized by the public.{% endblocktrans %}
+        <br/>
+        <a href="{% url 'help-index' %}">{% blocktrans %}Read more about the concept!{% endblocktrans %}</a>
+    </p>
 {% endblock %}
