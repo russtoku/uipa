@@ -125,12 +125,13 @@
           <div class="radio">
             <label>
               <input id="option-check_foi_personal" type="radio" name="check_foi" value="false"/>
-              {% blocktrans %}a matter that involves you personally{% endblocktrans %}
+              {% blocktrans %}a matter that involves you personally (personal records request){% endblocktrans %}
               <span class="help-block">
-                {% blocktrans %}Questions like "Where do I get X?" or "What do I have to do if X?"{% endblocktrans %}
+                {% blocktrans %}Questions like "Where do I get my X?"{% endblocktrans %}
               </span>
             </label>
           </div>
+          <!-- TODO: Commenting out for now.
           <div class="radio">
             <label>
               <input id="option-check_foi_opinion" type="radio" name="check_foi" value="false"/>
@@ -140,12 +141,13 @@
               </span>
             </label>
           </div>
+          -->
           <div class="radio">
             <label>
               <input id="option-check_foi" type="radio" name="check_foi" value="true"/>
-              {% blocktrans %}a matter of general interest (Freedom of Information request){% endblocktrans %}
+              {% blocktrans %}a matter of general interest (public records){% endblocktrans %}
               <span class="help-block">
-                {% blocktrans %}Questions like "How much did X cost?" or "Please give me a list of X?"{% endblocktrans %}
+                {% blocktrans %}Questions like "What financial records show how much X costs" or "Please give me emails about X?"{% endblocktrans %}
               </span>
             </label>
           </div>
