@@ -3,17 +3,17 @@
 
 {% block site_description %}
 <p>
-    The Uniform Information Practices Act (Modified), chapter 92F, Hawaii
-    Revised Statutes commonly known as UIPA, is Hawaii’s public records law.
+    The Uniform Information Practices Act (Modified), HRS chapter 92F, 
+    commonly known as UIPA, is Hawaii’s public records law.
 </p>
 <p>
-    This site publishes Freedom of Information requests made in Hawaii and helps you to make your own!
+    This site publishes public records requests made in Hawaii and helps you to make your own!
 </p>
 {% endblock %}
 
 {% block example_search_terms %}
     {% blocktrans %}Try the following:{% endblocktrans %}
-    <a href="{% url 'foirequest-search' %}?q={% trans "Salary" %}">{% trans "Salary" %}</a>
+    <a href="{% url 'foirequest-search' %}?q={% trans "Budget" %}">{% trans "Budget" %}</a>
     {% trans "or" %}
     <a href="{% url 'foirequest-search' %}?q={% trans "Crimes" %}">{% trans "Crimes" %}</a>
 {% endblock %}
@@ -66,16 +66,13 @@
 
 {% block index_sub_left %}
     <h3>{% blocktrans %}What is Freedom of Information?{% endblocktrans %}</h3>
-    <p>{% blocktrans %}Every citizen has the right under the Freedom of Information Laws to ask for and receive access to information from Public Bodies concerning public affairs.{% endblocktrans %}
-        <br/>
-        <a class="target-new" href="https://en.wikipedia.org/wiki/Freedom_of_information_laws_by_country">{% blocktrans %}Read more about the Freedom of Information!{% endblocktrans %}</a>
-    </p>
+    <p>{% blocktrans %}Everyone has the right under freedom of information laws to ask for and receive access to information from public agencies concerning government operations.{% endblocktrans %}</p>
 {% endblock %}
 
 {% block index_sub_right %}
     <h3>{% blocktrans %}What does this site do?{% endblocktrans %}</h3>
-    <p>{% blocktrans %}This site publishes Freedom of Information requests and replies so that others don't have to ask for the same information and replies can be scrutinized by the public.{% endblocktrans %}
-        <br/>
-        <a href="{% url 'help-index' %}">{% blocktrans %}Read more about the concept!{% endblocktrans %}</a>
+    <p>{% blocktrans %}This site publishes public records requests and replies so that others do not have to ask for the same information and replies can be scrutinized by the public.{% endblocktrans %}
+        <br/><br/>
+        <a href="{% url 'faq-index' %}">{% blocktrans %}Frequently Asked Questions{% endblocktrans %}</a>
     </p>
 {% endblock %}
