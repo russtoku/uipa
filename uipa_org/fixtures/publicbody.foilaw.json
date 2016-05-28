@@ -1,1 +1,28 @@
-[{"fields": {"mediator": null, "letter_start": "\r\n\r\n", "updated": null, "description": "", "created": null, "url": "http://oip.hawaii.gov/laws-rules-opinions/uipa/uniform-information-practices-act-uipa/", "jurisdiction": 1, "letter_end": "", "max_response_time_unit": "working_day", "request_note": "", "slug": "state-hawaii-freedom-information-law", "priority": 1, "refusal_reasons": "", "meta": false, "email_only": false, "max_response_time": 30, "site": 1, "combined": [], "long_description": "", "name": "State of Hawaii Freedom of Information Law"}, "model": "publicbody.foilaw", "pk": 1}]
+[
+{
+    "model": "publicbody.foilaw",
+    "pk": 1,
+    "fields": {
+        "name": "State of Hawaii UIPA",
+        "slug": "state-hawaii-uipa",
+        "description": "",
+        "long_description": "",
+        "created": null,
+        "updated": null,
+        "request_note": "",
+        "meta": false,
+        "letter_start": "",
+        "letter_end": "",
+        "jurisdiction": 1,
+        "priority": 1,
+        "url": "http://oip.hawaii.gov/laws-rules-opinions/uipa/uniform-information-practices-act-uipa/",
+        "max_response_time": 30,
+        "max_response_time_unit": "working_day",
+        "refusal_reasons": "",
+        "mediator": null,
+        "email_only": false,
+        "site": 1,
+        "combined": []
+    }
+}
+]
