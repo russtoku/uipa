@@ -98,4 +98,3 @@ ENV/
 # UIPA
 dev.db
 public/
-whoosh_index/

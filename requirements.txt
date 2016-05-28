@@ -23,11 +23,10 @@ unicodecsv==0.14.1
 honcho==0.6.6
 django-tinymce==2.3.0
 anyjson==0.3.3
-whoosh==2.7.4
+pysolr==3.5.0
 
 -e git://github.com/codeforhawaii/froide.git@master#egg=froide
 
-# pysolr==3.3.2
 # -e git://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
 #psycopg2==2.6.1
 #lxml==3.4.4
