@@ -13,15 +13,12 @@ In a Python virtualenv, run:
 
     pip install -r requirements.txt -e . --src=./src
     python manage.py syncdb  --noinput
-    python manage.py loaddata about-page
+    python manage.py createsuperuser
+    python manage.py loaddata uipa_org/fixtures/*
     python manage.py runserver
 
 At this point, visit http://127.0.0.1:8000/ in your browser and you should see
 the home page for uipa.org.
-
-To create the admin user, run:
-
-    python manage.py createsuperuser
 
 Be sure to remember the password for the admin user you create so that you can
 log on to the admin interface at http://127.0.0.1:8000/uipa-admin/. You can
@@ -51,11 +48,11 @@ To create these pages initially, we:
 * Create the pages using the Django administration interface at
   http://127.0.0.1:8000/uipa-admin/. Click on the *Flat pages* link.
 * Dump the database in JSON format (see below).
-* Edit the dump file, `db-dump.json`.
+* Edit the dump file, `<db-dump>.json`.
 * Copy the section of JSON data for the model, `flatpages.flatpage` (see
   below).
-* Put the JSON data in a file under the fixtures directory named
-  `<page>.json`. For example, `about.json` for the About page.
+* Put the JSON data in a file under the uipa_org/fixtures directory named
+  `flatpages.flatpage.json`.
 
 
 ### Loading the page data
