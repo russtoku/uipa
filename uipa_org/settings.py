@@ -55,6 +55,13 @@ class UipaOrgThemeBase(ThemeBase):
         "postmark_bounce": "uipa_postmark_bounce"
     })
 
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+            'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+        },
+    }
+
     @property
     def FROIDE_CONFIG(self):
         config = super(UipaOrgThemeBase, self).FROIDE_CONFIG

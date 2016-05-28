@@ -23,6 +23,7 @@ unicodecsv==0.14.1
 honcho==0.6.6
 django-tinymce==2.3.0
 anyjson==0.3.3
+whoosh==2.7.4
 
 -e git://github.com/codeforhawaii/froide.git@master#egg=froide
 
