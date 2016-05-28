@@ -11,10 +11,11 @@ from django.contrib.flatpages.views import flatpage
 from django.utils.translation import ugettext as _
 
 faq_url_part = _('faq')
+help_url_part = _('help')
 
 urlpatterns = patterns('',
-    url(r'^%s/$' % faq_url_part, flatpage,
-        {'url': '/%s/' % faq_url_part}, name='faq-index'),
+    url(r'^%s/%s/$' % (help_url_part, faq_url_part), flatpage,
+       {'url': '/%s/%s/' % (help_url_part, faq_url_part)}, name='help-faq'),
 )
 
 # vim: fenc=utf-8

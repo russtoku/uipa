@@ -6,3 +6,18 @@
 {% block extra_css %}
     <link rel="stylesheet" href="{% static "css/uipa-style.css" %}"/>
 {% endblock %}
+
+{% block footer_menu %}
+<li>
+  <a href="{% url 'help-about' %}">{% trans "About" %}</a>
+</li>
+<li>
+  <a href="{% url 'help-faq' %}">{% trans "FAQ" %}</a>
+</li>
+<li>
+  <a href="{% url 'help-terms' %}">{% trans "Terms of Use" %}</a>
+</li>
+<li>
+  <a href="{% url 'help-privacy' %}">{% trans "Privacy Statement" %}</a>
+</li>
+{% endblock %}
