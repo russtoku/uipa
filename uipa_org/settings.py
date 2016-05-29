@@ -97,6 +97,8 @@ class Dev(UipaOrgThemeBase, Base):
         }
     }
 
+    HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
+
 
 class Beta(UipaOrgThemeBase, Base):
     SITE_URL = values.Value('http://beta.uipa.org')
