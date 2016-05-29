@@ -12,7 +12,6 @@ from froide.foirequest.models import FoiRequest
 @receiver(FoiRequest.request_created,
         dispatch_uid="create_and_attach_pdf")
 def create_and_attach_pdf(sender, **kwargs):
-    print("YO")
     print(sender.__dict__)
     print(sender.messages)
 
