@@ -77,7 +77,7 @@ class UipaOrgThemeBase(ThemeBase):
             greetings=[rec(u"Dear (?:Mr\.?|Ms\.? .*?)")],
             closings=[rec(u"Mahalo,?")],
             public_body_boosts={},
-            dryrun=False,
+            dryrun=True,
             dryrun_domain="beta.uipa.org",
             allow_pseudonym=False,
             doc_conversion_binary=None,  # replace with libreoffice instance
@@ -90,6 +90,7 @@ class UipaOrgThemeBase(ThemeBase):
 
 
 class Dev(UipaOrgThemeBase, Base):
+
     CACHES = {
         'default': {
             'LOCATION': 'dev-uipa',
