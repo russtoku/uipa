@@ -7,6 +7,21 @@
 
 import datetime
 from docx import Document
+import os
+
+
+def create_uipa_document_request_from_foi_request(foi_request):
+    curr = os.path.dirname(os.path.realpath(__file__))
+    return create_uipa_document_request(
+        os.path.join(curr, 'data/Request-Access-form-12.1.15-fillable.docx'),
+        datetime.datetime.utcnow(),
+        foi_request.public_body.name,
+        foi_request.public_body.contact,
+        foi_request.user.email,
+        foi_request.user.email,
+        foi_request.user.email,
+        foi_request.description,
+        False)
 
 
 def create_uipa_document_request(
@@ -22,7 +37,7 @@ def create_uipa_document_request(
 
     # TODO: @ryankanno - Make case insensitive regexs at some point
     DELIMITER_REPLACEMENT_MAP = {
-        "[Request_Date]": request_date.isoformat(),
+        "[Request_Date]": request_date.strftime('%m-%d-%Y'),
         "[Agency_Name]": agency_name,
         "[Agency_Contact_Information]": agency_contact_information,
         "[Requester_Name]": requester_name,
