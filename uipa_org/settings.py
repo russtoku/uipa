@@ -118,7 +118,7 @@ class Beta(UipaOrgThemeBase, Base):
     ALLOWED_HOSTS = values.TupleValue(('beta.uipa.org',))
 
     FOI_EMAIL_TEMPLATE = values.Value('request+{secret}@{domain}')
-    FOI_EMAIL_DOMAIN = values.Value('beta.uipa.org')
+    FOI_EMAIL_DOMAIN = values.Value('beta-foi.uipa.org')
 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     SERVER_EMAIL = values.Value(os_env('POSTMARK_INBOUND_ADDRESS'))

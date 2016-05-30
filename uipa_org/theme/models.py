@@ -49,7 +49,5 @@ def create_and_attach_pdf(sender, **kwargs):
                 foi_att._committed = False
                 foi_att.save()
 
-            message.save()
-
 # vim: fenc=utf-8
 # vim: filetype=python
