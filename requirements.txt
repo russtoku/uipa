@@ -1,33 +1,41 @@
-pip==8.1.1
-Django<1.10
-Markdown==2.6.6
-celery==3.1.23
-celery-haystack==0.10
-django-celery-email==1.1.4
-django-taggit==0.18.1
-pytz==2016.4
-requests==2.9.1
-django-floppyforms==1.6.2
--e git://github.com/stephenmcd/django-overextends.git@master#egg=django-overextends
-python-magic==0.4.6
-django-tastypie==0.13.3
-python-mimeparse>=0.1.4
-django-configurations==1.0
-django-storages==1.4.1
-dj-database-url==0.4.1
-django-cache-url==1.0.0
-django-compressor==2.0
-django-contrib-comments==1.7.0
-unicodecsv==0.14.1
-honcho==0.6.6
-django-tinymce==2.3.0
+amqp==1.4.8
 anyjson==0.3.3
+billiard==3.3.0.22
+celery==3.1.18
+celery-haystack==0.10
+dj-database-url==0.3.0
+dj-static==0.0.5
+Django==1.8.3
+django-appconf==1.0.1
+django-cache-url==1.0.0
+django-celery==3.1.16
+django-celery-email==1.1.2
+django-compressor==1.6
+-e git://github.com/jezdez/django-configurations.git@7701e86b75874b5e517c9f35f2eebff6ec74c260#egg=django_configurations
+django-contrib-comments==1.6.1
+django-floppyforms==1.5.1
+django-haystack==2.4.0
+django-overextends==0.4.0
+django-storages==1.1.8
+django-taggit==0.16.2
+django-tastypie==0.12.2
+-e git://github.com/stefanw/django-tastypie-swagger.git@f5acb6b945b42f482cd0a9e73d0a9a655c479cea#egg=django_tastypie_swagger
+django-tinymce==2.0.2
+-e git://github.com/codeforhawaii/froide.git@e51150e6dc886dbaf976c8821e5c3f91d4961735#egg=froide
+honcho==0.6.6
+kombu==3.0.32
+lxml==3.6.0
+Markdown==2.6.2
 pysolr==3.5.0
+pystache==0.5.4
+python-dateutil==2.4.2
 python-docx==0.8.5
-
--e git://github.com/codeforhawaii/froide.git@master#egg=froide
--e git://github.com/django-haystack/django-haystack.git@f1ed18313777005dd77ed724ecbfb27c0b03cad8#egg=django-haystack
-
-# -e git://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
-#psycopg2==2.6.1
-#lxml==3.4.4
+python-magic==0.4.6
+python-mimeparse==0.1.4
+pytz==2015.4
+requests==2.7.0
+six==1.10.0
+South==0.8.4
+sphinx-me==0.3
+static==1.1.1
+unicodecsv==0.13.0
