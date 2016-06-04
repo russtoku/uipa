@@ -16,10 +16,10 @@ def create_uipa_document_request_from_foi_request(foi_request):
         os.path.join(curr, 'data/Request-Access-form-12.1.15-fillable.docx'),
         datetime.datetime.utcnow(),
         foi_request.public_body.name,
-        foi_request.public_body.contact,
-        foi_request.user.email,
-        foi_request.user.email,
-        foi_request.user.email,
+        foi_request.public_body.email,
+        foi_request.secret_address,
+        foi_request.secret_address,
+        foi_request.secret_address,
         foi_request.description,
         False)
 
