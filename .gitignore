@@ -98,3 +98,6 @@ ENV/
 # UIPA
 dev.db
 public/
+
+# PyCharm
+.idea/
