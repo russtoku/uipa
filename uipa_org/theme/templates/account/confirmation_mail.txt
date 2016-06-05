@@ -1,0 +1,14 @@
+{% load i18n %}{% autoescape off %}{% blocktrans %}Hello {{ name }},
+
+This is an email from {{ site_name }} to confirm your email address.
+Please visit the link below:
+
+{{ url }}
+
+{% endblocktrans %}{% if password %}{% blocktrans %}Use the following randomly generated password to login.  After you login, you can change the password.
+
+Your password is: {{ password }}
+{% endblocktrans %}{% endif %}
+{% blocktrans %}Cheers,
+{{ site_name }}{% endblocktrans %}
+{% endautoescape %}
