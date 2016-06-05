@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="{% static "css/uipa-style.css" %}"/>
 {% endblock %}
 
+{% block nav %}
+        <ul class="nav navbar-nav">
+          <li class="{% block nav_requests %}{% endblock %}">
+            <a href="{% url 'foirequest-list' %}">
+              {% blocktrans %}Requests{% endblocktrans %}
+            </a>
+          </li>
+          <li class="{% block nav_publicbodies %}{% endblock %}">
+            <a href="{% url 'publicbody-list' %}">
+              {% blocktrans %}Public Agencies{% endblocktrans %}
+            </a>
+         </li>
+          <li class="special-nav-item {% block nav_makerequest %}{% endblock %}">
+            <a href="{% url 'foirequest-make_request' %}">
+              <span>{% blocktrans %}Make a Request!{% endblocktrans %}</span>
+            </a>
+          </li>
+        </ul>
+{% endblock %}
+
 {% block footer_menu %}
 <li>
   <a href="{% url 'help-about' %}">{% trans "About" %}</a>
