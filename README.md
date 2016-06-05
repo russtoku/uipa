@@ -12,7 +12,7 @@ Theme](https://github.com/okfde/froide-theme).
 In a Python virtualenv, run:
 
     pip install -r requirements.txt -e . --src=./src
-    python manage.py syncdb  --noinput
+    python manage.py migrate  --noinput
     python manage.py createsuperuser
     python manage.py loaddata uipa_org/fixtures/*
     python manage.py runserver
