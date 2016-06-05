@@ -11,12 +11,34 @@
 </p>
 {% endblock %}
 
-{% block example_search_terms %}
-    {% blocktrans %}Try the following:{% endblocktrans %}
-    <a href="{% url 'foirequest-search' %}?q={% trans "Budget" %}">{% trans "Budget" %}</a>
-    {% trans "or" %}
-    <a href="{% url 'foirequest-search' %}?q={% trans "Criminal" %}">{% trans "Criminal" %}</a>
-{% endblock %}
+{% block index-search %}
+  <form method="get" action="{% url 'foirequest-search' %}">
+    <label for="index-search">
+      {% blocktrans %}Search {{ foicount }} requests and {{ pbcount }} public agencies:{% endblocktrans %}
+    </label>
+
+    <div class="input-group">
+      <input id="index-search"class="form-control col-lg-3" type="text" name="q" autocomplete="off" placeholder="{% block index-search-placeholder %}{% endblock %}"/>
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit">
+          <span class="glyphicon glyphicon-search"></span>
+          {% blocktrans %}Search For Information{% endblocktrans %}
+        </button>
+      </span>
+    </div>
+    {% block example_search_terms_block %}
+    <span class="help-block">
+
+      {% block example_search_terms %}
+          {% blocktrans %}Try the following:{% endblocktrans %}
+          <a href="{% url 'foirequest-search' %}?q={% trans "Budget" %}">{% trans "Budget" %}</a>
+          {% trans "or" %}
+          <a href="{% url 'foirequest-search' %}?q={% trans "Criminal" %}">{% trans "Criminal" %}</a>
+      {% endblock %}
+    </span>
+    {% endblock %}
+  </form>
+{% endblock index-search %}
 
 {% block first_index_row_featured %}
       <div id="main-foirequests" class="well">
