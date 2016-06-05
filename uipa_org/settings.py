@@ -13,7 +13,7 @@ rec = lambda x: re.compile(x, re.I | re.U)
 class UipaOrgThemeBase(ThemeBase):
     FROIDE_THEME = 'uipa_org.theme'
 
-    SITE_NAME = "UIPA"
+    SITE_NAME = "UIPA.org"
     SITE_EMAIL = "info@example.com"
     SITE_URL = 'http://localhost:8000'
 
