@@ -30,8 +30,8 @@ def temp_filename(suffix='', prefix='tmp', dir=None, delete=True):
 
 
 @receiver(FoiRequest.request_created,
-        dispatch_uid="create_and_attach_pdf")
-def create_and_attach_pdf(sender, **kwargs):
+          dispatch_uid="create_and_attach_uipa_document_request")
+def create_and_attach_uipa_document_request(sender, **kwargs):
     foi_request = sender
     document = create_uipa_document_request_from_foi_request(sender)
 
@@ -42,9 +42,9 @@ def create_and_attach_pdf(sender, **kwargs):
 
             if message:
                 foi_att = FoiAttachment(belongs_to=message,
-                                        name="initial_request.doc",
+                                        name="records_request.doc",
                                         filetype="docx")
-                foi_att.file.save("initial_request.doc", File(f))
+                foi_att.file.save("records_request.doc", File(f))
                 foi_att.size = foi_att.file.size
                 foi_att._committed = False
                 foi_att.save()
