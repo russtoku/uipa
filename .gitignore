@@ -102,4 +102,8 @@ public/
 # PyCharm
 .idea/
 
+# Mac
 .DS_Store
+
+# Solr
+solr-webapp
