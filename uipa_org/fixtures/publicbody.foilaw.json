@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
         "name": "State of Hawaii UIPA",
-        "slug": "state-hawaii-uipa",
+        "slug": "state-hawaii-uipa-state-of-hawaii",
         "description": "",
         "long_description": "",
         "created": null,
@@ -30,7 +30,7 @@
     "pk": 2,
     "fields": {
         "name": "State of Hawaii UIPA",
-        "slug": "state-hawaii-uipa",
+        "slug": "state-hawaii-uipa-city-and-county-of-honolulu",
         "description": "",
         "long_description": "",
         "created": null,
@@ -56,7 +56,7 @@
     "pk": 3,
     "fields": {
         "name": "State of Hawaii UIPA",
-        "slug": "state-hawaii-uipa",
+        "slug": "state-hawaii-uipa-county-of-hawaii",
         "description": "",
         "long_description": "",
         "created": null,
@@ -82,7 +82,7 @@
     "pk": 4,
     "fields": {
         "name": "State of Hawaii UIPA",
-        "slug": "state-hawaii-uipa",
+        "slug": "state-hawaii-uipa-county-of-maui",
         "description": "",
         "long_description": "",
         "created": null,
@@ -108,7 +108,7 @@
     "pk": 5,
     "fields": {
         "name": "State of Hawaii UIPA",
-        "slug": "state-hawaii-uipa",
+        "slug": "state-hawaii-uipa-county-of-kauai",
         "description": "",
         "long_description": "",
         "created": null,
