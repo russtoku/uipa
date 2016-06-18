@@ -145,6 +145,14 @@ class Beta(UipaOrgThemeBase, Base):
     FOI_EMAIL_PORT = values.IntegerValue(2525)
     FOI_EMAIL_USE_TLS = values.BooleanValue(True)
 
+    @property
+    def FROIDE_CONFIG(self):
+        config = super(Beta, self).FROIDE_CONFIG
+        config.update(dict(
+            payment_possible=True,
+            doc_conversion_binary="/usr/bin/libreoffice"))
+        return config
+
 
 class Production(UipaOrgThemeBase, Base):
     DEBUG = False
