@@ -66,6 +66,7 @@ class UipaOrgThemeBase(ThemeBase):
     def FROIDE_CONFIG(self):
         config = super(UipaOrgThemeBase, self).FROIDE_CONFIG
         config.update(dict(
+            currency="Dollars",
             create_new_publicbody=False,
             publicbody_empty=False,
             user_can_hide_web=True,
