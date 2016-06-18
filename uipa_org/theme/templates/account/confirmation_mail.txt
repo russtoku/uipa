@@ -9,6 +9,9 @@ Please visit the link below:
 
 Your password is: {{ password }}
 {% endblocktrans %}{% endif %}
+
+Mahalo for using {{ site_name }}.  Please encourage others to use this platform for requests.
+
 {% blocktrans %}Cheers,
 {{ site_name }}{% endblocktrans %}
 {% endautoescape %}
