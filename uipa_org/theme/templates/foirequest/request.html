@@ -17,7 +17,7 @@
     Froide.template.visitPublicBodyWebsite = '{% blocktrans %}Visit the website of this public body{% endblocktrans %}';
     Froide.regex = Froide.regex || {};
     Froide.regex.greetings = [{% blocktrans %}/Dear Sir or Madam/{% endblocktrans %}gi];
-    Froide.regex.closings = [{% blocktrans %}/Mahalo/{% endblocktrans %}gi];
+    Froide.regex.closings = [{% blocktrans %}/ /{% endblocktrans %}gi];
     Froide.template.searchInternet = '<li class="search-internet"><a href="{% templatetag openvariable %}url{% templatetag closevariable %}" class="target-new">{% trans "Search the internet for information about:" %} {% templatetag openvariable %}query{% templatetag closevariable %}</a></li>';
     Froide.template.searchPublicBodyWebsite = '<li class="search-public-body-website"><a href="{% templatetag openvariable %}url{% templatetag closevariable %}" class="target-new">{% trans "Search public agency website" %}</a></li>';
     Froide.template.searchEngineUrl = '{% search_engine_query %}';
@@ -306,7 +306,7 @@
 
               <div{% if request_form.body.errors %} class="has-error"{% endif %}>{{ request_form.body }}</div>
               <div id="letter_complete_end"{% if request_form.full_text.value %} style="display:none"{% endif %}><div id="letter_short_end" class="text"><small class="pull-right"><a class="toggle hideparent text-muted" href="#letter_end">{% trans "[... Show complete request text]" %}</a></small>
-                <span id="letter-greeting">{% blocktrans %}Mahalo,{% endblocktrans %}</span>
+                <span id="letter-greeting">{% blocktrans %}{% endblocktrans %}</span>
               </div>
 
               <div id="letter_end" style="display:none" class="text">{{ request_form.default_law.letter_end_form }}</div></div>

@@ -75,7 +75,7 @@ class UipaOrgThemeBase(ThemeBase):
             payment_possible=False,
             default_law=1,
             greetings=[rec(u"Dear (?:Mr\.?|Ms\.? .*?)")],
-            closings=[rec(u"Mahalo,?")],
+            closings=[rec(u"")],
             public_body_boosts={},
             dryrun=True,
             dryrun_domain="beta.uipa.org",
