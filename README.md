@@ -73,7 +73,7 @@ extension. Multiple pages can be loaded at the same time.
 Dumping the database in JSON format is done using the command:
 
 ```
-python manage.py dumpdata | python -m json.tool > db-dump.json
+python manage.py dumpdata --indent 4 > db-dump.json
 ```
 
 
