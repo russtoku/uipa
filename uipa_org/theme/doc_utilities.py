@@ -9,6 +9,12 @@ import datetime
 from docx import Document
 import os
 
+def is_requesting_waiver(text):
+    delimiter = "----- Put Reason to Waive Fees Below If Applicable -----"
+    parts = text.split(delimiter)
+    if len(parts) < 2:
+        return False
+    return len(parts[1].strip()) > 0
 
 def create_uipa_document_request_from_foi_request(foi_request):
     curr = os.path.dirname(os.path.realpath(__file__))
@@ -20,8 +26,7 @@ def create_uipa_document_request_from_foi_request(foi_request):
         foi_request.secret_address,
         foi_request.secret_address,
         foi_request.secret_address,
-        foi_request.description,
-        False)
+        foi_request.description)
 
 
 def create_uipa_document_request(
@@ -32,8 +37,7 @@ def create_uipa_document_request(
     requester_name,
     requester_contact_information,
     requester_email_address,
-    request_text,
-    should_waive_fees=False):
+    request_text):
 
     # TODO: @ryankanno - Make case insensitive regexs at some point
     DELIMITER_REPLACEMENT_MAP = {
@@ -48,6 +52,8 @@ def create_uipa_document_request(
 
     document = Document(document_path)
     paragraphs = document.paragraphs
+
+    should_waive_fees = is_requesting_waiver(request_text)
 
     for idx, paragraph in enumerate(paragraphs):
         for k, v in DELIMITER_REPLACEMENT_MAP.iteritems():
@@ -74,8 +80,7 @@ if __name__ == "__main__":
         "Sara Kanno",
         "sara@kanno.io",
         "sara@kanno.io",
-        "Can I get access to code?",
-        False)
+        "Can I get access to code?")
 
     document.save(
         './data/{0}-FALSE-Request-Access-form-12.1.15-fillable.docx'.format(
@@ -89,8 +94,7 @@ if __name__ == "__main__":
         "Sara Kanno",
         "sara@kanno.io",
         "sara@kanno.io",
-        "Can I get access to code?",
-        True)
+        "Can I get access to code?\n\n----- Put Reason to Waive Fees Below If Applicable -----\nBecause, it's public.\n")
 
     document.save(
         './data/{0}-TRUE-Request-Access-form-12.1.15-fillable.docx'.format(

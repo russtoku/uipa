@@ -33,7 +33,7 @@ def temp_filename(suffix='', prefix='tmp', dir=None, delete=True):
           dispatch_uid="create_and_attach_uipa_document_request")
 def create_and_attach_uipa_document_request(sender, **kwargs):
     foi_request = sender
-    document = create_uipa_document_request_from_foi_request(sender)
+    document = create_uipa_document_request_from_foi_request(foi_request)
 
     with temp_filename() as temp_fn:
         document.save(temp_fn)
