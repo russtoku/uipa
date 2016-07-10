@@ -29,6 +29,7 @@ class UipaOrgThemeBase(ThemeBase):
             'celery_haystack',
             'djcelery_email',
             'django.contrib.redirects',
+            'uipa_org.theme.templatetags.uipa_extras',
             'tinymce'
         ]
         return installed
