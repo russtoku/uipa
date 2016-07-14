@@ -8,10 +8,14 @@
 import datetime
 from docx import Document
 import os
+from uipa_org.uipa_constants import WAIVER_DELIMITER
 
 def is_requesting_waiver(text):
-    delimiter = "----- Put Reason to Waive Fees Below If Applicable -----"
-    parts = text.split(delimiter)
+    '''
+    Return True if requestor enters anything below the delimiter in the Your
+    Request field on the Request form.
+    '''
+    parts = text.split(WAIVER_DELIMITER)
     if len(parts) < 2:
         return False
     return len(parts[1].strip()) > 0

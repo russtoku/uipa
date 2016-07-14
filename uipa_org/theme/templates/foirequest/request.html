@@ -299,7 +299,7 @@
             </div>
 
             <div class="well letter">
-              <div{% if request_form.body.errors %} class="has-error"{% endif %}>{{ request_form.body|initial:"----- Put Reason to Waive Fees Below If Applicable -----" }}</div>
+              <div{% if request_form.body.errors %} class="has-error"{% endif %}>{{ request_form.body|prefill }}</div>
               <div id="letter_complete_end"><div id="letter_short_end" class="text">
                 <span id="letter-greeting">{% blocktrans %}{% endblocktrans %}</span>
               </div>
