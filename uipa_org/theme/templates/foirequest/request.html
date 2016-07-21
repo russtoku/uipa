@@ -15,7 +15,7 @@
     Froide.url = Froide.url || {};
     Froide.url.searchRequests = "{% url 'api_get_simple_search' api_name='v1' resource_name='request' %}"
     Froide.template = Froide.template || {};
-    Froide.template.visitPublicBodyWebsite = '{% blocktrans %}Visit the website of this public body{% endblocktrans %}';
+    Froide.template.visitPublicBodyWebsite = '{% blocktrans %}Visit the website of this public agency{% endblocktrans %}';
     Froide.regex = Froide.regex || {};
     Froide.regex.greetings = [{% blocktrans %}/Dear Sir or Madam/{% endblocktrans %}gi];
     Froide.regex.closings = [{% blocktrans %}/ /{% endblocktrans %}gi];
@@ -71,7 +71,7 @@
         <div id="request-note" class="panel panel-danger">
           <div class="panel-heading">
             <h3 class="panel-title">
-              {% trans "Notes for this public body" %}
+              {% trans "Notes for this public agency" %}
             </h3>
           </div>
           <div class="panel-body">
@@ -92,7 +92,7 @@
           {% if froide.publicbody_empty %}
             <div class="search-result">
               <label>
-                <input type="radio" id="option-emptypublicbody" name="public_body" value="" {% if request_form.public_body.value == "" %}checked="checked"{% endif %}/>{% blocktrans %}Don't select a public body for now. Let others help to find the right Public Body later.{% endblocktrans %}
+                <input type="radio" id="option-emptypublicbody" name="public_body" value="" {% if request_form.public_body.value == "" %}checked="checked"{% endif %}/>{% blocktrans %}Don't select a public agency for now. Let others help to find the right Public Agency later.{% endblocktrans %}
               </label>
             </div>
           {% endif %}
@@ -100,7 +100,7 @@
             <div class="search-result">
               <label>
                 <input id="option-newpublicbody" type="radio" name="public_body" value="new" {% if request_form.public_body.value == "new" %}checked="checked"{% endif %}/>
-                {% blocktrans %}Create a new public body on the fly.{% endblocktrans %}
+                {% blocktrans %}Create a new public agency on the fly.{% endblocktrans %}
               </label>
             </div>
             <div id="new-public_body" style="display:none">
@@ -197,7 +197,7 @@
             </div>
             <div class="panel-body">
               <p>
-                {% blocktrans %}In order to ask about a political state, you need to talk to people not public bodies. Please ask your Member of Parliament about the topic you are interested in:{% endblocktrans %}
+                {% blocktrans %}In order to ask about a political state, you need to talk to people not public agencies. Please ask your Member of the Legislature or City/County Council  about the topic you are interested in:{% endblocktrans %}
               </p>
               <p>
                 <a href="http://www.abgeordnetenwatch.de">
