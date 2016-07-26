@@ -2,3 +2,8 @@ div#main-folders.heroine-unit {
   background:none;
   border: 1px solid #ccc;
 }
+
+span.small-icon.status-has_fee {
+  background-image:url('../img/dollar.png');
+  background-size: 14px 14px;
+}
