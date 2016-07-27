@@ -59,8 +59,9 @@ class UipaOrgThemeBase(ThemeBase):
 
     HAYSTACK_CONNECTIONS = {
         'default': {
-            'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-            'URL': 'http://127.0.0.1:8983/solr/'
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': 'http://127.0.0.1:9200/',
+            'INDEX_NAME': 'haystack',
         }
     }
 
@@ -117,6 +118,13 @@ class Beta(UipaOrgThemeBase, Base):
     }
 
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
+
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+            'URL': 'http://127.0.0.1:8983/solr/'
+        }
+    }
 
     ALLOWED_HOSTS = values.TupleValue(('beta.uipa.org',))
 
