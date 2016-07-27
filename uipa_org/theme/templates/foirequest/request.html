@@ -346,19 +346,6 @@
                     {{ user_form.user_email }}
                   {% endif %}
                 </div>
-
-                <div class="form-group{% if user_form.address.errors %} has-error{% endif %}">
-                  {{ user_form.address.errors }}
-                  <label for="id_address" class="control-label">
-                    {% blocktrans %}Your mailing address{% endblocktrans %}
-                  </label>
-                  {% if user.is_authenticated %}
-                    <p id="post_address" class="text form-control-static">{{ user.address }}</p>
-                  {% else %}
-                    {{ user_form.address }}
-                    <p class="help-block">{{ user_form.address.help_text }}</p>
-                  {% endif %}
-                </div>
               </div>
             </div>
           </div>
