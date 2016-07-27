@@ -107,3 +107,6 @@ public/
 
 # Solr
 solr-webapp
+
+# Source for an editable project that pip installed
+src
