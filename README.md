@@ -8,6 +8,10 @@ Theme](https://github.com/okfde/froide-theme).
 
 ## Get started easily
 
+Prerequisite libraries and programs:
+
+ * libmagic (yum install libmagic, apt-get install libmagic, etc.)
+ * Elasticsearch (download, unpack, and run with Java; https://www.elastic.co/downloads/elasticsearch)
 
 In a Python virtualenv, run:
 
@@ -24,8 +28,25 @@ Be sure to remember the password for the admin user you create so that you can
 log on to the admin interface at http://127.0.0.1:8000/uipa-admin/. You can
 create or modify flatpages there.
 
-[Here is a complete guide of how to set this up on
-Heroku.](http://froide.readthedocs.org/en/latest/herokudeployment/)
+### Searching for public agencies or requests
+
+Once you have a running UIPA server, you'll want to be able to search for
+public bodies or previously submitted requests for information. To so, you'll
+need to:
+
+* Dowload and install Elasticsearch
+* Run an Elasticsearch server
+* Build the indexes
+
+```
+python manage.py update_index
+```
+
+## Running UIPA on Heroku
+
+There is a complete guide of how to set up Froide on Heroku at
+http://froide.readthedocs.org/en/latest/herokudeployment/. For UIPA, you'll
+need to interpolate a bit.
 
 
 ## Froide documentation
