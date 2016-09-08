@@ -1,0 +1,5 @@
+{% load i18n %}{% autoescape off %}--
+{% blocktrans %}UIPA.org: Expanding public access one request at a time
+
+Support Froide by donating to Open Knowledge Foundation Germany: http://okfn.de/spenden/
+{% endblocktrans %}{% endautoescape %}

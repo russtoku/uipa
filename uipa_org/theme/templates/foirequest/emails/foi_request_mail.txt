@@ -2,5 +2,6 @@
 
 {{ request.user.get_full_name }}{% if request.user.organization %}
 {{ request.user.organization }}{% endif %}
+
 {% include "foirequest/emails/request_footer.txt" %}
 {% endautoescape %}
