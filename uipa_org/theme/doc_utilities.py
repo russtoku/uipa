@@ -8,7 +8,8 @@
 import datetime
 from docx import Document
 import os
-from uipa_org.uipa_constants import WAIVER_DELIMITER
+from uipa_org.uipa_constants import WAIVER_DELIMITER, REQUEST_DELIMITER
+
 
 def is_requesting_waiver(text):
     '''
@@ -19,6 +20,11 @@ def is_requesting_waiver(text):
     if len(parts) < 2:
         return False
     return len(parts[1].strip()) > 0
+
+
+def remove_body_delimiters(text):
+    return text.replace( WAIVER_DELIMITER, '').replace(REQUEST_DELIMITER, '')
+
 
 def create_uipa_document_request_from_foi_request(foi_request):
     curr = os.path.dirname(os.path.realpath(__file__))
@@ -43,6 +49,9 @@ def create_uipa_document_request(
     requester_email_address,
     request_text):
 
+    should_waive_fees = is_requesting_waiver(request_text)
+    request_text = remove_body_delimiters(request_text)
+
     # TODO: @ryankanno - Make case insensitive regexs at some point
     DELIMITER_REPLACEMENT_MAP = {
         "[Request_Date]": request_date.strftime('%m-%d-%Y'),
@@ -56,8 +65,6 @@ def create_uipa_document_request(
 
     document = Document(document_path)
     paragraphs = document.paragraphs
-
-    should_waive_fees = is_requesting_waiver(request_text)
 
     for idx, paragraph in enumerate(paragraphs):
         for k, v in DELIMITER_REPLACEMENT_MAP.iteritems():
