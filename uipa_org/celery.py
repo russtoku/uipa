@@ -3,8 +3,8 @@ from __future__ import absolute_import
 import os
 
 # This should have been added to supervisord
-#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uipa_org.settings')
-#os.environ.setdefault("DJANGO_CONFIGURATION", "Beta")
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uipa_org.settings')
+# os.environ.setdefault("DJANGO_CONFIGURATION", "Beta")
 
 from configurations import importer
 importer.install(check_options=True)
@@ -12,6 +12,8 @@ importer.install(check_options=True)
 from celery import Celery
 from django.conf import settings
 
+import configurations
+configurations.setup()
 
 app = Celery('froide')
 app.config_from_object('django.conf:settings')
