@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from celery.schedules import crontab
 from configurations import values
 from froide.settings import Base
 from froide.settings import ThemeBase
