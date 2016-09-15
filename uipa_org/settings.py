@@ -65,6 +65,35 @@ class UipaOrgThemeBase(ThemeBase):
         }
     }
 
+    TIME_ZONE = values.Value('Pacific/Honolulu')
+
+    CELERYBEAT_SCHEDULE = {
+        'fetch-mail': {
+            'task': 'froide.foirequest.tasks.fetch_mail',
+            'schedule': crontab(),
+        },
+        'detect-asleep': {
+            'task': 'froide.foirequest.tasks.detect_asleep',
+            'schedule': crontab(hour=0, minute=0),
+        },
+        'detect-overdue': {
+            'task': 'froide.foirequest.tasks.detect_overdue',
+            'schedule': crontab(hour=0, minute=0),
+        },
+        'update-foirequestfollowers': {
+            'task': 'froide.foirequestfollower.tasks.batch_update',
+            'schedule': crontab(hour=0, minute=0),
+        },
+        'classification-reminder': {
+            'task': 'froide.foirequest.tasks.classification_reminder',
+            'schedule': crontab(hour=7, minute=0, day_of_week=6),
+        },
+        'test': {
+            'task': 'uipa_org.tasks.test',
+            'schedule': crontab(hour=0, minute=10)
+        },
+    }
+
     @property
     def FROIDE_CONFIG(self):
         config = super(UipaOrgThemeBase, self).FROIDE_CONFIG
