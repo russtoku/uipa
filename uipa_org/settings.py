@@ -95,6 +95,8 @@ class UipaOrgThemeBase(ThemeBase):
         },
     }
 
+    COMPRESS_ROOT = STATIC_ROOT
+
     @property
     def FROIDE_CONFIG(self):
         config = super(UipaOrgThemeBase, self).FROIDE_CONFIG
