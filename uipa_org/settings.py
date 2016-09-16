@@ -33,7 +33,6 @@ class UipaOrgThemeBase(ThemeBase):
             'djcelery_email',
             'django.contrib.redirects',
             'uipa_org.uipa_constants',
-            'uipa_org.tasks',
             'uipa_org.theme.templatetags.uipa_extras',
             'tinymce'
         ]
@@ -98,7 +97,7 @@ class UipaOrgThemeBase(ThemeBase):
         },
     }
 
-    COMPRESS_ROOT = STATIC_ROOT
+    CELERY_IMPORTS = ('uipa_org.tasks', )
 
     @property
     def FROIDE_CONFIG(self):
