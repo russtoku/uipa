@@ -4,6 +4,11 @@ from __future__ import absolute_import
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uipa_org.settings')
 # os.environ.setdefault("DJANGO_CONFIGURATION", "Beta")
 
+import os
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uipa_org.settings')
+os.environ.setdefault("DJANGO_CONFIGURATION", "Beta")
+
 from celery import Celery
 from django.conf import settings
 
