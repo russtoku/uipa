@@ -70,6 +70,9 @@ class UipaOrgThemeBase(ThemeBase):
 
     TIME_ZONE = values.Value('Pacific/Honolulu')
 
+    CELERY_IMPORTS = ('uipa_org.tasks', )
+    CELERY_TIMEZONE = values.Value('Pacific/Honolulu')
+
     CELERYBEAT_SCHEDULE = {
         'fetch-mail': {
             'task': 'froide.foirequest.tasks.fetch_mail',
@@ -91,13 +94,11 @@ class UipaOrgThemeBase(ThemeBase):
             'task': 'froide.foirequest.tasks.classification_reminder',
             'schedule': crontab(hour=7, minute=0, day_of_week=6),
         },
-        'test': {
+        'uipa-test': {
             'task': 'uipa_org.tasks.test',
-            'schedule': crontab(hour=0, minute=10)
+            'schedule': crontab(minute='*/10')
         },
     }
-
-    CELERY_IMPORTS = ('uipa_org.tasks', )
 
     @property
     def FROIDE_CONFIG(self):
