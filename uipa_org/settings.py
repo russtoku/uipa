@@ -100,6 +100,9 @@ class UipaOrgThemeBase(ThemeBase):
         },
     }
 
+    CELERY_RESULT_BACKEND = 'rpc'
+    CELERY_RESULT_PERSISTENT = True
+
     @property
     def FROIDE_CONFIG(self):
         config = super(UipaOrgThemeBase, self).FROIDE_CONFIG
