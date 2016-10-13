@@ -38,7 +38,7 @@ def create_and_attach_uipa_document_request(sender, **kwargs):
     document = create_uipa_document_request_from_foi_request(foi_request)
 
     with temp_filename() as temp_fn:
-        document.save(temp_fn)
+        document.save(temp_fn + ".extension_for_convert_to_pdf")
 
         result_file_path = convert_to_pdf(
             temp_fn,
