@@ -6,9 +6,11 @@
 # Distributed under terms of the MIT license.
 
 from contextlib import contextmanager
+from django.conf import settings
 from django.core.files import File
 from django.dispatch import receiver
 from doc_utilities import create_uipa_document_request_from_foi_request
+from froide.foirequest.file_utils import convert_to_pdf
 from froide.foirequest.models import FoiAttachment
 from froide.foirequest.models import FoiRequest
 import os
@@ -37,15 +39,28 @@ def create_and_attach_uipa_document_request(sender, **kwargs):
 
     with temp_filename() as temp_fn:
         document.save(temp_fn)
-        with open(temp_fn, "r") as f:
-            message = foi_request.messages[0]
 
-            if message:
+        result_file_path = convert_to_pdf(
+            temp_fn,
+            binary_name=settings.FROIDE_CONFIG.get(
+                'doc_conversion_binary'
+            ),
+            construct_call=settings.FROIDE_CONFIG.get(
+                'doc_conversion_call_func'
+            )
+        )
+        message = foi_request.messages[0]
+
+        if message and result_file_path:
+            with open(result_file_path, 'rb') as f:
+                filename = "records_request.pdf"
+                new_file = File(f)
                 foi_att = FoiAttachment(belongs_to=message,
-                                        name="records_request.doc",
-                                        filetype="docx")
-                foi_att.file.save("records_request.doc", File(f))
-                foi_att.size = foi_att.file.size
+                                        approved=False,
+                                        filetype='application/pdf')
+                foi_att.file = new_file
+                foi_att.size = new_file.size
+                foi_att.file.save(filename, new_file)
                 foi_att._committed = False
                 foi_att.save()
 
