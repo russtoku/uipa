@@ -58,6 +58,7 @@ def create_and_attach_uipa_document_request(sender, **kwargs):
                 new_file = File(f)
                 foi_att = FoiAttachment(belongs_to=message,
                                         approved=False,
+                                        name=filename,
                                         filetype='application/pdf')
                 foi_att.file = new_file
                 foi_att.size = new_file.size
