@@ -38,10 +38,11 @@ def create_and_attach_uipa_document_request(sender, **kwargs):
     document = create_uipa_document_request_from_foi_request(foi_request)
 
     with temp_filename() as temp_fn:
-        document.save(temp_fn + ".extension_for_convert_to_pdf")
+        modified_fn = temp_fn + ".extension_for_convert_to_pdf"
+        document.save(modified_fn)
 
         result_file_path = convert_to_pdf(
-            temp_fn,
+            modified_fn,
             binary_name=settings.FROIDE_CONFIG.get(
                 'doc_conversion_binary'
             ),
