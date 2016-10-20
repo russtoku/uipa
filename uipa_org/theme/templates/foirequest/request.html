@@ -448,61 +448,16 @@
               </div>
             </div>
           {% endif %}
-          <a href="#step-review" id="review-button" role="button" class="btn btn-primary btn-lg" data-toggle="modal">
-            <span class="glyphicon glyphicon-hand-right"></span>
-            {% trans "Review and Submit" %}
+          <!--a href="#step-review" id="review-button" role="button" class="btn btn-primary btn-lg" data-toggle="modal"-->
+          <button type="submit" id="send-request-button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-ok"></span>
+            {% trans "Submit Request"%}
+          </button>
           </a>
         </div>
       </fieldset>
+      <!-- removed modal dialog -->
 
-      <fieldset id="review-and-submit">
-        <div class="modal fade" id="step-review" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">
-                  {% blocktrans %}Review your Request and Submit{% endblocktrans %}
-                </h4>
-              </div>
-              <div class="modal-body">
-                <table class="message-table">
-                  <tbody>
-                  <tr>
-                    <td class="key">{% blocktrans %}To{% endblocktrans %}</td>
-                    <td id="review-to"></td>
-                  </tr>
-                  <tr>
-                    <td class="key">{% blocktrans %}From{% endblocktrans %}</td>
-                    <td id="review-from"></td>
-                  </tr>
-                  <tr>
-                    <td class="key">{% blocktrans %}Subject{% endblocktrans %}</td>
-                    <td><strong id="review-subject"></strong></td>
-                  </tr>
-                  </tbody>
-                </table>
-                <div id="review-text"></div>
-                <ul id="review-warnings">
-                </ul>
-                <ul>
-                  <li>{% blocktrans %}Please use proper spelling.{% endblocktrans %}</li>
-                  <li>{% blocktrans %}Please stay polite.{% endblocktrans %}</li>
-                </ul>
-              </div>
-              <div class="modal-footer">
-                <a href="#" class="btn btn-default" data-dismiss="modal">
-                  {% trans "edit your request again" %}
-                </a>
-                <button type="submit" id="send-request-button" class="btn btn-primary">
-                  <span class="glyphicon glyphicon-ok"></span>
-                  {% trans "Submit Request"%}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </fieldset>
     </form>
   </div>
 </div>
