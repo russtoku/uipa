@@ -8,7 +8,9 @@
 import datetime
 from docx import Document
 import os
-from uipa_org.uipa_constants import WAIVER_DELIMITER, REQUEST_DELIMITER
+from uipa_org.uipa_constants import (WELCOME_DELIMITER,
+                                     WAIVER_DELIMITER,
+                                     REQUEST_DELIMITER)
 
 
 def is_requesting_waiver(text):
@@ -21,12 +23,15 @@ def is_requesting_waiver(text):
         return False
     return len(parts[1].strip()) > 0
 
+def strip_for_request(text):
+    ''' Return the text without any delimiters.'''
+    return text.replace(WELCOME_DELIMITER, '').replace(WAIVER_DELIMITER, '').replace(REQUEST_DELIMITER, '')
 
-def remove_body_delimiters(text):
-    return text.replace( WAIVER_DELIMITER, '').replace(REQUEST_DELIMITER, '')
+def strip_for_email(text):
+    ''' Return the text with only the welcome delimiter.'''
+    return text.replace(WAIVER_DELIMITER, '').replace(REQUEST_DELIMITER, '')
 
-
-def create_uipa_document_request_from_foi_request(foi_request):
+def create_uipa_document_request_from_foi_request(foi_request, should_waive_fees):
     curr = os.path.dirname(os.path.realpath(__file__))
     return create_uipa_document_request(
         os.path.join(curr, 'data/Request-Access-form-12.1.15-fillable.docx'),
@@ -36,7 +41,8 @@ def create_uipa_document_request_from_foi_request(foi_request):
         foi_request.secret_address,
         foi_request.secret_address,
         foi_request.secret_address,
-        foi_request.description)
+        foi_request.description,
+        should_waive_fees)
 
 
 def create_uipa_document_request(
@@ -47,10 +53,8 @@ def create_uipa_document_request(
     requester_name,
     requester_contact_information,
     requester_email_address,
-    request_text):
-
-    should_waive_fees = is_requesting_waiver(request_text)
-    request_text = remove_body_delimiters(request_text)
+    request_text,
+    should_waive_fees):
 
     # TODO: @ryankanno - Make case insensitive regexs at some point
     DELIMITER_REPLACEMENT_MAP = {
@@ -83,6 +87,7 @@ if __name__ == "__main__":
     """
     Testing, yo.
     """
+    fee_wavier = False
     document = create_uipa_document_request(
         './data/Request-Access-form-12.1.15-fillable.docx',
         datetime.datetime.utcnow(),
@@ -91,12 +96,14 @@ if __name__ == "__main__":
         "Sara Kanno",
         "sara@kanno.io",
         "sara@kanno.io",
-        "Can I get access to code?")
+        "Can I get access to code?",
+        fee_wavier)
 
     document.save(
         './data/{0}-FALSE-Request-Access-form-12.1.15-fillable.docx'.format(
             datetime.datetime.utcnow().isoformat()))
 
+    fee_wavier = True
     document = create_uipa_document_request(
         './data/Request-Access-form-12.1.15-fillable.docx',
         datetime.datetime.utcnow(),
@@ -105,7 +112,8 @@ if __name__ == "__main__":
         "Sara Kanno",
         "sara@kanno.io",
         "sara@kanno.io",
-        "Can I get access to code?\n\n----- Put Reason to Waive Fees Below If Applicable -----\nBecause, it's public.\n")
+        "Can I get access to code?\n\n----- Put Reason to Waive Fees Below If Applicable -----\nBecause, it's public.\n",
+        fee_wavier)
 
     document.save(
         './data/{0}-TRUE-Request-Access-form-12.1.15-fillable.docx'.format(
