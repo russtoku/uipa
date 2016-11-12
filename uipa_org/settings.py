@@ -253,6 +253,66 @@ class Production(UipaOrgThemeBase, Base):
     FOI_EMAIL_PORT = values.IntegerValue(2525)
     FOI_EMAIL_USE_TLS = values.BooleanValue(True)
 
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'root': {
+            'level': 'WARNING',
+            'handlers': [],
+        },
+        'filters': {
+            'require_debug_false': {
+                '()': 'django.utils.log.RequireDebugFalse'
+            }
+        },
+        'formatters': {
+            'verbose': {
+                'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            },
+        },
+        'handlers': {
+            'mail_admins': {
+                'level': 'ERROR',
+                'filters': ['require_debug_false'],
+                'class': 'django.utils.log.AdminEmailHandler'
+            },
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+            },
+            'uipa_org_logfile': {
+                'level':'DEBUG',
+                'class':'logging.handlers.RotatingFileHandler',
+                'filename': os.path.join('/var/log/uipa_org/', 'uipa_org_app.log'),
+                'maxBytes': 1024*1024*5, # 5MB
+                'backupCount': 10,
+                'formatter': 'verbose',
+            },
+        },
+        'loggers': {
+            'froide': {
+                'handlers': ['uipa_org_logfile'],
+                'propagate': True,
+                'level': 'DEBUG',
+            },
+            'django.request': {
+                'handlers': ['mail_admins'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+            'django.db.backends': {
+                'level': 'ERROR',
+                'handlers': ['uipa_org_logfile'],
+                'propagate': False,
+            },
+            'uipa_org': {
+                'handlers': ['uipa_org_logfile',],
+                'propagate': True,
+                'level': 'DEBUG',
+            },
+        }
+    }
+
 try:
     from .local_settings import *  # noqa
 except ImportError:
