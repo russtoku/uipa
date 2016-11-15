@@ -322,6 +322,16 @@ class Production(UipaOrgThemeBase, Base):
         }
     }
 
+    @property
+    def FROIDE_CONFIG(self):
+        config = super(Production, self).FROIDE_CONFIG
+        config.update(dict(
+            payment_possible=True,
+            dryrun=True,
+            dryrun_domain="uipa.org",
+            doc_conversion_binary="/usr/bin/libreoffice"))
+        return config
+
 try:
     from .local_settings import *  # noqa
 except ImportError:
