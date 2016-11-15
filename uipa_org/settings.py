@@ -208,11 +208,10 @@ class Production(UipaOrgThemeBase, Base):
     DEBUG = False
     TEMPLATE_DEBUG = False
 
-    CELERY_ALWAYS_EAGER = values.BooleanValue(False)
     COMPRESS_ENABLED = values.BooleanValue(True)
     COMPRESS_OFFLINE = values.BooleanValue(True)
 
-    SITE_URL = values.Value('http://uipa.org')
+    SITE_URL = values.Value('https://uipa.org')
     SITE_EMAIL = 'info@uipa.org'
     DEFAULT_FROM_EMAIL = 'info@uipa.org'
 

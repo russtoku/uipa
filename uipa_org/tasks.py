@@ -13,9 +13,9 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils import translation
-from froide.models import FoiRequest
+from froide.foirequest.models import FoiRequest
 from uipa_org.celery import app as celery_app
-import timedelta
+from datetime import timedelta
 
 
 logger = get_task_logger(__name__)
