@@ -5,11 +5,13 @@
 #
 # Distributed under terms of the MIT license.
 
+from __future__ import absolute_import
 from celery.utils.log import get_task_logger
 from django.conf import settings
 from django.core.mail import send_mail
 from django.db.models import Q
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils import translation
 from froide.models import FoiRequest
 from uipa_org.celery import app as celery_app
