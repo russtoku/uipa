@@ -223,6 +223,16 @@ class Production(UipaOrgThemeBase, Base):
         }
     }
 
+    HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
+
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': 'http://127.0.0.1:9200/',
+            'INDEX_NAME': 'haystack',
+        }
+    }
+
     ALLOWED_HOSTS = values.TupleValue(('uipa.org',))
 
     FOI_EMAIL_TEMPLATE = values.Value('request+{secret}@{domain}')
