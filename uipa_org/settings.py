@@ -94,9 +94,13 @@ class UipaOrgThemeBase(ThemeBase):
             'task': 'froide.foirequest.tasks.classification_reminder',
             'schedule': crontab(hour=7, minute=0, day_of_week=6),
         },
-        'uipa-test': {
-            'task': 'uipa_org.tasks.test',
-            'schedule': crontab(minute='*/10')
+        'uipa-private_public_reminder': {
+            'task': 'uipa_org.tasks.private_public_reminder',
+            'schedule': crontab(hour=0, minute=0),
+        },
+        'uipa-make_public_private': {
+            'task': 'uipa_org.tasks.make_public_private',
+            'schedule': crontab(hour=0, minute=0),
         },
     }
 

@@ -24,7 +24,7 @@ NOTIFICATION_SENT_BEFORE_NUM_DAYS = 14
 
 
 @celery_app.task
-def detect_private_will_be_made_public(*args, **kwargs):
+def private_public_reminder(*args, **kwargs):
     translation.activate(settings.LANGUAGE_CODE)
     num_days_after_due_date = settings.FROIDE_CONFIG.get(
         'make_public_num_days_after_due_date', 365)
