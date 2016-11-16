@@ -30,5 +30,5 @@ elasticsearch==2.3.0
 -e git://github.com/codeforhawaii/froide.git@master#egg=froide
 
 # -e git://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
-psycopg2==2.6.1
+#psycopg2==2.6.1
 #lxml==3.4.4
