@@ -34,7 +34,8 @@ class UipaOrgThemeBase(ThemeBase):
             'django.contrib.redirects',
             'uipa_org.uipa_constants',
             'uipa_org.theme.templatetags.uipa_extras',
-            'tinymce'
+            'tinymce',
+            'raven.contrib.django.raven_compat'
         ]
         return installed
 
@@ -325,6 +326,10 @@ class Production(UipaOrgThemeBase, Base):
                 'level': 'DEBUG',
             },
         }
+    }
+
+    RAVEN_CONFIG = {
+        'dsn': os_env('SENTRY_DSN')
     }
 
     @property
