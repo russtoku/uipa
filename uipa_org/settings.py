@@ -264,7 +264,6 @@ class Beta(UipaOrgThemeBase, Base):
     AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os_env('AWS_STORAGE_BUCKET_NAME')
-
     AWS_S3_SECURE_URLS = values.Value(True)
     AWS_QUERYSTRING_AUTH = values.Value(False)
     AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
@@ -274,11 +273,13 @@ class Beta(UipaOrgThemeBase, Base):
 
     STATICFILES_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
     STATICFILES_LOCATION = 'static'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
     COMPRESS_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
 
     DEFAULT_FILE_STORAGE = values.Value('storages.backends.s3boto.S3BotoStorage')
     MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
     AWS_HEADERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
