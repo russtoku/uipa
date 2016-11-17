@@ -201,6 +201,101 @@ class Beta(UipaOrgThemeBase, Base):
     FOI_EMAIL_PORT = values.IntegerValue(2525)
     FOI_EMAIL_USE_TLS = values.BooleanValue(True)
 
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'root': {
+            'level': 'WARNING',
+            'handlers': [],
+        },
+        'filters': {
+            'require_debug_false': {
+                '()': 'django.utils.log.RequireDebugFalse'
+            }
+        },
+        'formatters': {
+            'verbose': {
+                'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            },
+        },
+        'handlers': {
+            'mail_admins': {
+                'level': 'ERROR',
+                'filters': ['require_debug_false'],
+                'class': 'django.utils.log.AdminEmailHandler'
+            },
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+            },
+            'uipa_org_logfile': {
+                'level':'DEBUG',
+                'class':'logging.handlers.RotatingFileHandler',
+                'filename': os.path.join('/var/log/uipa_org_beta/', 'uipa_org_beta_app.log'),
+                'maxBytes': 1024*1024*5, # 5MB
+                'backupCount': 10,
+                'formatter': 'verbose',
+            },
+        },
+        'loggers': {
+            'froide': {
+                'handlers': ['uipa_org_logfile'],
+                'propagate': True,
+                'level': 'DEBUG',
+            },
+            'django.request': {
+                'handlers': ['mail_admins'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+            'django.db.backends': {
+                'level': 'ERROR',
+                'handlers': ['uipa_org_logfile'],
+                'propagate': False,
+            },
+            'uipa_org': {
+                'handlers': ['uipa_org_logfile',],
+                'propagate': True,
+                'level': 'DEBUG',
+            },
+        }
+    }
+
+    AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os_env('AWS_STORAGE_BUCKET_NAME')
+
+    AWS_S3_SECURE_URLS = values.Value(True)
+    AWS_QUERYSTRING_AUTH = values.Value(False)
+    AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
+    AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
+    AWS_S3_CUSTOM_DOMAIN = '%s.%s' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    AWS_S3_FILE_OVERWRITE = False
+
+    STATICFILES_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
+    STATICFILES_LOCATION = 'static'
+
+    COMPRESS_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
+
+    DEFAULT_FILE_STORAGE = values.Value('storages.backends.s3boto.S3BotoStorage')
+    MEDIAFILES_LOCATION = 'media'
+
+    AWS_HEADERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'Cache-Control': 'max-age=94608000',
+    }
+    AWS_IS_GZIPPED = True
+    GZIP_CONTENT_TYPES = (
+        'text/css',
+        'application/javascript',
+        'application/x-javascript',
+        'text/javascript'
+    )
+
+    RAVEN_CONFIG = {
+        'dsn': os_env('SENTRY_DSN')
+    }
+
     @property
     def FROIDE_CONFIG(self):
         config = super(Beta, self).FROIDE_CONFIG
