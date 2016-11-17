@@ -271,11 +271,11 @@ class Beta(UipaOrgThemeBase, Base):
     AWS_S3_CUSTOM_DOMAIN = '%s.%s' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
     AWS_S3_FILE_OVERWRITE = False
 
-    STATICFILES_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
+    STATICFILES_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
     STATICFILES_LOCATION = 'static'
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
-    COMPRESS_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
+    COMPRESS_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
 
     DEFAULT_FILE_STORAGE = values.Value('uipa_org.custom_storages.MediaStorage')
     MEDIAFILES_LOCATION = 'media'
