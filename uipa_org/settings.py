@@ -277,7 +277,7 @@ class Beta(UipaOrgThemeBase, Base):
 
     COMPRESS_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
 
-    DEFAULT_FILE_STORAGE = values.Value('storages.backends.s3boto.S3BotoStorage')
+    DEFAULT_FILE_STORAGE = values.Value('uipa_org.custom_storages.MediaStorage')
     MEDIAFILES_LOCATION = 'media'
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
