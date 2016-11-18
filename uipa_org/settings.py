@@ -310,8 +310,8 @@ class Production(UipaOrgThemeBase, Base):
     DEBUG = False
     TEMPLATE_DEBUG = False
 
-    COMPRESS_ENABLED = values.BooleanValue(True)
-    COMPRESS_OFFLINE = values.BooleanValue(True)
+    # COMPRESS_ENABLED = values.BooleanValue(True)
+    # COMPRESS_OFFLINE = values.BooleanValue(True)
 
     SITE_URL = values.Value('https://uipa.org')
     SITE_EMAIL = 'info@uipa.org'
