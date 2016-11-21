@@ -23,13 +23,27 @@ def is_requesting_waiver(text):
         return False
     return len(parts[1].strip()) > 0
 
+def strip_to(phrase, lines):
+    '''Return lines after the line that contains the phrase'''
+    if not phrase:
+        return lines
+
+    start = 0
+    for (i, line) in enumerate(lines):
+        if line.find(phrase) > -1:
+            start = i + 1
+
+    return lines[start:]
+
 def strip_for_request(text):
     ''' Return the text without any delimiters.'''
-    return text.replace(WELCOME_DELIMITER, '').replace(WAIVER_DELIMITER, '').replace(REQUEST_DELIMITER, '')
+    lines = strip_to(REQUEST_DELIMITER, text.split('\r\n'))
+    lns = [line for line in lines if line.find(WAIVER_DELIMITER) == -1]
+    return '\r\n'.join(lns)
 
 def strip_for_email(text):
     ''' Return the text with only the welcome delimiter.'''
-    return text.replace(WAIVER_DELIMITER, '').replace(REQUEST_DELIMITER, '')
+    return '%s\r\n\r\n%s' % (WELCOME_DELIMITER, strip_for_request(text))
 
 def create_uipa_document_request_from_foi_request(foi_request, should_waive_fees):
     curr = os.path.dirname(os.path.realpath(__file__))
@@ -104,6 +118,9 @@ if __name__ == "__main__":
             datetime.datetime.utcnow().isoformat()))
 
     fee_wavier = True
+    body = "Can I get access to code?\r\n\r\n%s\r\nBecause, it's public." % WAIVER_DELIMITER
+    stripped_body = strip_for_request(body)
+
     document = create_uipa_document_request(
         './data/Request-Access-form-12.1.15-fillable.docx',
         datetime.datetime.utcnow(),
@@ -112,7 +129,7 @@ if __name__ == "__main__":
         "Sara Kanno",
         "sara@kanno.io",
         "sara@kanno.io",
-        "Can I get access to code?\n\n----- Put Reason to Waive Fees Below If Applicable -----\nBecause, it's public.\n",
+        stripped_body,
         fee_wavier)
 
     document.save(
