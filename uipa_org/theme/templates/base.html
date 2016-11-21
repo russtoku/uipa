@@ -5,6 +5,12 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static "css/uipa-style.css" %}"/>
+    <script src="{% static "js/cheet.min.js" %}"></script>
+    <script type="text/javascript">
+        cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+            $('#easter-egg-modal').modal('show');
+        });
+    </script>
 {% endblock %}
 
 {% block nav %}
@@ -52,6 +58,32 @@
   </div>
 </div>
 <hr/>
+
+<div class="modal fade" id="easter-egg-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Mahalo to all our volunteers!</h4> 
+            </div>
+            <div class="modal-body">
+                <h4>Special thanks to the Core Team:</h4>
+                <p>Brian Black, Ryan Kanno, and Russ Tokuyama</p>
+
+                <img src="{% static 'img/team-with-bblack.jpg' %}" width="100%" />
+                From left: Russ, Brian, Ryan, and George at <a href="https://blog.codeforhawaii.org/2016/06/10/national-day-civic-hacking-recap/">National Day of Civic Hacking</a>
+
+                <hr/>
+
+                <h4>Special thanks to the following:</h4>
+                <p>Ian Lind, Sara Sakamoto, George Lee, Stephan Fitpatrick, and McKay Davis</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock footer_credits %}
 
 {% block footer_menu %}
