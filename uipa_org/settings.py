@@ -27,6 +27,8 @@ class UipaOrgThemeBase(ThemeBase):
 
     MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+    SECRET_KEY = os_env('SECRET_KEY')
+
     @property
     def INSTALLED_APPS(self):
         installed = super(UipaOrgThemeBase, self).INSTALLED_APPS
