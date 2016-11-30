@@ -25,6 +25,8 @@ class UipaOrgThemeBase(ThemeBase):
 
     FIXTURE_DIRS = ('fixtures',)
 
+    MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
     @property
     def INSTALLED_APPS(self):
         installed = super(UipaOrgThemeBase, self).INSTALLED_APPS
