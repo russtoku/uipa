@@ -426,6 +426,8 @@ class Production(UipaOrgThemeBase, Base):
         }
     }
 
+    SESSION_COOKIE_SECURE = True
+
     AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os_env('AWS_STORAGE_BUCKET_NAME')
