@@ -141,6 +141,12 @@ class UipaOrgThemeBase(ThemeBase):
         return config
 
 
+class SslEnabled(object):
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+
+
 class Dev(UipaOrgThemeBase, Base):
 
     CACHES = {
@@ -310,7 +316,7 @@ class Beta(UipaOrgThemeBase, Base):
         return config
 
 
-class Production(UipaOrgThemeBase, Base):
+class Production(SslEnabled, UipaOrgThemeBase, Base):
     DEBUG = False
     TEMPLATE_DEBUG = False
 
@@ -427,8 +433,6 @@ class Production(UipaOrgThemeBase, Base):
             },
         }
     }
-
-    SESSION_COOKIE_SECURE = True
 
     AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
