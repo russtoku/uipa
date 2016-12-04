@@ -29,6 +29,8 @@ class UipaOrgThemeBase(ThemeBase):
 
     SECRET_KEY = os_env('SECRET_KEY')
 
+    MEDIA_ROOT = os_env('MEDIA_ROOT')
+
     @property
     def INSTALLED_APPS(self):
         installed = super(UipaOrgThemeBase, self).INSTALLED_APPS
