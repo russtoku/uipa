@@ -331,7 +331,7 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, UipaOrgThemeBase,
         return config
 
 
-class Production(SentryEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
+class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
     DEBUG = False
     TEMPLATE_DEBUG = False
 
