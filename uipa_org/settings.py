@@ -154,7 +154,7 @@ class SslEnabled(object):
     SESSION_COOKIE_SECURE = True
 
 
-class RavenEnabled(object):
+class SentryEnabled(object):
     RAVEN_CONFIG = {
         'dsn': os_env('SENTRY_DSN')
     }
@@ -210,7 +210,7 @@ class Dev(UipaOrgThemeBase, Base):
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
 
-class Beta(RavenEnabled, NginxSecureStaticEnabled, S3Enabled, UipaOrgThemeBase, Base):
+class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, UipaOrgThemeBase, Base):
     SITE_URL = values.Value('http://beta.uipa.org')
     SITE_EMAIL = 'info@beta.uipa.org'
     DEFAULT_FROM_EMAIL = 'info@beta.uipa.org'
@@ -331,7 +331,7 @@ class Beta(RavenEnabled, NginxSecureStaticEnabled, S3Enabled, UipaOrgThemeBase, 
         return config
 
 
-class Production(RavenEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
+class Production(SentryEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
     DEBUG = False
     TEMPLATE_DEBUG = False
 
