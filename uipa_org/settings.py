@@ -177,9 +177,8 @@ class S3Enabled(object):
     COMPRESS_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
     COMPRESS_URL = values.Value(STATIC_URL)
 
-    DEFAULT_FILE_STORAGE = values.Value('uipa_org.custom_storages.MediaStorage')
-
     # @ryankanno - Can't store media files in S3 because of auth issue
+    # DEFAULT_FILE_STORAGE = values.Value('uipa_org.custom_storages.MediaStorage')
     # MEDIAFILES_LOCATION = 'media'
     # MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
