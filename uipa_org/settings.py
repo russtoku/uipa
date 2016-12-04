@@ -141,10 +141,60 @@ class UipaOrgThemeBase(ThemeBase):
         return config
 
 
+class NginxSecureStaticEnabled(object):
+    USE_X_ACCEL_REDIRECT = True
+    X_ACCEL_REDIRECT_PREFIX = values.Value('/protected')
+
+
 class SslEnabled(object):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
+
+
+class RavenEnabled(object):
+    RAVEN_CONFIG = {
+        'dsn': os_env('SENTRY_DSN')
+    }
+
+
+class S3Enabled(object):
+    AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os_env('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_SECURE_URLS = values.Value(True)
+    AWS_QUERYSTRING_AUTH = values.Value(False)
+
+    AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
+    AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
+    AWS_S3_CUSTOM_DOMAIN = '%s.%s' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    AWS_S3_FILE_OVERWRITE = False
+
+    STATICFILES_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
+    STATICFILES_LOCATION = 'static'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+    COMPRESS_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
+    COMPRESS_URL = values.Value(STATIC_URL)
+
+    DEFAULT_FILE_STORAGE = values.Value('uipa_org.custom_storages.MediaStorage')
+
+    # @ryankanno - Can't store media files in S3 because of auth issue
+    # MEDIAFILES_LOCATION = 'media'
+    # MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+
+    AWS_HEADERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'Cache-Control': 'max-age=94608000',
+    }
+    AWS_IS_GZIPPED = True
+
+    GZIP_CONTENT_TYPES = (
+        'text/css',
+        'application/javascript',
+        'application/x-javascript',
+        'text/javascript'
+    )
 
 
 class Dev(UipaOrgThemeBase, Base):
@@ -159,7 +209,7 @@ class Dev(UipaOrgThemeBase, Base):
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
 
-class Beta(UipaOrgThemeBase, Base):
+class Beta(RavenEnabled, NginxSecureStaticEnabled, S3Enabled, UipaOrgThemeBase, Base):
     SITE_URL = values.Value('http://beta.uipa.org')
     SITE_EMAIL = 'info@beta.uipa.org'
     DEFAULT_FROM_EMAIL = 'info@beta.uipa.org'
@@ -271,42 +321,6 @@ class Beta(UipaOrgThemeBase, Base):
         }
     }
 
-    AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os_env('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_SECURE_URLS = values.Value(True)
-    AWS_QUERYSTRING_AUTH = values.Value(False)
-    AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
-    AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
-    AWS_S3_CUSTOM_DOMAIN = '%s.%s' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-    AWS_S3_FILE_OVERWRITE = False
-
-    STATICFILES_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
-    STATICFILES_LOCATION = 'static'
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-
-    COMPRESS_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
-
-    DEFAULT_FILE_STORAGE = values.Value('uipa_org.custom_storages.MediaStorage')
-    MEDIAFILES_LOCATION = 'media'
-    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-
-    AWS_HEADERS = {
-        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-        'Cache-Control': 'max-age=94608000',
-    }
-    AWS_IS_GZIPPED = True
-    GZIP_CONTENT_TYPES = (
-        'text/css',
-        'application/javascript',
-        'application/x-javascript',
-        'text/javascript'
-    )
-
-    RAVEN_CONFIG = {
-        'dsn': os_env('SENTRY_DSN')
-    }
-
     @property
     def FROIDE_CONFIG(self):
         config = super(Beta, self).FROIDE_CONFIG
@@ -316,7 +330,7 @@ class Beta(UipaOrgThemeBase, Base):
         return config
 
 
-class Production(SslEnabled, UipaOrgThemeBase, Base):
+class Production(RavenEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
     DEBUG = False
     TEMPLATE_DEBUG = False
 
@@ -432,42 +446,6 @@ class Production(SslEnabled, UipaOrgThemeBase, Base):
                 'level': 'DEBUG',
             },
         }
-    }
-
-    AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os_env('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_SECURE_URLS = values.Value(True)
-    AWS_QUERYSTRING_AUTH = values.Value(False)
-    AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
-    AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
-    AWS_S3_CUSTOM_DOMAIN = '%s.%s' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
-    AWS_S3_FILE_OVERWRITE = False
-
-    STATICFILES_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
-    STATICFILES_LOCATION = 'static'
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-
-    COMPRESS_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
-
-    DEFAULT_FILE_STORAGE = values.Value('uipa_org.custom_storages.MediaStorage')
-    MEDIAFILES_LOCATION = 'media'
-    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-
-    AWS_HEADERS = {
-        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-        'Cache-Control': 'max-age=94608000',
-    }
-    AWS_IS_GZIPPED = True
-    GZIP_CONTENT_TYPES = (
-        'text/css',
-        'application/javascript',
-        'application/x-javascript',
-        'text/javascript'
-    )
-
-    RAVEN_CONFIG = {
-        'dsn': os_env('SENTRY_DSN')
     }
 
     @property
