@@ -211,6 +211,10 @@ class Dev(UipaOrgThemeBase, Base):
 
 
 class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, UipaOrgThemeBase, Base):
+
+    COMPRESS_ENABLED = values.BooleanValue(True)
+    COMPRESS_OFFLINE = values.BooleanValue(True)
+
     SITE_URL = values.Value('http://beta.uipa.org')
     SITE_EMAIL = 'info@beta.uipa.org'
     DEFAULT_FROM_EMAIL = 'info@beta.uipa.org'
