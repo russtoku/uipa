@@ -1,9 +1,9 @@
 pip==8.1.1
-django==1.9.12
+django==1.10.2
 Markdown==2.6.6
 celery==3.1.23
 celery-haystack==0.10
-django-haystack==2.4.1
+django-haystack==2.5.0
 django-celery-email==1.1.4
 django-taggit==0.18.1
 pytz==2016.6.1
