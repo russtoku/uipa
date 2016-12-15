@@ -77,7 +77,7 @@ class UipaOrgThemeBase(ThemeBase):
 
     TIME_ZONE = values.Value('Pacific/Honolulu')
 
-    CELERY_IMPORTS = ('uipa_org.tasks.private_public_reminder', 'uipa_org.tasks.make_public_private', )
+    CELERY_IMPORTS = ('uipa_org.tasks',)
     CELERY_TIMEZONE = values.Value('Pacific/Honolulu')
 
     CELERYBEAT_SCHEDULE = {
@@ -106,7 +106,7 @@ class UipaOrgThemeBase(ThemeBase):
             'schedule': crontab(hour=0, minute=0),
         },
         'uipa-make_public_private': {
-            'task': 'uipa_org.tasks.make_public_private',
+            'task': 'uipa_org.tasks.make_private_public',
             'schedule': crontab(hour=0, minute=0),
         },
     }
