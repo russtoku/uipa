@@ -26,6 +26,7 @@ NOTIFICATION_SENT_BEFORE_NUM_DAYS = 14
 @celery_app.task
 def private_public_reminder(*args, **kwargs):
     translation.activate(settings.LANGUAGE_CODE)
+
     num_days_after_due_date = settings.FROIDE_CONFIG.get(
         'make_public_num_days_after_due_date', 365)
     num_days_after_due_date = num_days_after_due_date - NOTIFICATION_SENT_BEFORE_NUM_DAYS
@@ -33,7 +34,12 @@ def private_public_reminder(*args, **kwargs):
     now = timezone.now()
     due_date_everything_should_be_made_private = now - timedelta(num_days_after_due_date)
 
+    logger.info("Attempting to warn all requests that were due on : {0}".format(due_date_everything_should_be_made_private))
+
     for foirequest in FoiRequest.objects.filter(Q(visibility=0) | Q(visibility=1), is_foi=True, due_date=due_date_everything_should_be_made_private):
+
+        logger.info("Sending private/public reminder to request {0} on {1}".format(foirequest.pk, now))
+
         send_mail(u'{0}'.format(
                 _("%(site_name)s: Reminder that your request is being made public in 7 days") % {
                     "site_name": settings.SITE_NAME
@@ -55,6 +61,12 @@ def make_private_public(*args, **kwargs):
         'make_public_num_days_after_due_date', 365)
     now = timezone.now()
     due_date_everything_should_be_made_private = now - timedelta(num_days_after_due_date)
+
+    logger.info("Switching all private requests that were due on {0} to public requests.".format(due_date_everything_should_be_made_private))
+
     for foirequest in FoiRequest.objects.filter(Q(visibility=0) | Q(visibility=1), is_foi=True, due_date__lte=due_date_everything_should_be_made_private):
+
+        logger.info("Switching private foirequest {0} to be made public on {1}".format(foirequest.pk, now))
+
         foirequest.visibility = 2
         foirequest.save()
