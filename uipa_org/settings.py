@@ -77,7 +77,7 @@ class UipaOrgThemeBase(ThemeBase):
 
     TIME_ZONE = values.Value('Pacific/Honolulu')
 
-    CELERY_IMPORTS = ('uipa_org.tasks', )
+    CELERY_IMPORTS = ('uipa_org.tasks.private_public_reminder', 'uipa_org.tasks.make_public_private', )
     CELERY_TIMEZONE = values.Value('Pacific/Honolulu')
 
     CELERYBEAT_SCHEDULE = {
