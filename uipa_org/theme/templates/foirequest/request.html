@@ -298,6 +298,8 @@
             </div>
 
             <div class="well letter">
+              <div id="letter_start" class="text"{% if request_form.full_text.value %} style="display:none"{% endif %}>{{ request_form.default_law.letter_start_form }}</div>
+
               <div{% if request_form.body.errors %} class="has-error"{% endif %}>{{ request_form.body|prefill }}</div>
               <div id="letter_complete_end"><div id="letter_short_end" class="text">
                 <span id="letter-greeting">{% blocktrans %}{% endblocktrans %}</span>
