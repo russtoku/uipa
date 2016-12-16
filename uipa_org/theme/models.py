@@ -10,6 +10,7 @@ from django.conf import settings
 from django.core.files import File
 from django.dispatch import receiver
 from doc_utilities import create_uipa_document_request_from_foi_request
+from doc_utilities import prepare_for_final_archiving
 from froide.foirequest.file_utils import convert_to_pdf
 from froide.foirequest.models import FoiAttachment
 from froide.foirequest.models import FoiRequest
@@ -50,21 +51,28 @@ def create_and_attach_uipa_document_request(sender, **kwargs):
                 'doc_conversion_call_func'
             )
         )
+
         message = foi_request.messages[0]
 
-        if message and result_file_path:
-            with open(result_file_path, 'rb') as f:
-                filename = "records_request.pdf"
-                new_file = File(f)
-                foi_att = FoiAttachment(belongs_to=message,
-                                        approved=False,
-                                        name=filename,
-                                        filetype='application/pdf')
-                foi_att.file = new_file
-                foi_att.size = new_file.size
-                foi_att.file.save(filename, new_file)
-                foi_att._committed = False
-                foi_att.save()
+        if message:
+            original_plaintext = message.plaintext
+            message.plaintext = prepare_for_final_archiving(original_plaintext)
+            message.plaintext_redacted = prepare_for_final_archiving(original_plaintext)
+            message.save()
+
+            if result_file_path:
+                with open(result_file_path, 'rb') as f:
+                    filename = "records_request.pdf"
+                    new_file = File(f)
+                    foi_att = FoiAttachment(belongs_to=message,
+                                            approved=False,
+                                            name=filename,
+                                            filetype='application/pdf')
+                    foi_att.file = new_file
+                    foi_att.size = new_file.size
+                    foi_att.file.save(filename, new_file)
+                    foi_att._committed = False
+                    foi_att.save()
 
 # vim: fenc=utf-8
 # vim: filetype=python

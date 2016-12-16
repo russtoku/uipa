@@ -8,9 +8,7 @@
 import datetime
 from docx import Document
 import os
-from uipa_org.uipa_constants import (WELCOME_DELIMITER,
-                                     WAIVER_DELIMITER,
-                                     REQUEST_DELIMITER)
+from uipa_org.uipa_constants import (WELCOME_DELIMITER, WAIVER_DELIMITER)
 
 
 def is_requesting_waiver(text):
@@ -23,27 +21,54 @@ def is_requesting_waiver(text):
         return False
     return len(parts[1].strip()) > 0
 
-def strip_to(phrase, lines):
-    '''Return lines after the line that contains the phrase'''
+
+def _strip_contents_after(phrase, lines):
+    '''Returns lines before the line that contains the phrase'''
     if not phrase:
         return lines
 
     start = 0
     for (i, line) in enumerate(lines):
         if line.find(phrase) > -1:
-            start = i + 1
+            start = i
 
-    return lines[start:]
+    return lines[:start]
 
-def strip_for_request(text):
-    ''' Return the text without any delimiters.'''
-    lines = strip_to(REQUEST_DELIMITER, text.split('\r\n'))
-    lns = [line for line in lines if line.find(WAIVER_DELIMITER) == -1]
+
+def prepare_for_description(text):
+    ''' Returns text without everything after waiver delimiter'''
+    lines = text.split('\r\n')
+    lns = _strip_contents_after(WAIVER_DELIMITER, lines)
     return '\r\n'.join(lns)
 
-def strip_for_email(text):
-    ''' Return the text with only the welcome delimiter.'''
-    return '%s\r\n\r\n%s' % (WELCOME_DELIMITER, strip_for_request(text))
+
+def prepare_for_pdf(text):
+    ''' Returns the text with only the text body,
+        and waiver request, but no delimiter'''
+    parts = text.split(WELCOME_DELIMITER)
+
+    if len(parts) == 2:
+        request_form = parts[1].strip()
+        lines = request_form.split('\r\n')
+        lns = [line for line in lines if line.find(WAIVER_DELIMITER) == -1]
+        return '\r\n'.join(lns)
+
+    raise Exception("Unable to find the WELCOME_DELIMITER while preparing for pdf")
+
+
+def prepare_for_final_archiving(text):
+    ''' Returns the text with only the text body,
+        and waiver request, but no delimiter'''
+    parts = text.split(WELCOME_DELIMITER)
+
+    if len(parts) == 2:
+        request_form = parts[-1].strip()
+        lines = request_form.split('\r\n')
+        lns = _strip_contents_after(WAIVER_DELIMITER, lines)
+        return '\r\n'.join(lns)
+
+    raise Exception("Unable to find the WELCOME_DELIMITER while preparing for final archiving")
+
 
 def create_uipa_document_request_from_foi_request(foi_request, should_waive_fees):
     curr = os.path.dirname(os.path.realpath(__file__))
@@ -55,7 +80,7 @@ def create_uipa_document_request_from_foi_request(foi_request, should_waive_fees
         foi_request.secret_address,
         foi_request.secret_address,
         foi_request.secret_address,
-        foi_request.description,
+        prepare_for_pdf(foi_request.messages[0].plaintext),
         should_waive_fees)
 
 

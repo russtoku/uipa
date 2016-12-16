@@ -7,11 +7,9 @@
 # Distributed under terms of the MIT license.
 
 
-WELCOME_DELIMITER = '''Aloha, pursuant to the public records law, I would \
+WELCOME_DELIMITER = '''Pursuant to the public records law, I would \
 like to request the following records in electronic format sent to my email \
 address.'''
-
-REQUEST_DELIMITER = '''STATE REQUEST BELOW THIS LINE'''
 
 WAIVER_DELIMITER = '''IF SEEKING PUBLIC INTEREST WAIVER, PROVIDE PUBLIC \
 INTEREST STATEMENT BELOW THIS LINE'''

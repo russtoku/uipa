@@ -14,5 +14,9 @@ span.small-icon.status-has_fee {
   color:#fff;
 }
 .modal-content {
-    overflow:hidden;
+  overflow:hidden;
+}
+
+div#letter_start {
+  margin-bottom:2em;
 }
