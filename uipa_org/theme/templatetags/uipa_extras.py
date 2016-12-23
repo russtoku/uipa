@@ -17,6 +17,6 @@ def prefill(body):
     '''
     Insert string into a textarea field
     '''
-    body.field.initial = "\n\n\n\n\n{0}\n".format(WAIVER_DELIMITER)
+    body.field.initial = "\n\n\n{0}\n".format(WAIVER_DELIMITER)
     return body
 
