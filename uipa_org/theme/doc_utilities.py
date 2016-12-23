@@ -8,7 +8,9 @@
 import datetime
 from docx import Document
 import os
-from uipa_org.uipa_constants import (WELCOME_DELIMITER, WAIVER_DELIMITER)
+from uipa_org.uipa_constants import (FOOTER_DELIMITER,
+                                     WELCOME_DELIMITER,
+                                     WAIVER_DELIMITER)
 
 
 def is_requesting_waiver(text):
@@ -44,28 +46,35 @@ def prepare_for_description(text):
 
 def prepare_for_pdf(text):
     ''' Returns the text with only the text body,
-        and waiver request, but no delimiter'''
+        and waiver request, but no delimiter and footer'''
     parts = text.split(WELCOME_DELIMITER)
 
     if len(parts) == 2:
-        request_form = parts[1].strip()
-        lines = request_form.split('\r\n')
-        lns = [line for line in lines if line.find(WAIVER_DELIMITER) == -1]
-        return '\r\n'.join(lns)
+        rest_of_request_form = parts[1].strip()
+        request_form_parts = rest_of_request_form.split(FOOTER_DELIMITER)
+        if len(request_form_parts) == 2:
+            request_form = request_form_parts[0].strip()
+            lines = request_form.split('\r\n')
+            lns = [line for line in lines if line.find(WAIVER_DELIMITER) == -1]
+            return '\r\n'.join(lns)
+
+        raise Exception("Unable to find the FOOTER_DELIMITER while preparing for pdf")
 
     raise Exception("Unable to find the WELCOME_DELIMITER while preparing for pdf")
 
 
 def prepare_for_final_archiving(text):
-    ''' Returns the text with only the text body,
-        and waiver request, but no delimiter'''
-    parts = text.split(WELCOME_DELIMITER)
+    ''' Returns the text with everything except for the waiver request '''
+    parts = text.split(WAIVER_DELIMITER)
 
     if len(parts) == 2:
-        request_form = parts[-1].strip()
-        lines = request_form.split('\r\n')
-        lns = _strip_contents_after(WAIVER_DELIMITER, lines)
-        return '\r\n'.join(lns)
+        waiver_to_end = parts[1].strip()
+        waiver_parts = waiver_to_end.split(FOOTER_DELIMITER)
+        if len(waiver_parts) == 2:
+            return "{0}{1}{2}".format(
+                parts[0], FOOTER_DELIMITER, waiver_parts[1])
+
+        raise Exception("Unable to find the FOOTER_DELIMITER while preparing for final archiving")
 
     raise Exception("Unable to find the WELCOME_DELIMITER while preparing for final archiving")
 
