@@ -6,7 +6,7 @@ Go to your request now:
 {{ url }}
 
 
-Cheers,
+Mahalo,
 {{ site_name }}{% endblocktrans %}
 {% endautoescape %}
 {% include "foirequest/emails/user_footer.txt" %}

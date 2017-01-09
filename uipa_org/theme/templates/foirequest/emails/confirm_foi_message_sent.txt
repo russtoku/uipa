@@ -4,7 +4,7 @@ Your message for the UIPA request "{{ title }}" has been sent. We will notify yo
 
 {{ url }}
 
-Cheers,
+Mahalo,
 {{ site_name }}
 {% endblocktrans %}
 

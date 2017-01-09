@@ -9,7 +9,7 @@ You received a suggestion for a Public Agency on your request '{{ title }}'.{% e
 {% blocktrans %}If you want to use this Public Agency, go to your request and chose the Public Agency from the list. Here is a link to your request:{% endblocktrans %}
 {{ go_url }}
 
-{% blocktrans %}Cheers,
+{% blocktrans %}Mahalo,
 {{ site_name }}{% endblocktrans %}
 {% endautoescape %}
 {% include "foirequest/emails/user_footer.txt" %}

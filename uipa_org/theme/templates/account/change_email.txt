@@ -7,6 +7,6 @@ Please visit the link below:
 
 {% endblocktrans %}
 
-{% blocktrans %}Cheers,
+{% blocktrans %}Mahalo,
 {{ site_name }}{% endblocktrans %}
 {% endautoescape %}

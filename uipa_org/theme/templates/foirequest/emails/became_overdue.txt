@@ -8,7 +8,7 @@ If you received a postal answer, please add it to the request.
 Here's a link to the request:
 {{ url }}
 
-Cheers,
+Mahalo,
 {{ site_name }}{% endblocktrans %}
 {% endautoescape %}
 {% include "foirequest/emails/user_footer.txt" %}
