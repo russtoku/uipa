@@ -20,7 +20,7 @@ from datetime import timedelta
 
 logger = get_task_logger(__name__)
 
-NOTIFICATION_SENT_BEFORE_NUM_DAYS = 14
+NOTIFICATION_SENT_BEFORE_NUM_DAYS = 1
 
 
 @celery_app.task
@@ -28,7 +28,7 @@ def private_public_reminder(*args, **kwargs):
     translation.activate(settings.LANGUAGE_CODE)
 
     num_days_after_due_date = settings.FROIDE_CONFIG.get(
-        'make_public_num_days_after_due_date', 365)
+        'make_public_num_days_after_due_date', 2)
     num_days_after_due_date = num_days_after_due_date - NOTIFICATION_SENT_BEFORE_NUM_DAYS
 
     now = timezone.now()
@@ -58,7 +58,7 @@ def private_public_reminder(*args, **kwargs):
 def make_private_public(*args, **kwargs):
     translation.activate(settings.LANGUAGE_CODE)
     num_days_after_due_date = settings.FROIDE_CONFIG.get(
-        'make_public_num_days_after_due_date', 365)
+        'make_public_num_days_after_due_date', 2)
     now = timezone.now()
     due_date_everything_should_be_made_private = now - timedelta(num_days_after_due_date)
 
