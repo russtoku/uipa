@@ -28,7 +28,7 @@ def private_public_reminder(*args, **kwargs):
     translation.activate(settings.LANGUAGE_CODE)
 
     num_days_after_due_date = settings.FROIDE_CONFIG.get(
-        'make_public_num_days_after_due_date', 2)
+        'make_public_num_days_after_due_date', 3)
     num_days_after_due_date = num_days_after_due_date - NOTIFICATION_SENT_BEFORE_NUM_DAYS
 
     now = timezone.now()
@@ -36,7 +36,7 @@ def private_public_reminder(*args, **kwargs):
 
     logger.info("Attempting to warn all requests that were due on : {0}".format(due_date_everything_should_be_made_private))
 
-    for foirequest in FoiRequest.objects.filter(Q(visibility=0) | Q(visibility=1), is_foi=True, due_date=due_date_everything_should_be_made_private):
+    for foirequest in FoiRequest.objects.filter(Q(visibility=0) | Q(visibility=1), is_foi=True, due_date__date=due_date_everything_should_be_made_private.date()):
 
         logger.info("Sending private/public reminder to request {0} on {1}".format(foirequest.pk, now))
 
@@ -58,7 +58,7 @@ def private_public_reminder(*args, **kwargs):
 def make_private_public(*args, **kwargs):
     translation.activate(settings.LANGUAGE_CODE)
     num_days_after_due_date = settings.FROIDE_CONFIG.get(
-        'make_public_num_days_after_due_date', 2)
+        'make_public_num_days_after_due_date', 3)
     now = timezone.now()
     due_date_everything_should_be_made_private = now - timedelta(num_days_after_due_date)
 
