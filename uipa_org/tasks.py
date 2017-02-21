@@ -34,7 +34,7 @@ def private_public_reminder(*args, **kwargs):
     now = timezone.now()
     due_date_everything_should_be_made_private = now - timedelta(num_days_after_due_date)
 
-    logger.info("Attempting to warn all requests that were due on : {0}".format(due_date_everything_should_be_made_private))
+    logger.info("Attempting to warn all requests that were due on : {0}".format(due_date_everything_should_be_made_private.date()))
 
     for foirequest in FoiRequest.objects.filter(Q(visibility=0) | Q(visibility=1), is_foi=True, due_date__date=due_date_everything_should_be_made_private.date()):
 
@@ -68,5 +68,4 @@ def make_private_public(*args, **kwargs):
 
         logger.info("Switching private foirequest {0} to be made public on {1}".format(foirequest.pk, now))
 
-        foirequest.visibility = 2
-        foirequest.save()
+        foirequest.make_public()
