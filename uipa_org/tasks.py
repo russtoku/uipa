@@ -40,18 +40,21 @@ def private_public_reminder(*args, **kwargs):
 
         logger.info("Sending private/public reminder to request {0} on {1}".format(foirequest.pk, now))
 
-        send_mail(u'{0}'.format(
-                _("%(site_name)s: Reminder that your request is being made public in 7 days") % {
-                    "site_name": settings.SITE_NAME
-                },
-            ),
-            render_to_string("foirequest/emails/became_public.txt", {
-                "site_name": settings.SITE_NAME,
-                "request": foirequest,
-            }),
-            settings.DEFAULT_FROM_EMAIL,
-            [foirequest.user.email]
-        )
+        try:
+            send_mail(u'{0}'.format(
+                    _("%(site_name)s: Reminder that your request is being made public in 7 days") % {
+                        "site_name": settings.SITE_NAME
+                    },
+                ),
+                render_to_string("foirequest/emails/became_public.txt", {
+                    "site_name": settings.SITE_NAME,
+                    "request": foirequest,
+                }),
+                settings.DEFAULT_FROM_EMAIL,
+                [foirequest.user.email]
+            )
+        except Exception as e:
+            logger.error(e)
 
 
 @celery_app.task
