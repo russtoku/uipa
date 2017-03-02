@@ -13,6 +13,7 @@ from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils import translation
+from django.utils.translation import override, ugettext, ugettext_lazy as _
 from froide.foirequest.models import FoiRequest
 from uipa_org.celery import app as celery_app
 from datetime import timedelta
