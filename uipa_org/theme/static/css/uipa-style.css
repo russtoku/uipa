@@ -1,7 +1,10 @@
 div#main-folders.heroine-unit {
   background-image:url('../img/capitol.jpg');
   background-size:100%;
+  background-repeat:no-repeat;
+  background-position: left center;
   border: 1px solid #ccc;
+  padding: 1.5em;
 }
 
 span.small-icon.status-has_fee {

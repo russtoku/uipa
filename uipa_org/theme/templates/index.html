@@ -37,8 +37,7 @@
           <a href="{% url 'foirequest-search' %}?q={% trans "Criminal" %}">{% trans "Criminal" %}</a>
       {% endblock %}
     </span>
-    <br/>
-    <p style="font-size:1em;font-weight:bold;color:#444;text-decoration:underline;">To find out how to use the site, check out the screencast →</p>
+    <p style="font-size:1em;color:#444;padding-top:.25em;">To find out how to use the site, <span style="font-weight:bold; text-decoration:underline;">check out the screencast →</span></p>
     {% endblock %}
   </form>
 {% endblock index-search %}
@@ -72,7 +71,7 @@
           {% endif %}
         </div>
         {% else %}
-          <iframe src="https://player.vimeo.com/video/207061508" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          <iframe src="https://player.vimeo.com/video/207061508" width="100%" height="320" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         {% endif %}
       </div>
   {% endblock first_index_row_featured %}
