@@ -30,7 +30,6 @@
     </div>
     {% block example_search_terms_block %}
     <span class="help-block">
-
       {% block example_search_terms %}
           {% blocktrans %}Try the following:{% endblocktrans %}
           <a href="{% url 'foirequest-search' %}?q={% trans "Budget" %}">{% trans "Budget" %}</a>
@@ -38,6 +37,8 @@
           <a href="{% url 'foirequest-search' %}?q={% trans "Criminal" %}">{% trans "Criminal" %}</a>
       {% endblock %}
     </span>
+    <br/>
+    <p style="font-size:1em;font-weight:bold;color:#444;text-decoration:underline;">To find out how to use the site, check out the screencast →</p>
     {% endblock %}
   </form>
 {% endblock index-search %}
@@ -71,20 +72,8 @@
           {% endif %}
         </div>
         {% else %}
-        <div id="sample-letter" class="frontpage-teaser">{% blocktrans %}Uniform Information Practices Act Request
-
-    To: Hawaii Tourism Authority
-
-    Aloha,
-
-    I request information about the following:
-    ...
-    ...
-    
-    {% endblocktrans %}
-      <a class="make-request-icon" href="{% url 'foirequest-make_request' %}">{% blocktrans %}Write a Request Now!{% endblocktrans %}</a>
-      </div>
-      {% endif %}
+          <iframe src="https://player.vimeo.com/video/207061508" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        {% endif %}
       </div>
   {% endblock first_index_row_featured %}
 
