@@ -57,7 +57,9 @@ def create_and_attach_uipa_document_request(sender, **kwargs):
         if message:
             original_plaintext = message.plaintext
             message.plaintext = prepare_for_final_archiving(original_plaintext)
-            message.plaintext_redacted = prepare_for_final_archiving(original_plaintext)
+
+            original_plaintext_redacted = message.plaintext_redacted
+            message.plaintext_redacted = prepare_for_final_archiving(original_plaintext_redacted)
             message.save()
 
             if result_file_path:
