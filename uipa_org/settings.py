@@ -150,6 +150,7 @@ class NginxSecureStaticEnabled(object):
 
 
 class SslEnabled(object):
+    SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
@@ -211,7 +212,7 @@ class Dev(UipaOrgThemeBase, Base):
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
 
-class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, UipaOrgThemeBase, Base):
+class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
 
     COMPRESS_ENABLED = values.BooleanValue(True)
     COMPRESS_OFFLINE = values.BooleanValue(True)
