@@ -313,17 +313,17 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
                 'level': 'DEBUG',
             },
             'django.request': {
-                'handlers': ['mail_admins'],
-                'level': 'ERROR',
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
+                'level': 'DEBUG',
                 'propagate': True,
             },
             'django.db.backends': {
-                'level': 'ERROR',
-                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG',
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
                 'propagate': False,
             },
             'uipa_org': {
-                'handlers': ['uipa_org_logfile',],
+                'handlers': ['uipa_org_logfile'],
                 'propagate': True,
                 'level': 'DEBUG',
             },
@@ -442,13 +442,13 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
                 'level': 'DEBUG',
             },
             'django.request': {
-                'handlers': ['mail_admins'],
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
                 'level': 'ERROR',
                 'propagate': True,
             },
             'django.db.backends': {
                 'level': 'ERROR',
-                'handlers': ['uipa_org_logfile'],
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
                 'propagate': False,
             },
             'uipa_org': {
