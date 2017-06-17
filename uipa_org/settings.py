@@ -221,6 +221,8 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
     SITE_EMAIL = 'info@beta.uipa.org'
     DEFAULT_FROM_EMAIL = 'info@beta.uipa.org'
 
+    ADMINS = [('Admin', 'admin@beta.uipa.org'),]
+
     CACHES = {
         'default': {
             'LOCATION': 'beta-uipa',
@@ -347,6 +349,8 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
     SITE_URL = values.Value('https://uipa.org')
     SITE_EMAIL = 'info@uipa.org'
     DEFAULT_FROM_EMAIL = 'info@uipa.org'
+
+    ADMINS = [('Admin', 'admin@uipa.org'), ('Ryan', 'ryan@codeforhawaii.org')]
 
     CACHES = {
         'default': {
