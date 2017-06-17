@@ -13,6 +13,9 @@
 
 <h2 itemprop="name">{{ object.name }}</h2>
 
+<p>{{ object.description }}</p>
+<br/>
+
 {% if object.email %}
 <p>
   <a class="btn btn-primary" href="{% url 'foirequest-make_request' public_body=object.slug %}">{% blocktrans %}Make a Request to this public agency!{% endblocktrans %}</a>
