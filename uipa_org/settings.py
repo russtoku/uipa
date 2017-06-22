@@ -31,6 +31,8 @@ class UipaOrgThemeBase(ThemeBase):
 
     MEDIA_ROOT = os_env('MEDIA_ROOT')
 
+    DATA_UPLOAD_MAX_MEMORY_SIZE = 26214400  # 25MB
+
     @property
     def INSTALLED_APPS(self):
         installed = super(UipaOrgThemeBase, self).INSTALLED_APPS
