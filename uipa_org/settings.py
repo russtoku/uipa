@@ -109,6 +109,10 @@ class UipaOrgThemeBase(ThemeBase):
             'task': 'uipa_org.tasks.make_private_public',
             'schedule': crontab(hour=0, minute=0),
         },
+        'uipa-deferred_message_notification': {
+            'task': 'uipa_org.tasks.deferred_message_notification',
+            'schedule': crontab(hour=6, minute=0),
+        },
     }
 
     CELERY_RESULT_BACKEND = 'rpc'

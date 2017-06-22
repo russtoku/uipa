@@ -14,6 +14,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils import translation
 from django.utils.translation import override, ugettext, ugettext_lazy as _
+from froide.foirequest.models import DeferredMessage
 from froide.foirequest.models import FoiRequest
 from uipa_org.celery import app as celery_app
 from datetime import timedelta
@@ -73,3 +74,40 @@ def make_private_public(*args, **kwargs):
         logger.info("Switching private foirequest {0} to be made public on {1}".format(foirequest.pk, now))
 
         foirequest.make_public()
+
+
+@celery_app.task
+def deferred_message_notification(*args, **kwargs):
+    translation.activate(settings.LANGUAGE_CODE)
+
+    today_date = timezone.now().date()
+    yesterday_date = today_date + timezone.timedelta(days=-1)
+
+    logger.info("Running notification service for deferred messages on {0}".format(today_date))
+
+    total_deferred_messages = DeferredMessage.objects.count()
+    total_deferred_messages_today = DeferredMessage.objects.filter(timestamp__date=today_date)
+    total_deferred_messages_yesterday = DeferredMessage.objects.filter(timestamp__date=yesterday_date)
+
+    if (total_deferred_messages_today > 0) or (total_deferred_messages_yesterday > 0):
+
+        logger.info("Deferred messages came in yesterday / today -> sending notification email")
+
+        try:
+            send_mail(u'{0}'.format(
+                    _("%(site_name)s: You have deferred messages from yesterday/today") % {
+                        "site_name": settings.SITE_NAME
+                    },
+                ),
+                render_to_string("foirequest/emails/admin_deferred_message_notifications.txt", {
+                    "site_name": settings.SITE_NAME,
+                    "today_date": today_date,
+                    "total_deferred_messages": total_deferred_messages,
+                    "total_deferred_messages_yesterday": total_deferred_messages_yesterday,
+                    "total_deferred_messages_today": total_deferred_messages_today,
+                }),
+                settings.DEFAULT_FROM_EMAIL,
+                settings.ADMINS
+            )
+        except Exception as e:
+            logger.error(e)
