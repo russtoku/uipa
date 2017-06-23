@@ -145,7 +145,8 @@ class UipaOrgThemeBase(ThemeBase):
             api_activated=True,
             search_engine_query='http://www.google.com/search?as_q=%(query)s&as_epq=&as_oq=&as_eq=&hl=en&lr=&cr=&as_ft=i&as_filetype=&as_qdr=all&as_occt=any&as_dt=i&as_sitesearch=%(domain)s&as_rights=&safe=images',
             show_public_body_employee_name=False,
-            ga_tracking_id=os_env('GA_TRACKING_ID')
+            make_public_num_days_after_due_date=365,
+            ga_tracking_id=os_env('GA_TRACKING_ID'),
         ))
         return config
 
@@ -341,6 +342,7 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
         config = super(Beta, self).FROIDE_CONFIG
         config.update(dict(
             payment_possible=True,
+            make_public_num_days_after_due_date=3,
             doc_conversion_binary="/usr/bin/libreoffice"))
         return config
 
@@ -472,6 +474,7 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
             payment_possible=True,
             dryrun=True,
             dryrun_domain="uipa.org",
+            make_public_num_days_after_due_date=3,
             doc_conversion_binary="/usr/bin/libreoffice"))
         return config
 
