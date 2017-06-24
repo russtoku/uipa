@@ -7,6 +7,14 @@ div#main-folders.heroine-unit {
   padding: 1.2em;
 }
 
+.icon.status-user_withdrew_costs {
+  background-image:url('../img/user_withdrew_costs.png');
+}
+
+.small-icon.status-user_withdrew_costs {
+  background-image:url('../img/user_withdrew_costs_small.png');
+}
+
 span.small-icon.status-has_fee {
   background-image:url('../img/dollar.png');
   background-size: 14px 14px;
