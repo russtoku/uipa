@@ -209,10 +209,98 @@ class S3Enabled(object):
 
 class Dev(UipaOrgThemeBase, Base):
 
+    DEBUG = False
+    ALLOWED_HOSTS = values.TupleValue(('localhost',))
+
+    COMPRESS_ENABLED = values.BooleanValue(True)
+    COMPRESS_OFFLINE = True
+
+    STATIC_URL = '/static/'
+    COMPRESS_URL = values.Value(STATIC_URL)
+
+    @property
+    def COMPRESS_OFFLINE_CONTEXT(self):
+        return {
+            "DEBUG": super(Dev, self).DEBUG,
+            "STATIC_URL": super(Dev, self).STATIC_URL
+        }
+
     CACHES = {
         'default': {
             'LOCATION': 'dev-uipa',
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+        }
+    }
+
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'root': {
+            'level': 'DEBUG',
+            'handlers': ['uipa_org_logfile',],
+        },
+        'filters': {
+            'require_debug_false': {
+                '()': 'django.utils.log.RequireDebugFalse'
+            },
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            },
+        },
+        'formatters': {
+            'verbose': {
+                'format': '[%(asctime)s] %(levelname)s [%(module)s %(process)d %(thread)d - %(name)s.%(funcName)s:%(lineno)d] %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S'
+            },
+        },
+        'handlers': {
+            'mail_admins': {
+                'level': 'ERROR',
+                'filters': ['require_debug_false'],
+                'class': 'django.utils.log.AdminEmailHandler'
+            },
+            'console': {
+                'level': 'DEBUG',
+                'filters': ['require_debug_true'],
+                'class': 'logging.StreamHandler',
+            },
+            'uipa_org_logfile': {
+                'level': 'DEBUG',
+                'class': 'logging.handlers.RotatingFileHandler',
+                'filename': os.path.join(os.path.dirname(os.path.realpath(__file__)), 'uipa_org_dev_app.log'),
+                'maxBytes': 1024*1024*5,  # 5MB
+                'backupCount': 10,
+                'formatter': 'verbose',
+            },
+        },
+        'loggers': {
+            'froide': {
+                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG',
+            },
+            'django': {
+                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG'
+            },
+            'django.request': {
+                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG',
+                'propagate': False,
+            },
+            'django.security': {
+                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG',
+                'propagate': False,
+            },
+            'django.db.backends': {
+                'level': 'DEBUG',
+                'handlers': ['uipa_org_logfile'],
+                'propagate': False,
+            },
+            'uipa_org': {
+                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG',
+            },
         }
     }
 
@@ -281,17 +369,21 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
         'version': 1,
         'disable_existing_loggers': True,
         'root': {
-            'level': 'WARNING',
-            'handlers': [],
+            'level': 'DEBUG',
+            'handlers': ['uipa_org_logfile',],
         },
         'filters': {
             'require_debug_false': {
                 '()': 'django.utils.log.RequireDebugFalse'
-            }
+            },
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            },
         },
         'formatters': {
             'verbose': {
-                'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+                'format': '[%(asctime)s] %(levelname)s [%(module)s %(process)d %(thread)d - %(name)s.%(funcName)s:%(lineno)d] %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S'
             },
         },
         'handlers': {
@@ -302,13 +394,14 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
             },
             'console': {
                 'level': 'DEBUG',
+                'filters': ['require_debug_true'],
                 'class': 'logging.StreamHandler',
             },
             'uipa_org_logfile': {
-                'level':'DEBUG',
-                'class':'logging.handlers.RotatingFileHandler',
+                'level': 'DEBUG',
+                'class': 'logging.handlers.RotatingFileHandler',
                 'filename': os.path.join('/var/log/uipa_org_beta/', 'uipa_org_beta_app.log'),
-                'maxBytes': 1024*1024*5, # 5MB
+                'maxBytes': 1024*1024*5,  # 5MB
                 'backupCount': 10,
                 'formatter': 'verbose',
             },
@@ -316,22 +409,29 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
         'loggers': {
             'froide': {
                 'handlers': ['uipa_org_logfile'],
-                'propagate': True,
                 'level': 'DEBUG',
             },
+            'django': {
+                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG'
+            },
             'django.request': {
-                'handlers': ['uipa_org_logfile', 'mail_admins'],
+                'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG',
-                'propagate': True,
+                'propagate': False,
+            },
+            'django.security': {
+                'handlers': ['uipa_org_logfile'],
+                'level': 'DEBUG',
+                'propagate': False,
             },
             'django.db.backends': {
                 'level': 'DEBUG',
-                'handlers': ['uipa_org_logfile', 'mail_admins'],
+                'handlers': ['uipa_org_logfile'],
                 'propagate': False,
             },
             'uipa_org': {
                 'handlers': ['uipa_org_logfile'],
-                'propagate': True,
                 'level': 'DEBUG',
             },
         }
@@ -411,17 +511,21 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
         'version': 1,
         'disable_existing_loggers': True,
         'root': {
-            'level': 'WARNING',
-            'handlers': [],
+            'level': 'DEBUG',
+            'handlers': ['uipa_org_logfile'],
         },
         'filters': {
             'require_debug_false': {
                 '()': 'django.utils.log.RequireDebugFalse'
-            }
+            },
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            },
         },
         'formatters': {
             'verbose': {
-                'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+                'format': '[%(asctime)s] %(levelname)s [%(module)s %(process)d %(thread)d - %(name)s.%(funcName)s:%(lineno)d] %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S'
             },
         },
         'handlers': {
@@ -432,13 +536,14 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
             },
             'console': {
                 'level': 'DEBUG',
+                'filters': ['require_debug_true'],
                 'class': 'logging.StreamHandler',
             },
             'uipa_org_logfile': {
-                'level':'DEBUG',
-                'class':'logging.handlers.RotatingFileHandler',
+                'level': 'DEBUG',
+                'class': 'logging.handlers.RotatingFileHandler',
                 'filename': os.path.join('/var/log/uipa_org/', 'uipa_org_app.log'),
-                'maxBytes': 1024*1024*5, # 5MB
+                'maxBytes': 1024*1024*5,  # 5MB
                 'backupCount': 10,
                 'formatter': 'verbose',
             },
@@ -446,13 +551,21 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
         'loggers': {
             'froide': {
                 'handlers': ['uipa_org_logfile'],
-                'propagate': True,
                 'level': 'DEBUG',
+            },
+            'django': {
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
+                'level': 'ERROR'
             },
             'django.request': {
                 'handlers': ['uipa_org_logfile', 'mail_admins'],
                 'level': 'ERROR',
-                'propagate': True,
+                'propagate': False,
+            },
+            'django.security': {
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
+                'level': 'ERROR',
+                'propagate': False,
             },
             'django.db.backends': {
                 'level': 'ERROR',
@@ -460,8 +573,7 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
                 'propagate': False,
             },
             'uipa_org': {
-                'handlers': ['uipa_org_logfile',],
-                'propagate': True,
+                'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG',
             },
         }
