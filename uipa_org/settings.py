@@ -209,7 +209,7 @@ class S3Enabled(object):
 
 class Dev(UipaOrgThemeBase, Base):
 
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = values.TupleValue(('localhost',))
 
     COMPRESS_ENABLED = values.BooleanValue(True)
