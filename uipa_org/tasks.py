@@ -76,6 +76,12 @@ def make_private_public(*args, **kwargs):
 
         foirequest.make_public()
 
+        for message in foirequest.messages:
+            for attachment in message.attachments:
+                if attachment.can_approve:
+                    logger.info("Switching attachment {0} to approved".format(attachment.pk))
+                    attachment.approve_and_save()
+
 
 @celery_app.task
 def deferred_message_notification(*args, **kwargs):
