@@ -67,6 +67,7 @@ def create_and_attach_uipa_document_request(sender, **kwargs):
                     filename = "form1_records_request.pdf"
                     new_file = File(f)
                     foi_att = FoiAttachment(belongs_to=message,
+                                            can_approve=False,
                                             approved=False,
                                             name=filename,
                                             filetype='application/pdf')
