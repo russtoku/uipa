@@ -442,7 +442,7 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
         config = super(Beta, self).FROIDE_CONFIG
         config.update(dict(
             payment_possible=True,
-            make_public_num_days_after_due_date=3,
+            make_public_num_days_after_due_date=365,
             doc_conversion_binary="/usr/bin/libreoffice"))
         return config
 
@@ -586,7 +586,7 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
             payment_possible=True,
             dryrun=True,
             dryrun_domain="uipa.org",
-            make_public_num_days_after_due_date=3,
+            make_public_num_days_after_due_date=365,
             doc_conversion_binary="/usr/bin/libreoffice"))
         return config
 
