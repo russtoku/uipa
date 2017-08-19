@@ -33,6 +33,8 @@ class UipaOrgThemeBase(ThemeBase):
 
     DATA_UPLOAD_MAX_MEMORY_SIZE = 26214400  # 25MB
 
+    TAGGING_AUTOCOMPLETE_MAX_TAGS = 100
+
     @property
     def INSTALLED_APPS(self):
         installed = super(UipaOrgThemeBase, self).INSTALLED_APPS
