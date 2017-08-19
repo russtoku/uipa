@@ -91,8 +91,8 @@ def deferred_message_notification(*args, **kwargs):
     logger.info("Running notification service for deferred messages on {0}".format(today_date))
 
     total_deferred_messages = DeferredMessage.objects.count()
-    total_deferred_messages_today = DeferredMessage.objects.filter(timestamp__date=today_date)
-    total_deferred_messages_yesterday = DeferredMessage.objects.filter(timestamp__date=yesterday_date)
+    total_deferred_messages_today = DeferredMessage.objects.filter(timestamp__date=today_date).count()
+    total_deferred_messages_yesterday = DeferredMessage.objects.filter(timestamp__date=yesterday_date).count()
 
     if (total_deferred_messages_today > 0) or (total_deferred_messages_yesterday > 0):
 
