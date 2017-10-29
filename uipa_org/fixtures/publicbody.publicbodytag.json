@@ -831,70 +831,10 @@
 },
 {
     "model": "publicbody.publicbodytag",
-    "pk": 84,
-    "fields": {
-        "name": "Cable Advisory Committee",
-        "slug": "cable-advisory-committee",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 85,
-    "fields": {
-        "name": "Board of Barbering and Cosmetology",
-        "slug": "board-of-barbering-and-cosmetology",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 86,
-    "fields": {
-        "name": "Elevator Mechanics Licensing Board",
-        "slug": "elevator-mechanics-licensing-board",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 87,
-    "fields": {
-        "name": "Board of Electricians and Plumbers",
-        "slug": "board-of-electricians-and-plumbers",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 88,
-    "fields": {
-        "name": "Motor Vehicle Repair Industry Board",
-        "slug": "motor-vehicle-repair-industry-board",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
     "pk": 89,
     "fields": {
         "name": "financial institutions",
         "slug": "financial-institutions",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 90,
-    "fields": {
-        "name": "Board of Chiropractic Examiners",
-        "slug": "board-of-chiropractic-examiners",
         "is_topic": false,
         "rank": 0
     }
@@ -911,70 +851,10 @@
 },
 {
     "model": "publicbody.publicbodytag",
-    "pk": 92,
-    "fields": {
-        "name": "Board of Pharmacy",
-        "slug": "board-of-pharmacy",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 93,
-    "fields": {
-        "name": "Board of Massage Therapy",
-        "slug": "board-of-massage-therapy",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
     "pk": 94,
     "fields": {
         "name": "insurance",
         "slug": "insurance",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 95,
-    "fields": {
-        "name": "Board of Psychology",
-        "slug": "board-of-psychology",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 96,
-    "fields": {
-        "name": "Real Estate Commission",
-        "slug": "real-estate-commission",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 97,
-    "fields": {
-        "name": "Hawaii Hurricane Relief Fund",
-        "slug": "hawaii-hurricane-relief-fund",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 98,
-    "fields": {
-        "name": "Board of Naturopathic Medicine",
-        "slug": "board-of-naturopathic-medicine",
         "is_topic": false,
         "rank": 0
     }
@@ -1001,80 +881,10 @@
 },
 {
     "model": "publicbody.publicbodytag",
-    "pk": 101,
-    "fields": {
-        "name": "Board of Speech Pathology and Audiology",
-        "slug": "board-of-speech-pathology-and-audiology",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 102,
-    "fields": {
-        "name": "Board of Public Accountancy",
-        "slug": "board-of-public-accountancy",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 103,
-    "fields": {
-        "name": "Architects",
-        "slug": "architects",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 104,
-    "fields": {
-        "name": "Contractors License Board",
-        "slug": "contractors-license-board",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 105,
-    "fields": {
-        "name": "Board of Nursing",
-        "slug": "board-of-nursing",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 106,
-    "fields": {
-        "name": "Credit Union Advisory Board",
-        "slug": "credit-union-advisory-board",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
     "pk": 107,
     "fields": {
         "name": "cable television",
         "slug": "cable-television",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 108,
-    "fields": {
-        "name": "Surveyors and Landscape Architects",
-        "slug": "surveyors-and-landscape-architects",
         "is_topic": false,
         "rank": 0
     }
@@ -1101,26 +911,6 @@
 },
 {
     "model": "publicbody.publicbodytag",
-    "pk": 111,
-    "fields": {
-        "name": "Motor Vehicle Industry Licensing Board",
-        "slug": "motor-vehicle-industry-licensing-board",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 112,
-    "fields": {
-        "name": "Broadband Assistance Advisory Council",
-        "slug": "broadband-assistance-advisory-council",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
     "pk": 113,
     "fields": {
         "name": "landlord",
@@ -1135,16 +925,6 @@
     "fields": {
         "name": "consumer affairs",
         "slug": "consumer-affairs",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 115,
-    "fields": {
-        "name": "Board of Private Detectives and Guards",
-        "slug": "board-of-private-detectives-and-guards",
         "is_topic": false,
         "rank": 0
     }
@@ -1181,36 +961,6 @@
 },
 {
     "model": "publicbody.publicbodytag",
-    "pk": 119,
-    "fields": {
-        "name": "Board of Dental Examiners",
-        "slug": "board-of-dental-examiners",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 120,
-    "fields": {
-        "name": "Board of Professional Engineers",
-        "slug": "board-of-professional-engineers",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 121,
-    "fields": {
-        "name": "Board of Physical Therapy",
-        "slug": "board-of-physical-therapy",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
     "pk": 122,
     "fields": {
         "name": "regulated industries",
@@ -1225,16 +975,6 @@
     "fields": {
         "name": "landlord-tenant",
         "slug": "landlord-tenant",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 124,
-    "fields": {
-        "name": "Pest Control Board",
-        "slug": "pest-control-board",
         "is_topic": false,
         "rank": 0
     }
@@ -1281,16 +1021,6 @@
 },
 {
     "model": "publicbody.publicbodytag",
-    "pk": 129,
-    "fields": {
-        "name": "Board of Veterinary Examiners",
-        "slug": "board-of-veterinary-examiners",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
     "pk": 130,
     "fields": {
         "name": "BREG",
@@ -1301,50 +1031,10 @@
 },
 {
     "model": "publicbody.publicbodytag",
-    "pk": 131,
-    "fields": {
-        "name": "Hawaii Medical Board",
-        "slug": "hawaii-medical-board",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
     "pk": 132,
     "fields": {
         "name": "securities",
         "slug": "securities",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 133,
-    "fields": {
-        "name": "Board of Acupuncture",
-        "slug": "board-of-acupuncture",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 134,
-    "fields": {
-        "name": "Board of Examiners in Optometry",
-        "slug": "board-of-examiners-in-optometry",
-        "is_topic": false,
-        "rank": 0
-    }
-},
-{
-    "model": "publicbody.publicbodytag",
-    "pk": 135,
-    "fields": {
-        "name": "Boxing Commission",
-        "slug": "boxing-commission",
         "is_topic": false,
         "rank": 0
     }
@@ -8595,6 +8285,626 @@
     "fields": {
         "name": "Maui Metropolitan Planning Organization",
         "slug": "maui-metropolitan-planning-organization",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 870,
+    "fields": {
+        "name": "naturopathic medicine",
+        "slug": "naturopathic-medicine",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 871,
+    "fields": {
+        "name": "electrician",
+        "slug": "electrician",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 872,
+    "fields": {
+        "name": "nursing",
+        "slug": "nursing",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 873,
+    "fields": {
+        "name": "dental hygienist",
+        "slug": "dental-hygienist",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 874,
+    "fields": {
+        "name": "surveyor",
+        "slug": "surveyor",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 878,
+    "fields": {
+        "name": "boxing",
+        "slug": "boxing",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 880,
+    "fields": {
+        "name": "osteopathy",
+        "slug": "osteopathy",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 882,
+    "fields": {
+        "name": "acupuncture",
+        "slug": "acupuncture_1",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 883,
+    "fields": {
+        "name": "motor vehicle repair",
+        "slug": "motor-vehicle-repair",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 884,
+    "fields": {
+        "name": "engineer",
+        "slug": "engineer",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 886,
+    "fields": {
+        "name": "accountancy",
+        "slug": "accountancy_1",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 888,
+    "fields": {
+        "name": "cosmetology",
+        "slug": "cosmetology_1",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 889,
+    "fields": {
+        "name": "dentist",
+        "slug": "dentist",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 891,
+    "fields": {
+        "name": "pest control",
+        "slug": "pest-control",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 892,
+    "fields": {
+        "name": "plumber",
+        "slug": "plumber",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 893,
+    "fields": {
+        "name": "chiropractor",
+        "slug": "chiropractor",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 894,
+    "fields": {
+        "name": "motor vehicle industry",
+        "slug": "motor-vehicle-industry",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 895,
+    "fields": {
+        "name": "massage therapy",
+        "slug": "massage-therapy",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 896,
+    "fields": {
+        "name": "medical",
+        "slug": "medical",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 897,
+    "fields": {
+        "name": "elevator mechanic",
+        "slug": "elevator-mechanic",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 899,
+    "fields": {
+        "name": "barbering",
+        "slug": "barbering_1",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 900,
+    "fields": {
+        "name": "landscape architect",
+        "slug": "landscape-architect",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 901,
+    "fields": {
+        "name": "time share",
+        "slug": "time-share",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 902,
+    "fields": {
+        "name": "mental health counselor",
+        "slug": "mental-health-counselor",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 903,
+    "fields": {
+        "name": "physical therapy",
+        "slug": "physical-therapy",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 904,
+    "fields": {
+        "name": "respiratory therapist",
+        "slug": "respiratory-therapist",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 905,
+    "fields": {
+        "name": "social worker",
+        "slug": "social-worker",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 906,
+    "fields": {
+        "name": "behavior analysts",
+        "slug": "behavior-analysts",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 907,
+    "fields": {
+        "name": "nursing home administrator",
+        "slug": "nursing-home-administrator",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 908,
+    "fields": {
+        "name": "audiology",
+        "slug": "audiology",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 909,
+    "fields": {
+        "name": "travel agency",
+        "slug": "travel-agency",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 910,
+    "fields": {
+        "name": "nursing aide",
+        "slug": "nursing-aide",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 911,
+    "fields": {
+        "name": "psychology",
+        "slug": "psychology",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 912,
+    "fields": {
+        "name": "veterinary",
+        "slug": "veterinary",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 913,
+    "fields": {
+        "name": "cemetery",
+        "slug": "cemetery",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 914,
+    "fields": {
+        "name": "occupational therapy",
+        "slug": "occupational-therapy",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 915,
+    "fields": {
+        "name": "activity desk",
+        "slug": "activity-desk",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 916,
+    "fields": {
+        "name": "condominium property regimes",
+        "slug": "condominium-property-regimes",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 917,
+    "fields": {
+        "name": "hearing aid",
+        "slug": "hearing-aid",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 918,
+    "fields": {
+        "name": "pharmacist",
+        "slug": "pharmacist",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 919,
+    "fields": {
+        "name": "optometry",
+        "slug": "optometry",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 920,
+    "fields": {
+        "name": "port pilot",
+        "slug": "port-pilot",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 922,
+    "fields": {
+        "name": "collection agency",
+        "slug": "collection-agency",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 923,
+    "fields": {
+        "name": "marriage and family therapist",
+        "slug": "marriage-and-family-therapist",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 924,
+    "fields": {
+        "name": "athletic trainers",
+        "slug": "athletic-trainers",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 925,
+    "fields": {
+        "name": "dispensing optician",
+        "slug": "dispensing-optician",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 926,
+    "fields": {
+        "name": "subdivision",
+        "slug": "subdivision",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 927,
+    "fields": {
+        "name": "speech pathology",
+        "slug": "speech-pathology",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 928,
+    "fields": {
+        "name": "uniform athlete agents",
+        "slug": "uniform-athlete-agents",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 929,
+    "fields": {
+        "name": "private detective and guard",
+        "slug": "private-detective-and-guard",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 930,
+    "fields": {
+        "name": "electrologist",
+        "slug": "electrologist",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 931,
+    "fields": {
+        "name": "architect",
+        "slug": "architect",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 932,
+    "fields": {
+        "name": "employment agency",
+        "slug": "employment-agency",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 933,
+    "fields": {
+        "name": "real estate appraiser",
+        "slug": "real-estate-appraiser",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 934,
+    "fields": {
+        "name": "nurse aide",
+        "slug": "nurse-aide",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 935,
+    "fields": {
+        "name": "mixed martial arts contests",
+        "slug": "mixed-martial-arts-contests",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 936,
+    "fields": {
+        "name": "GEMS",
+        "slug": "gems",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 937,
+    "fields": {
+        "name": "HGIA",
+        "slug": "hgia",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 938,
+    "fields": {
+        "name": "Green Energy Market Securitization",
+        "slug": "green-energy-market-securitization",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 940,
+    "fields": {
+        "name": "dbedt",
+        "slug": "dbedt_1",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 941,
+    "fields": {
+        "name": "PISCES",
+        "slug": "pisces",
+        "is_topic": false,
+        "rank": 0
+    }
+},
+{
+    "model": "publicbody.publicbodytag",
+    "pk": 942,
+    "fields": {
+        "name": "SHPDA",
+        "slug": "shpda",
         "is_topic": false,
         "rank": 0
     }

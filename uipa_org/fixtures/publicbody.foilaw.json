@@ -16,7 +16,7 @@
         "jurisdiction": 1,
         "priority": 1,
         "url": "http://oip.hawaii.gov/laws-rules-opinions/uipa/uniform-information-practices-act-uipa/",
-        "max_response_time": 1,
+        "max_response_time": 16,
         "max_response_time_unit": "day",
         "refusal_reasons": "",
         "mediator": null,
