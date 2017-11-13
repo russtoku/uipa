@@ -479,7 +479,7 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
         }
     }
 
-    ALLOWED_HOSTS = values.TupleValue(('uipa.org',))
+    ALLOWED_HOSTS = values.TupleValue(('uipa.org', 'www.uipa.org'))
 
     FOI_EMAIL_TEMPLATE = values.Value('request+{secret}@{domain}')
     FOI_EMAIL_DOMAIN = values.Value('foi.uipa.org')
