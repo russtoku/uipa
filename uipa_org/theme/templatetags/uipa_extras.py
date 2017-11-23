@@ -20,3 +20,9 @@ def prefill(body):
     body.field.initial = "\n\n\n{0}\n".format(WAIVER_DELIMITER)
     return body
 
+@register.simple_tag
+def waiver_delimiter():
+    '''
+    Returns the waiver delimiter to template
+    '''
+    return WAIVER_DELIMITER

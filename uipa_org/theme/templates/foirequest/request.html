@@ -27,6 +27,12 @@
     Froide.template.foundClosing = "{% trans "We found {{ find }} in your text, but there is already a closing at the bottom of the letter!" %}";
     Froide.template.emptyBody = "{% blocktrans %}Don't leave the body of your message empty{% endblocktrans %}";
     Froide.template.emptySubject = "{% blocktrans %}Don't leave the subject of your message empty{% endblocktrans %}";
+    $( "#request-form-body #id_body" ).blur(function() {
+      var requestFormBody = $(this).val();
+      if (!requestFormBody.includes("{% waiver_delimiter %}")) {
+        confirm("You have deleted the ALL CAPS text.  Please confirm that you wish to proceed.  If you are seeking a public interest waiver, you should cancel and restart the request.");
+      }
+    });
   </script>
   {# {% compress js %}#}
     <script src="{{ STATIC_URL }}js/foirequest.js" type="text/javascript"></script>
@@ -238,6 +244,9 @@
                 </h4>
                 <ul>
                   <li>
+                    <strong>Note:</strong> Do not delete the <a href="{% url "help-faq" %}#12">ALL CAPS text</a>!
+                  </li>
+                  <li>
                     {% blocktrans %}Write your request in <strong>simple, precise language</strong>.{% endblocktrans %}
                   </li>
                   <li>
@@ -300,7 +309,7 @@
             <div class="well letter">
               <div id="letter_start" class="text"{% if request_form.full_text.value %} style="display:none"{% endif %}>{{ request_form.default_law.letter_start_form }}</div>
 
-              <div{% if request_form.body.errors %} class="has-error"{% endif %}>{{ request_form.body|prefill }}</div>
+              <div{% if request_form.body.errors %} class="has-error"{% endif %} id="request-form-body">{{ request_form.body|prefill }}</div>
 
               <div id="letter_complete_end">
                 <div id="letter_short_end" class="text">
