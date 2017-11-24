@@ -30,7 +30,10 @@
     $( "#request-form-body #id_body" ).blur(function() {
       var requestFormBody = $(this).val();
       if (!requestFormBody.includes("{% waiver_delimiter %}")) {
-        confirm("You have deleted the ALL CAPS text.  Please confirm that you wish to proceed.  If you are seeking a public interest waiver, you should cancel and restart the request.");
+        if (confirm("You have deleted or modified the ALL CAPS text.  Please confirm that you wish to proceed.  If you are seeking a public interest waiver, you should cancel and restart the request.")) {
+        } else {
+          window.location.replace("{% url 'foirequest-make_request' %}");
+        }
       }
     });
   </script>
@@ -244,7 +247,7 @@
                 </h4>
                 <ul>
                   <li>
-                    <strong>Note:</strong> Do not delete the <a href="{% url "help-faq" %}#10.5">ALL CAPS text</a>!
+                    Do not delete the <a href="{% url "help-faq" %}#10.5">ALL CAPS text</a>!
                   </li>
                   <li>
                     {% blocktrans %}Write your request in <strong>simple, precise language</strong>.{% endblocktrans %}
