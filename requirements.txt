@@ -30,7 +30,7 @@ elasticsearch==2.3.0
 -e git://github.com/codeforhawaii/froide.git@master#egg=froide
 
 # -e git://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
-psycopg2==2.6.1
+psycopg2==2.7.1
 lxml==3.4.4
 raven==5.32.0
 # boto3==1.4.1 - Can't use this until we create our own storage and not use froide custom storage
