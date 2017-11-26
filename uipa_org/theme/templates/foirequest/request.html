@@ -27,14 +27,17 @@
     Froide.template.foundClosing = "{% trans "We found {{ find }} in your text, but there is already a closing at the bottom of the letter!" %}";
     Froide.template.emptyBody = "{% blocktrans %}Don't leave the body of your message empty{% endblocktrans %}";
     Froide.template.emptySubject = "{% blocktrans %}Don't leave the subject of your message empty{% endblocktrans %}";
-    $( "#request-form-body #id_body" ).blur(function() {
-      var requestFormBody = $(this).val();
-      if (!requestFormBody.includes("{% waiver_delimiter %}")) {
-        if (confirm("You have deleted or modified the ALL CAPS text.  Please confirm that you wish to proceed.  If you are seeking a public interest waiver, you should cancel and restart the request.")) {
-        } else {
-          window.location.replace("{% url 'foirequest-make_request' %}");
+
+    $('form.foirequest').on('submit', function(event) {
+        event.preventDefault();
+        var requestFormBody = $("#request-form-body #id_body").val();
+        if (!requestFormBody.includes("{% waiver_delimiter %}")) {
+          if (confirm("You have deleted or modified the ALL CAPS text.  Please confirm that you wish to proceed.  If you are seeking a public interest waiver, you should cancel and restart the request.")) {
+            this.submit();
+          } else {
+            window.location.replace("{% url 'foirequest-make_request' %}");
+          }
         }
-      }
     });
   </script>
   {# {% compress js %}#}
