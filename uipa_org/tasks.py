@@ -112,7 +112,7 @@ def deferred_message_notification(*args, **kwargs):
                     "total_deferred_messages_today": total_deferred_messages_today,
                 }),
                 settings.DEFAULT_FROM_EMAIL,
-                settings.ADMINS
+                [a[1] for a in settings.ADMINS]
             )
         except Exception as e:
             logger.error(e)
