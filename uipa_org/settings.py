@@ -552,7 +552,7 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
         },
         'loggers': {
             'froide': {
-                'handlers': ['uipa_org_logfile'],
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
                 'level': 'DEBUG',
             },
             'django': {
@@ -575,9 +575,9 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
                 'propagate': False,
             },
             'uipa_org': {
-                'handlers': ['uipa_org_logfile'],
+                'handlers': ['uipa_org_logfile', 'mail_admins'],
                 'level': 'DEBUG',
-            },
+            }
         }
     }
 
