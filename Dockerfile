@@ -11,7 +11,7 @@ ENV PYTHONFAULTHANDLER=1 \
 	PIP_DEFAULT_TIMEOUT=100
 
 RUN apt-get update && \
-	apt-get install -y --no-install-recommends libqpdf-dev g++ wget python3-pip libpq-dev libgdal-dev imagemagick git libpangocairo-1.0-0 libmagic1 && \
+	apt-get install -y --no-install-recommends libqpdf-dev g++ wget python3-pip python3-psycopg2 python3-lxml libxml2-dev libpq-dev libgdal-dev imagemagick git libpangocairo-1.0-0 libmagic1 && \
 	apt-get clean && \
     rm -rf /var/lib/apt && \
     rm -rf /var/lib/dpkg
