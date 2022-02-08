@@ -1,5 +1,6 @@
 ARG INSTALL_PYTHON_VERSION=${INSTALL_PYTHON_VERSION:-3.8.12}
-FROM python:${INSTALL_PYTHON_VERSION}-slim-bullseye AS base
+#FROM python:${INSTALL_PYTHON_VERSION}-slim-bullseye AS base
+FROM debian:bullseye-slim AS base
 
 MAINTAINER Ryan Kanno <ryankanno@localkinegrinds.com>
 
@@ -11,10 +12,11 @@ ENV PYTHONFAULTHANDLER=1 \
 	PIP_DEFAULT_TIMEOUT=100
 
 RUN apt-get update && \
-	apt-get install -y --no-install-recommends libqpdf-dev g++ wget python3-pip python3-psycopg2 python3-lxml libxml2-dev libpq-dev libgdal-dev imagemagick git libpangocairo-1.0-0 libmagic1 && \
-	apt-get clean && \
-    rm -rf /var/lib/apt && \
-    rm -rf /var/lib/dpkg
+	apt-get install -y --no-install-recommends build-essential libqpdf-dev python3-dev wget python3-markdown2 python3-pip python3-psycopg2 python3-lxml libxml2-dev libpq-dev libgdal-dev imagemagick git libpangocairo-1.0-0 libmagic1 && \
+	apt-get clean  
+#	apt-get clean && \
+#    rm -rf /var/lib/apt && \
+#    rm -rf /var/lib/dpkg
 
 RUN pip install --upgrade pip
 
@@ -24,6 +26,6 @@ ENV CXXFLAGS=-I/usr/local/include/libqpdf
 ENV LDFLAGS=-L/usr/local/lib
 
 COPY requirements.txt /requirements.txt
-RUN pip install -r requirements.txt
+#RUN pip install -r requirements.txt
 
 ENV PYTHONPATH "${PYTHONPATH}:/app"
