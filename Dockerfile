@@ -1,4 +1,4 @@
-ARG INSTALL_PYTHON_VERSION=${INSTALL_PYTHON_VERSION:-3.8.12}
+#ARG INSTALL_PYTHON_VERSION=${INSTALL_PYTHON_VERSION:-3.8.12}
 #FROM python:${INSTALL_PYTHON_VERSION}-slim-bullseye AS base
 FROM debian:bullseye-slim AS base
 
@@ -13,7 +13,6 @@ ENV PYTHONFAULTHANDLER=1 \
 
 RUN apt-get update && \
 	apt-get install -y --no-install-recommends build-essential libqpdf-dev python3-dev wget python3-markdown2 python3-pip python3-psycopg2 python3-lxml libxml2-dev libxslt-dev libpq-dev libgdal-dev imagemagick git libpangocairo-1.0-0 libmagic1 && \
-#	apt-get clean  
 	apt-get clean && \
     rm -rf /var/lib/apt && \
     rm -rf /var/lib/dpkg

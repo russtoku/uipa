@@ -26,7 +26,7 @@ pysolr==3.5.0
 python-docx==0.8.5
 elasticsearch==2.3.0
 
--e git://github.com/codeforhawaii/froide.git@v2#egg=froide
+-e git+https://github.com/codeforhawaii/froide.git@v2#egg=froide
 
 psycopg2~=2.8.6
 lxml==4.8.0
