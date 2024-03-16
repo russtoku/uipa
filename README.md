@@ -1,4 +1,6 @@
-<h1 align="center">UIPA.org</h1>
+<div align="center">
+  <img src="./docs/logos/uipa.org/vertical/UIPA-vertical-logo-transparent-background.png" alt="UIPA.org Logo" width="200" />
+</div>
 
 <div align="center">
 	:envelope: :rainbow: :office:
