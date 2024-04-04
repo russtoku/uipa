@@ -57,10 +57,10 @@ After running `docker-compose up` successfully, the output in your terminal shou
 
     > Note: Comes with a full PostgreSQL installation.
 
-- [GDAL (Geospatial Data Abstraction Library)](GDAL_LIBRARY_PATH) (GIS support for PostgreSQL)
+- [GDAL (Geospatial Data Abstraction Library)] (GIS support for PostgreSQL)
 
-    > Note: You may need to set the GDAL_LIBRARY_PATH and/or GEOS_LIBRARY_PATH
-    > environment variables in your shell environment.
+    > Note: You may need to set the MAGICK_HOME, GDAL_LIBRARY_PATH and/or GEOS_LIBRARY_PATH
+    > environment variables in your shell environment. Remember to add export in front of the variable.
 
 
 
