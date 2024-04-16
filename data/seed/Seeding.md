@@ -36,14 +36,15 @@ This will set up the data that needs to exist in the database before you upload
 the public body information from a CSV file.
 
 ```
-$ python manage.py loaddata data/seed/2024-03-15-classification.json
-$ python manage.py loaddata data/seed/2024-03-15-jurisdiction.json
-$ python manage.py loaddata data/seed/2024-03-15-foilaw.json
+$ python manage.py loaddata data/seed/YYYY-MM-DD-classification.json
+$ python manage.py loaddata data/seed/YYYY-MM-DD-jurisdiction.json
+$ python manage.py loaddata data/seed/YYYY-MM-DD-foilaw.json
 ```
 
 > NOTE: The Classifications data has been extracted from the Classifications field in
-> the extract of public bodies from the production UIPA.org website on
-> 03/15/2024. See 2024-03-15-Hawaii_UIPA_Public_Bodies_All.csv.
+> the extract of public bodies from the production UIPA.org websiteon
+> 03/15/2024. See 2024-03-15-Hawaii_UIPA_Public_Bodies_All.csv. Update the 
+> file names in the command to reflect the current json files located in data/seed/.
 
 
 ### Load Public Bodies - Testing with a small batch
@@ -101,6 +102,9 @@ you can load the full set of public bodies from these files:
 
 
 #### Reset your database
+> NOTE: After resetting your database you will need to rerun the commands from the  
+> Load Classifications, Jurisdictions, and Freedom of Information Laws section 
+> before continuing on.
 
 - Stop your Django server by pressing Ctl-C in the terminal window running the
   server.
