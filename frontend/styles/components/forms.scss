@@ -1,0 +1,21 @@
+.help-block {
+  @extend .small;
+  @extend .text-body-secondary;
+}
+
+.field-required {
+  text-wrap: nowrap; // to prevent the asterisk from wrapping to the next line
+
+  &::after {
+    content: '*';
+    color: var(--#{$prefix}danger);
+  }
+}
+
+.no-required-asterisk {
+  .field-required {
+    &::after {
+      content: '';
+    }
+  }
+}

@@ -15,7 +15,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // eslint-disable-next-line no-undef
-      '~froide': resolve(__dirname, 'node_modules/froide')
+      '~froide': resolve(__dirname)
     },
     dedupe: ['bootstrap', 'vue', 'pdfjs-dist'],
     extensions: ['.mjs', '.js', '.ts', '.vue', '.json']
@@ -27,43 +27,22 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        // audio_player: './frontend/javascript/audio-player.ts',
-        // bookpub: './frontend/javascript/bookpub.js',
-        campaign_list:
-          'node_modules/froide_campaign/frontend/javascript/list.js',
-        campaign_map: 'node_modules/froide_campaign/frontend/javascript/map.js',
-        campaign_questionaire:
-          'node_modules/froide_campaign/frontend/javascript/questionaire.js',
-        document: 'node_modules/froide/frontend/javascript/document.js',
-        docupload: 'node_modules/froide/frontend/javascript/docupload.js',
-        exam_curriculum:
-          'node_modules/froide_exam/frontend/javascript/curriculum.js',
-        // fds_cms: './frontend/javascript/fds_cms.js',
-        fileuploader: 'node_modules/froide/frontend/javascript/fileuploader.js',
+        document: './frontend/javascript/document.js',
+        docupload: './frontend/javascript/docupload.js',
+        fileuploader: './frontend/javascript/fileuploader.js',
         filingcabinet:
           'node_modules/@okfde/filingcabinet/frontend/javascript/filingcabinet.js',
-        food: 'node_modules/froide_food/frontend/javascript/food.js',
-        foodreport: 'node_modules/froide_food/frontend/javascript/report.js',
-        geomatch: 'node_modules/froide/frontend/javascript/geomatch.js',
-        lawsuits_table:
-          'node_modules/froide_legalaction/frontend/javascript/table.js',
-        legal_decisions_listfilter:
-          'node_modules/froide_legalaction/frontend/javascript/listFilter.js',
+        //geomatch: './frontend/javascript/geomatch.js',
         main: './frontend/javascript/main.ts',
-        makerequest: 'node_modules/froide/frontend/javascript/makerequest.js',
-        messageredaction:
-          'node_modules/froide/frontend/javascript/messageredaction.js',
-        moderation: 'node_modules/froide/frontend/javascript/moderation.js',
-        payment: 'node_modules/froide_payment/frontend/javascript/payment.ts',
-        proofupload: 'node_modules/froide/frontend/javascript/proofupload.js',
-        publicbody: 'node_modules/froide/frontend/javascript/publicbody.js',
-        publicbodyupload:
-          'node_modules/froide/frontend/javascript/publicbodyupload.js',
-        redact: 'node_modules/froide/frontend/javascript/redact.js',
-        request: 'node_modules/froide/frontend/javascript/request.ts',
-        tagautocomplete:
-          'node_modules/froide/frontend/javascript/tagautocomplete.ts',
-        // vegacharts: './frontend/javascript/vegacharts.js'
+        makerequest: './frontend/javascript/makerequest.js',
+        messageredaction: './frontend/javascript/messageredaction.js',
+        moderation: './frontend/javascript/moderation.js',
+        proofupload: './frontend/javascript/proofupload.js',
+        publicbody: './frontend/javascript/publicbody.js',
+        publicbodyupload: './frontend/javascript/publicbodyupload.js',
+        redact: './frontend/javascript/redact.js',
+        request: './frontend/javascript/request.ts',
+        tagautocomplete: './frontend/javascript/tagautocomplete.ts'
       },
       output: {
         sourcemap: true,

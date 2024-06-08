@@ -1,18 +1,14 @@
 @import 'bootstrap/scss/functions';
+@import 'color-contrast';
 
-// importing FROIDE variables
-@import 'froide/frontend/styles/variables';
-
-// Override variables here
+/* Override variables here */
 @import 'variables';
 
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/variables-dark';
 
-@import 'froide/frontend/styles/color-contrast';
-
 /* Override maps here */
-@import 'froide/frontend/styles/maps';
+@import 'maps';
 
 @import 'bootstrap/scss/maps';
 
@@ -32,7 +28,6 @@
 @import 'bootstrap/scss/buttons';
 @import 'bootstrap/scss/transitions';
 @import 'bootstrap/scss/dropdown';
-// @import "dropdown";
 @import 'bootstrap/scss/button-group';
 @import 'bootstrap/scss/nav';
 @import 'bootstrap/scss/navbar';
@@ -61,65 +56,27 @@
 @import 'bootstrap/scss/utilities/api';
 // scss-docs-end import-stack
 
+@import 'root';
+@import 'utilities';
+
 // Icon font
 $fa-font-path: 'font-awesome/fonts';
 @import 'font-awesome/scss/font-awesome';
 
-// Import FontAwesome 4 explicitly to:
-// - add font-display: swap
-// - remove svg font
-@import 'font-awesome/scss/variables';
-@import 'font-awesome/scss/mixins';
-
-$fa-font-path: 'font-awesome/fonts';
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
-  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}')
-      format('embedded-opentype'),
-    url('#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}')
-      format('woff2'),
-    url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}')
-      format('woff'),
-    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}')
-      format('truetype');
-  //  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@import 'font-awesome/scss/core';
-@import 'font-awesome/scss/larger';
-@import 'font-awesome/scss/fixed-width';
-@import 'font-awesome/scss/list';
-@import 'font-awesome/scss/bordered-pulled';
-@import 'font-awesome/scss/animated';
-@import 'font-awesome/scss/rotated-flipped';
-@import 'font-awesome/scss/stacked';
-@import 'font-awesome/scss/icons';
-@import 'font-awesome/scss/screen-reader';
-
-// letter-spacing: .03rem;
-
-@import 'froide/frontend/styles/root';
-@import 'froide/frontend/styles/utilities';
-
 // Own components
 // FIXME: these are not really components
-@import 'froide/frontend/styles/components/base';
-@import 'froide/frontend/styles/components/breadcrumb';
-@import 'froide/frontend/styles/components/buttons';
-@import 'froide/frontend/styles/components/comments';
-@import 'froide/frontend/styles/components/dropdown';
-@import 'froide/frontend/styles/components/footer';
-@import 'froide/frontend/styles/components/forms';
-@import 'froide/frontend/styles/components/js-switches';
-@import 'froide/frontend/styles/components/misc';
-@import 'header';
-@import 'legacy';
-@import 'froide/frontend/styles/components/redacted';
-@import 'froide/frontend/styles/components/request-status';
-@import 'froide/frontend/styles/components/type';
-@import 'froide/frontend/styles/components/print';
-
-@import 'type';
+@import 'components/base';
+@import 'components/breadcrumb';
+@import 'components/buttons';
+@import 'components/comments';
+@import 'components/dropdown';
+@import 'components/footer';
+@import 'components/forms';
+@import 'components/js-switches';
+@import 'components/misc';
+@import 'components/navbar';
+@import 'components/redacted';
+@import 'components/request-status';
+@import 'components/type';
+@import 'components/share-buttons';
+@import 'components/print';

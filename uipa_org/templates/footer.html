@@ -61,7 +61,7 @@
 {% endblock %}
 
 {% block footer_logo %}
-<a href="https://uipa.org">
+<a href="{% url 'index' %}">
   <img class="img-fluid"
        loading="lazy"
        src="{% static 'img/uipa-footer.png' %}"
