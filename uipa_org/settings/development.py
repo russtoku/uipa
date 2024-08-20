@@ -15,10 +15,12 @@ class Dev(UipaOrgThemeBase):
     CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
 
     ELASTICSEARCH_HOST = values.Value("localhost", environ=True, environ_name="ELASTICSEARCH_HOST")
+    ELASTICSEARCH_USER = values.Value("elastic", environ=True, environ_name="ELASTICSEARCH_USER")
+    ELASTICSEARCH_PASSWORD = values.Value("****", environ=True, environ_name="ELASTICSEARCH_PASSWORD")
     ELASTICSEARCH_DSL = {
         "default": {
             "hosts": "http://%s:9200" % ELASTICSEARCH_HOST,
-            'http_auth': ('elastic', 'froide')
+            'http_auth': (ELASTICSEARCH_USER, ELASTICSEARCH_PASSWORD)
         }
     }
 

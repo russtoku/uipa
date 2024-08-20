@@ -1825,7 +1825,7 @@ lint = ["black (==23.3.0)", "flake8 (==6.0.0)", "flake8-bugbear (==23.5.9)", "is
 type = "git"
 url = "https://github.com/codewithaloha/froide.git"
 reference = "container_fixes"
-resolved_reference = "7dede656b281daf673e38232684dd6462ff437b2"
+resolved_reference = "44b3c108d89b92cc2ee0269042d1302a9234945c"
 
 [[package]]
 name = "frozenlist"

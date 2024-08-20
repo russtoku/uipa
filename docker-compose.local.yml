@@ -6,6 +6,8 @@ services:
     environment:
       - "DATABASE_URL=postgis://froide:froide@db:5432/froide"
       - "DJANGO_ELASTICSEARCH_HOST=elasticsearch"
+      - "DJANGO_ELASTICSEARCH_USER=elastic"
+      - "DJANGO_ELASTICSEARCH_PASSWORD=froide"
     ports:
       - "8000:8000"
     networks:
