@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
+from configurations import values
+
 from .base import UipaOrgThemeBase, env, required_env
 
 class Dev(UipaOrgThemeBase):
@@ -12,12 +14,13 @@ class Dev(UipaOrgThemeBase):
 
     CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
 
+    ELASTICSEARCH_HOST = values.Value("localhost", environ=True, environ_name="ELASTICSEARCH_HOST")
     ELASTICSEARCH_DSL = {
-            'default': {
-                'hosts': 'http://localhost:9200',
-                'http_auth': ('elastic', 'froide')
-            }
+        "default": {
+            "hosts": "http://%s:9200" % ELASTICSEARCH_HOST,
+            'http_auth': ('elastic', 'froide')
         }
+    }
 
     @property
     def TEMPLATES(self):

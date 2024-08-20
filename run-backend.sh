@@ -10,8 +10,6 @@ yarn build
 yarn serve dev &
 
 # hack until we get the froide setup build working (i.e. include templates)
-virtualenv_path=`/root/.local/bin/poetry show -v | grep 'Using virtualenv' | cut -f 3 -d' '`
-(cd /tmp;tar xvzf /srv/django/templates.tar.gz;mv templates $virtualenv_path/lib/python3.12/site-packages/froide/)
 echo "STARTING DB"
 # To initialise the database:
 /root/.local/bin/poetry run ./manage.py migrate --skip-checks
