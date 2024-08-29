@@ -8,6 +8,8 @@ services:
       - "DJANGO_ELASTICSEARCH_HOST=elasticsearch"
       - "DJANGO_ELASTICSEARCH_USER=elastic"
       - "DJANGO_ELASTICSEARCH_PASSWORD=froide"
+      - "GDAL_LIBRARY_PATH=/usr/lib/libgdal.so.34"
+      - "GEOS_LIBRARY_PATH=/usr/lib/libgeos_c.so.1"
     ports:
       - "8000:8000"
     networks:

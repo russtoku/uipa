@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 
 from configurations import values
+from setuptools.msvc import environ
 
 from .base import UipaOrgThemeBase, env, required_env
 
@@ -13,6 +14,12 @@ class Dev(UipaOrgThemeBase):
     FRONTEND_DEBUG = False
 
     CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
+
+    # setup GDAL and GEOS
+    GDAL_LIBRARY_PATH = values.Value('/usr/lib/libgdal.so.34', environ=True, environ_name="GDAL_LIBRARY_PATH",
+                                     environ_prefix="")
+    GEOS_LIBRARY_PATH = values.PathValue('/usr/lib/libgeos_c.so.1', environ=True, environ_name="GEOS_LIBRARY_PATH",
+                                         environ_prefix="")
 
     ELASTICSEARCH_HOST = values.Value("localhost", environ=True, environ_name="ELASTICSEARCH_HOST")
     ELASTICSEARCH_USER = values.Value("elastic", environ=True, environ_name="ELASTICSEARCH_USER")
