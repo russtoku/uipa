@@ -44,8 +44,6 @@ class UipaOrgThemeBase(ThemeBase):
             'django.contrib.redirects',
             'uipa_org.uipa_constants',
             'uipa_org.theme.templatetags.uipa_extras',
-            'tinymce',
-            'raven.contrib.django.raven_compat'
         ]
         return installed
 
@@ -212,7 +210,7 @@ class S3Enabled(object):
 class Dev(UipaOrgThemeBase, Base):
 
     DEBUG = True
-    ALLOWED_HOSTS = values.TupleValue(('localhost',))
+    ALLOWED_HOSTS = values.TupleValue(('localhost','127.0.0.1'))
 
     COMPRESS_ENABLED = values.BooleanValue(True)
     COMPRESS_OFFLINE = True
@@ -326,14 +324,14 @@ class Dev(UipaOrgThemeBase, Base):
 
     DATABASES = {
         'default': {
-            #'ENGINE': 'django.db.backends.sqlite3',  # Load from fixtures doesn't work with SQLite3.
-            #'NAME': 'dev.db',
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'uipa',
-            'USER': 'uipa',
-            'PASSWORD': 'uipa',
-            'HOST': 'localhost',
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.sqlite3',  # Load from fixtures doesn't work with SQLite3.
+            'NAME': 'dev.db',
+            #'ENGINE': 'django.db.backends.postgresql',
+            #'NAME': 'uipa',
+            #'USER': 'uipa',
+            #'PASSWORD': 'uipa',
+            #'HOST': 'localhost',
+            #'PORT': '5432',
         }
     }
 
