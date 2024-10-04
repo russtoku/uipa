@@ -1,5 +1,29 @@
 # Quick Start
 
+## Running UIPA in a fully containerized environment
+
+If you want to use the uipa containers, then you don't need to 
+setup any prerequisites aside from installing docker or podman.
+
+Then you can just run the following:
+
+- `docker compose -f docker-compose.local.yml up` or `podman compose -f docker-compose.local.yml up`
+- Wait a few minutes for everything to start running
+- Open `http://127.0.0.1:8000/` in your web browser.
+
+You can also set the follow environment variables to `y` or `Y`  in your shell 
+(e.g. `export DEBUG=y`) before running 
+docker or podman compose for additional modifications to how
+the containers run
+
+|Variable | Effect                |
+|---------|-----------------------|
+| DEBUG | Enables debug output  |
+| LOAD_DATA | Load seed data | 
+| INITIALIZE_DB | Initialize Elasticsearch and Postgres Databases | 
+
+## Running UIPA locally without a container
+
 After setting up the prerequisites, run the following commands from the `uipa` directory in the working directory that you cloned the UIPA repository into.
 
 - In a terminal window, run `docker-compose up`.
