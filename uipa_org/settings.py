@@ -312,26 +312,32 @@ class Dev(UipaOrgThemeBase, Base):
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
     HAYSTACK_CONNECTIONS = {
-        ##'default': {
-        ##    'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        ##    'URL': 'http://127.0.0.1:8983/solr/uipa/',
-        ##    'INDEX_NAME': 'haystack',
-        ##}
+        #'default': {
+        #    'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        #    'URL': 'http://127.0.0.1:8983/solr/uipa/',
+        #    'INDEX_NAME': 'haystack',
+        #}
         'default': {
-            'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': 'http://127.0.0.1:9200/',
+            'INDEX_NAME': 'haystack',
         }
+        #'default': {
+        #    'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        #    Doesn't support updates.
+        #}
     }
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',  # Load from fixtures doesn't work with SQLite3.
-            'NAME': 'dev.db',
-            #'ENGINE': 'django.db.backends.postgresql',
-            #'NAME': 'uipa',
-            #'USER': 'uipa',
-            #'PASSWORD': 'uipa',
-            #'HOST': 'localhost',
-            #'PORT': '5432',
+            #'ENGINE': 'django.db.backends.sqlite3',  # Load from fixtures doesn't work with SQLite3.
+            #'NAME': 'dev.db',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'uipa',
+            'USER': 'uipa',
+            'PASSWORD': 'uipa',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 

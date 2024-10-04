@@ -1,14 +1,13 @@
 django==1.11.29
 django-appconf==1.0.2
-Markdown==2.6.6
+Markdown
 # for Python 3.7 bug with celery
 importlib-metadata<5.0
-celery
+celery<5.0
 celery-haystack
 django-haystack
 django-celery-email
 django-taggit==0.18.1
-pytz==2016.6.1
 requests==2.11.1
 django-floppyforms~=1.8
 -e git+https://github.com/stephenmcd/django-overextends.git@master#egg=django-overextends
@@ -32,7 +31,7 @@ elasticsearch==2.3.0
 -e git+https://github.com/russtoku/froide.git@dj_1_11#egg=froide
 
 # -e git+https://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
-psycopg2
+psycopg2>=2.8,<2.9
 lxml
 # boto3==1.4.1 - Can't use this until we create our own storage and not use froide custom storage
 boto==2.43.0
