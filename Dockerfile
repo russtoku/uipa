@@ -26,4 +26,3 @@ RUN /root/.local/bin/poetry install --no-root --no-interaction
 COPY run-backend.sh /srv/django
 
 ENTRYPOINT  ["/srv/django/run-backend.sh"]
-#ENTRYPOINT ["/bin/sleep", "3600"]
