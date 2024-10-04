@@ -11,7 +11,9 @@ Then you can just run the following:
 - Wait a few minutes for everything to start running
 - Open `http://127.0.0.1:8000/` in your web browser.
 
-You can also define the follow environment variables for additional modifications to how
+You can also set the follow environment variables to `y` or `Y`  in your shell 
+(e.g. `export DEBUG=y`) before running 
+docker or podman compose for additional modifications to how
 the containers run
 
 |Variable | Effect                |
