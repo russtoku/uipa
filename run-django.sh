@@ -1,7 +1,7 @@
 #!/bin/ash
 
 
-if [[ -z "${DEBUG}" ]];
+if [[  "$DEBUG" == "y" ]] || [[  "$DEBUG" == "Y" ]];
 then
   python ./manage.py diffsettings --all
 fi
