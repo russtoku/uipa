@@ -71,9 +71,13 @@ class UipaOrgThemeBase(ThemeBase):
 
     HAYSTACK_CONNECTIONS = {
         'default': {
-            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            #'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
             'URL': 'http://127.0.0.1:9200/',
             'INDEX_NAME': 'haystack',
+            'KWARGS': {
+                    'http_auth': ('elastic', 'froide'),
+            },
         }
     }
 
@@ -311,6 +315,10 @@ class Dev(UipaOrgThemeBase, Base):
 
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
+    # For elasticsearch connection.
+    from urllib.parse import urlparse
+    parsed = urlparse("http://elastic:froide@127.0.0.1:9200")
+
     HAYSTACK_CONNECTIONS = {
         #'default': {
         #    'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
@@ -318,13 +326,19 @@ class Dev(UipaOrgThemeBase, Base):
         #    'INDEX_NAME': 'haystack',
         #}
         'default': {
-            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-            'URL': 'http://127.0.0.1:9200/',
+            #'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+            'URL': parsed.hostname,
             'INDEX_NAME': 'haystack',
+            'KWARGS': {
+                'port': parsed.port,
+                'http_auth': (parsed.username, parsed.password),
+                'use_ssl': False,
+            },
         }
+        # This doesn't support updates.
         #'default': {
         #    'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-        #    Doesn't support updates.
         #}
     }
 
