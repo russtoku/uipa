@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
+
 
 from celery.schedules import crontab
 from configurations import values
@@ -137,8 +137,8 @@ class UipaOrgThemeBase(ThemeBase):
             request_public_after_due_days=14,
             payment_possible=False,
             default_law=1,
-            greetings=[rec(u"Aloha (?:Mr\.?|Ms\.? .*?)")],
-            closings=[rec(u"Mahalo,?")],
+            greetings=[rec("Aloha (?:Mr\.?|Ms\.? .*?)")],
+            closings=[rec("Mahalo,?")],
             public_body_boosts={},
             dryrun=True,
             dryrun_domain="beta.uipa.org",
@@ -214,7 +214,7 @@ class S3Enabled(object):
 class Dev(UipaOrgThemeBase, Base):
 
     DEBUG = True
-    ALLOWED_HOSTS = values.TupleValue(('localhost','127.0.0.1'))
+    ALLOWED_HOSTS = values.TupleValue(('localhost', '127.0.0.1'))
 
     COMPRESS_ENABLED = values.BooleanValue(True)
     COMPRESS_OFFLINE = True
