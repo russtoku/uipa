@@ -321,25 +321,20 @@ class Dev(UipaOrgThemeBase, Base):
 
     HAYSTACK_CONNECTIONS = {
         #'default': {
-        #    'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        #    'URL': 'http://127.0.0.1:8983/solr/uipa/',
+        #    #'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        #    'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+        #    'URL': parsed.hostname,
         #    'INDEX_NAME': 'haystack',
+        #    'KWARGS': {
+        #        'port': parsed.port,
+        #        'http_auth': (parsed.username, parsed.password),
+        #        'use_ssl': False,
+        #    },
         #}
         'default': {
-            #'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-            'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
-            'URL': parsed.hostname,
-            'INDEX_NAME': 'haystack',
-            'KWARGS': {
-                'port': parsed.port,
-                'http_auth': (parsed.username, parsed.password),
-                'use_ssl': False,
-            },
+            # This doesn't support updates.
+            'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
         }
-        # This doesn't support updates.
-        #'default': {
-        #    'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-        #}
     }
 
     DATABASES = {
