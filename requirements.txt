@@ -22,7 +22,6 @@ django-compressor==2.1
 django-contrib-comments==1.7.1
 unicodecsv==0.14.1
 honcho==0.6.6
-pysolr==3.5.0
 python-docx==0.8.5
 elasticsearch==2.3.0
 
