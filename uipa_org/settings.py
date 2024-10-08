@@ -75,9 +75,9 @@ class UipaOrgThemeBase(ThemeBase):
             'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
             'URL': 'http://127.0.0.1:9200/',
             'INDEX_NAME': 'haystack',
-            'KWARGS': {
-                    'http_auth': ('elastic', 'froide'),
-            },
+            #'KWARGS': {
+            #        'http_auth': ('elastic', 'froide'),
+            #},
         }
     }
 
@@ -315,26 +315,28 @@ class Dev(UipaOrgThemeBase, Base):
 
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
-    # For elasticsearch connection.
-    from urllib.parse import urlparse
-    parsed = urlparse("http://elastic:froide@127.0.0.1:9200")
+    ## For elasticsearch connection.
+    #from urllib.parse import urlparse
+    #parsed = urlparse("http://elastic:froide@127.0.0.1:9200")
 
     HAYSTACK_CONNECTIONS = {
-        #'default': {
-        #    #'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        #    'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
-        #    'URL': parsed.hostname,
-        #    'INDEX_NAME': 'haystack',
-        #    'KWARGS': {
-        #        'port': parsed.port,
-        #        'http_auth': (parsed.username, parsed.password),
-        #        'use_ssl': False,
-        #    },
-        #}
         'default': {
-            # This doesn't support updates.
-            'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+            #'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+            'INDEX_NAME': 'haystack',
+            'URL': 'http://127.0.0.1:9200'
+            # elasticsearch 2.x doesn't have authentication.
+            #'URL': parsed.hostname,
+            #'KWARGS': {
+            #    'port': parsed.port,
+            #    'http_auth': (parsed.username, parsed.password),
+            #    'use_ssl': False,
+            #},
         }
+        #'default': {
+        #    # This doesn't support updates.
+        #    'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        #}
     }
 
     DATABASES = {
