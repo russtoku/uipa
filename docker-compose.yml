@@ -9,24 +9,16 @@ services:
       POSTGRES_PASSWORD: uipa
     ports:
       - "127.0.0.1:5432:5432"
-      #elasticsearch:
-      #  image: docker.elastic.co/elasticsearch/elasticsearch:8.14.1
-      #  volumes:
-      #    - es-data:/usr/share/elasticsearch/data
-      #    - es-logs:/var/log
-      #  environment:
-      #    - "discovery.type=single-node"
-      #    - "xpack.security.enabled=true"
-      #    # user = elastic
-      #    - "ELASTIC_PASSWORD=froide"
-      #    - "cluster.routing.allocation.disk.threshold_enabled=false"
-      #    - "cluster.routing.allocation.disk.watermark.low=3gb"
-      #    - "cluster.routing.allocation.disk.watermark.high=2gb"
-      #    - "cluster.routing.allocation.disk.watermark.flood_stage=1gb"
-      #  ports:
-      #    - "127.0.0.1:9200:9200"
+  es:
+    build:
+      dockerfile: ./es.Dockerfile
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+      - es-logs:/usr/share/elasticsearch/log
+    ports:
+      - "127.0.0.1:9200:9200"
 
 volumes:
-  #es-data: {}
-  #es-logs: {}
+  es-data: {}
+  es-logs: {}
   pg-data: {}
