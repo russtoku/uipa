@@ -276,7 +276,7 @@ class Dev(UipaOrgThemeBase, Base):
             'uipa_org_logfile': {
                 'level': 'DEBUG',
                 'class': 'logging.handlers.RotatingFileHandler',
-                'filename': os.path.join(os.path.dirname(os.path.realpath(__file__)), 'uipa_org_dev_app.log'),
+                'filename': 'uipa_org_dev_app.log', # put in the working directory
                 'maxBytes': 1024*1024*5,  # 5MB
                 'backupCount': 10,
                 'formatter': 'verbose',
@@ -291,7 +291,8 @@ class Dev(UipaOrgThemeBase, Base):
                 'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG'
             },
-            'django.request': {
+            # Use instead of 'django.request' to log all requests; added in Django 1.11.
+            'django.server': {
                 'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG',
                 'propagate': False,
@@ -315,7 +316,7 @@ class Dev(UipaOrgThemeBase, Base):
 
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
-    ## For elasticsearch connection.
+    ## For elasticsearch connection authentication.
     #from urllib.parse import urlparse
     #parsed = urlparse("http://elastic:froide@127.0.0.1:9200")
 
