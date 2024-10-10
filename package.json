@@ -59,5 +59,8 @@
     "vega-embed": "6.19.1",
     "vega-interpreter": "^1.0.4",
     "vega-lite": "<5.15"
+  },
+  "resolutions": {
+    "axios": "0.28.1"
   }
 }
