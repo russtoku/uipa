@@ -61,6 +61,7 @@
     "vega-lite": "<5.15"
   },
   "resolutions": {
-    "axios": "0.28.1"
+    "axios": "0.28.1",
+    "pdfjs-dist": "4.2.67"
   }
 }
