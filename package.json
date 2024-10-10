@@ -43,7 +43,7 @@
     "@glidejs/glide": "^3.4.1",
     "@okfde/filingcabinet": "okfde/django-filingcabinet",
     "@popperjs/core": "^2.11.5",
-    "@sentry/browser": "^7.12.1",
+    "@sentry/browser": "7.119.1",
     "@sentry/integrations": "^7.12.1",
     "@sentry/tracing": "^7.12.1",
     "bootstrap": "^5.3.2",
