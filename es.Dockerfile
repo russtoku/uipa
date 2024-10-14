@@ -15,6 +15,7 @@ RUN apk add --no-cache su-exec curl && \
 
 # cluster.name and network.host configured for our purposes.
 COPY es.2_4_6_config.yml /usr/share/elasticsearch/config/elasticsearch.yml
+RUN chown elasticsearch:elasticsearch /usr/share/elasticsearch/config/elasticsearch.yml
 
 # Run the server as a regular user.
 USER elasticsearch

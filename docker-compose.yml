@@ -7,6 +7,7 @@ services:
       POSTGRES_DB: uipa
       POSTGRES_USER: uipa
       POSTGRES_PASSWORD: uipa
+    platform: linux/arm64/v8
     ports:
       - "127.0.0.1:5432:5432"
   es:
@@ -15,6 +16,7 @@ services:
     volumes:
       - es-data:/usr/share/elasticsearch/data
       - es-logs:/usr/share/elasticsearch/log
+    platform: linux/arm64/v8
     ports:
       - "127.0.0.1:9200:9200"
 

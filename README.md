@@ -10,8 +10,13 @@ Theme](https://github.com/okfde/froide-theme).
 
 Prerequisite libraries and programs:
 
- * Python 3.5 in a virtual environment (python -m venv venv3)
+ * Python 3.8 in a virtual environment (python -m venv venv3)
+    * **NOTE:** Use a pip version less than 24 with Python 3.8.
  * libmagic (yum install libmagic, apt-get install libmagic, etc.)
+ * PostgreSQL - psycopg2 needs the libraries locally.
+ * postgis library
+ * GDAL library
+ * libgeoip libary
  * Docker
     * Desktop (Mac or Windows) - See [Overview of Docker Desktop](https://docs.docker.com/desktop/)
     * Engine (Linux) - See [Docker Engine overview](https://docs.docker.com/engine/)
@@ -19,20 +24,20 @@ Prerequisite libraries and programs:
 
 Clone this repo and change into the directory that the repo was cloned to.
 
-Start a PostgresQL docker container using:
+Start a PostgreSQL database and an Elasticsearch server in docker containers using:
 
-    docker compose -d
+    docker compose up -d
 
-After activating your Python 3.5 virtualenv, run:
+After activating your Python 3.8 virtualenv, run:
 
     pip install -r requirements.txt -e . --src=./src
     python manage.py migrate  --noinput
-    python manage.py createsuperuser
     python manage.py loaddata uipa_org/fixtures/*
     python manage.py runserver
 
-Be sure to remember the password for the admin user you create so that you can
-log on to the admin interface at http://127.0.0.1:8000/uipa-admin/. You can
+The admin user is created from a fixture file and its password is *testing*.
+
+Log on to the Admin site at http://127.0.0.1:8000/uipa-admin/. You can
 create or modify flatpages there.
 
 At this point, visit http://127.0.0.1:8000/ in your browser and you should see
