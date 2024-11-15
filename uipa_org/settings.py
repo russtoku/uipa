@@ -366,7 +366,7 @@ class Dev(UipaOrgThemeBase, Base):
         ))
         return config
 
-    TEST_SELENIUM_DRIVER = 'chrome'
+    TEST_SELENIUM_DRIVER = 'chromedriver'
 
 class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
 
