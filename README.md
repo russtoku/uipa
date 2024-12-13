@@ -1,7 +1,8 @@
 # UIPA.org - Uniform Information Practices Act portal
 
 > This branch is a departure from the main branch. It seeks to satisfy the goal
-> of upgrading UIPA.org to currently supported versions of Python and Django.
+> of upgrading UIPA.org to currently supported versions of Python and Django
+> without upgrading Froide to a newer upstream version.
 
 This started as a Django project forked from the [Froide Base
 Theme](https://github.com/okfde/froide-theme). This is a theme app that plugs
