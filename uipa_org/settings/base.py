@@ -9,8 +9,18 @@ from pathlib import Path
 
 rec = lambda x: re.compile(x, re.I | re.U)
 
+# Helper functions for reading environment variables
+
+# env() returns the value of an environment variable, or None if it is not set
 def env(key, default=None):
     return os.environ.get(key, default)
+
+# required_env() returns the value of an environment variable, or raises an exception if it is not set
+def required_env(key):
+    value = env(key)
+    if value is None or value == "":
+        raise ValueError(f"Required environment variable {key} is not set")
+    return value
 
 THEME_ROOT = Path(__file__).resolve().parent.parent
 
@@ -92,7 +102,7 @@ class UipaOrgThemeBase(Base):
             request_public_after_due_days=14,
             payment_possible=False,
             default_law=1,
-            greetings=[rec(u"Aloha (?:Mr\.?|Ms\.? .*?)")],
+            greetings=[rec(u"Aloha (?:Mr.|Ms. .*?)")],
             closings=[rec(u"Mahalo,?")],
             public_body_boosts={},
             dryrun=False,

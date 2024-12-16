@@ -9,6 +9,12 @@ const outputDir = resolve(__dirname, 'build')
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  optimizeDeps:{
+    esbuildOptions: {
+      target: "es2022",
+    }
+  },
+
   // eslint-disable-next-line no-undef
   base: process.env.ASSET_PATH || '/static/',
   publicDir: false,
@@ -25,6 +31,7 @@ export default defineConfig({
     emptyOutDir: true,
     outDir: outputDir,
     sourcemap: true,
+    target: 'es2022',
     rollupOptions: {
       input: {
         // audio_player: './frontend/javascript/audio-player.ts',

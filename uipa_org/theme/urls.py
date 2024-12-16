@@ -61,7 +61,7 @@ urlpatterns += [
     # TODO: Remove this when we have a proper about/help page
     # Redirect /help and /about to /help/faq
     re_path(r'^%s/$' % gettext('help'), flatpage, {'url': '/help/faq/'}, name='help'),
-    re_path(r'^%s/$' % gettext('about'), flatpage, {'url': '/help/faq/'}, name='about'),
+    re_path(r'^%s/$' % gettext('about'), flatpage, {'url': '/help/about/'}, name='about'),
     
     # Beep boop, robots.txt
     re_path(
