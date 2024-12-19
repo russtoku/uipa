@@ -165,7 +165,8 @@ class AccountManager(object):
             to_sign.append(self.user.last_login.strftime("%Y-%m-%dT%H:%M:%S"))
         return hmac.new(
                 settings.SECRET_KEY.encode('utf-8'),
-                (".".join(to_sign)).encode('utf-8')
+                (".".join(to_sign)).encode('utf-8'),
+                digestmod="md5",
         ).hexdigest()
 
     def check_confirmation_secret(self, secret, *args):
@@ -182,7 +183,8 @@ class AccountManager(object):
             to_sign.append(self.user.last_login.strftime("%Y-%m-%dT%H:%M:%S"))
         return hmac.new(
                 settings.SECRET_KEY.encode('utf-8'),
-                (".".join(to_sign)).encode('utf-8')
+                (".".join(to_sign)).encode('utf-8'),
+                digestmod="md5",
         ).hexdigest()
 
     def send_confirmation_mail(self, request_id=None, password=None):
