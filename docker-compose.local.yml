@@ -1,6 +1,6 @@
 services:
   app:
-    image: uipa_backend:0.10
+    image: uipa/uipa:0.2
     volumes:
       - .:/app
     environment:
