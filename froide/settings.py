@@ -39,7 +39,6 @@ class Base(Configuration):
         'haystack',
         'taggit',
         'floppyforms',
-        'overextends',
         'tastypie',
         'storages',
         'compressor',

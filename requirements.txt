@@ -10,7 +10,6 @@ django-celery-email
 django-taggit==0.18.1
 requests==2.11.1
 django-floppyforms~=1.8
-django-overextends
 python-magic==0.4.6
 django-tastypie==0.13.3
 python-mimeparse>=0.1.4
@@ -25,7 +24,6 @@ honcho==0.6.6
 python-docx==0.8.5
 elasticsearch==2.3.0
 
-# -e git+https://github.com/stefanw/django-compressor.git@patch-1#egg=compressor
 psycopg2>=2.8,<2.9
 lxml
 # boto3==1.4.1 - Can't use this until we create our own storage and not use froide custom storage
