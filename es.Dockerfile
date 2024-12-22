@@ -1,4 +1,4 @@
-FROM amd64/eclipse-temurin:8-jdk-alpine
+FROM eclipse-temurin:8-jdk-alpine
 
 RUN mkdir /usr/share/elasticsearch
 WORKDIR /usr/share/elasticsearch

@@ -32,15 +32,16 @@ Prerequisite libraries and programs:
     - **NOTE:** Use a pip version less than 24 with Python 3.8.
  - libmagic (yum install libmagic, apt-get install libmagic, etc.)
  - PostgreSQL - psycopg2 needs the libraries locally.
- - postgis library
- - GDAL library
- - libgeoip libary
  - Docker
     - Desktop (Mac or Windows) - See [Overview of Docker Desktop](https://docs.docker.com/desktop/)
     - Engine (Linux) - See [Docker Engine overview](https://docs.docker.com/engine/)
 
 
 Clone this repo and change into the directory that the repo was cloned to.
+
+Set DOCKER_DEFAULT_PLATFORM to linux/amd64 on macOS and Windows:
+
+    export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 Start a PostgreSQL database and an Elasticsearch server in docker containers using:
 
@@ -54,12 +55,13 @@ After activating your Python 3.8 virtualenv, run:
     python manage.py runserver
 
 The admin user is created from a fixture file and its password is *testing*.
-
-Log on to the Admin site at http://127.0.0.1:8000/uipa-admin/. You can
-create or modify flatpages there.
+Two regular users are also created and their password is the same.
 
 At this point, visit http://127.0.0.1:8000/ in your browser and you should see
 the home page for uipa.org.
+
+Log on to the Admin site at http://127.0.0.1:8000/uipa-admin/. You can
+create or modify flatpages there.
 
 ### Searching for public agencies or requests
 
