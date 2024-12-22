@@ -258,8 +258,7 @@ class Dev(UipaOrgThemeBase, Base):
         },
         'formatters': {
             'verbose': {
-                'format': '[%(asctime)s] %(levelname)s [%(module)s %(process)d %(thread)d - %(name)s.%(funcName)s:%(lineno)d] %(message)s',
-                'datefmt': '%Y-%m-%d %H:%M:%S'
+                'format': '[%(asctime)s] %(levelname)s (pid: %(process)d) [%(name)s.%(module)s: %(funcName)s:%(lineno)d] %(message)s',
             },
         },
         'handlers': {
@@ -304,6 +303,11 @@ class Dev(UipaOrgThemeBase, Base):
             },
             'django.db.backends': {
                 'level': 'DEBUG',
+                'handlers': ['uipa_org_logfile'],
+                'propagate': False,
+            },
+            'django.template': {
+                'level': 'INFO',
                 'handlers': ['uipa_org_logfile'],
                 'propagate': False,
             },
