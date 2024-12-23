@@ -285,10 +285,12 @@ class Dev(UipaOrgThemeBase, Base):
             'froide': {
                 'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG',
+                'propagate': False,
             },
             'django': {
                 'handlers': ['uipa_org_logfile'],
-                'level': 'DEBUG'
+                'level': 'DEBUG',
+                'propagate': False,
             },
             # Use instead of 'django.request' to log all requests; added in Django 1.11.
             'django.server': {
@@ -314,6 +316,7 @@ class Dev(UipaOrgThemeBase, Base):
             'uipa_org': {
                 'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG',
+                'propagate': False,
             },
         }
     }
