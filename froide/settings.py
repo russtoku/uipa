@@ -163,7 +163,6 @@ class Base(Configuration):
                     'django.template.loaders.filesystem.Loader',
                     'django.template.loaders.app_directories.Loader',
                 ],
-                'builtins': ['overextends.templatetags.overextends_tags'],
                 'context_processors': [
                     'django.template.context_processors.debug',
                     'django.template.context_processors.i18n',
