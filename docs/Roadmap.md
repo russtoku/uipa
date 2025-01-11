@@ -1,16 +1,6 @@
----
-date: 04/28/2024
-author: Russ Tokuyama
-copyright_year: 2024
-layout: page
-site_title: Russ Tokuyama
----
 # Roadmap to updgrade UIPA to Django 4.2 and Python 3.10
 
 *Last update: 01/11/2025*  
-[Back to home](/)  
-[Back to Posts](/posts/)
-
 
 ## Status
 
