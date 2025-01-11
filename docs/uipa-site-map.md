@@ -1,7 +1,14 @@
 # UIPA.org Site Map
 
 This is the site map of UIPA.org based on the source code in the Code With Aloha
-repos. See the [Source Code](#source_code) section for details.
+repos.
+
+See the [Source Code](#source_code) section for details.
+
+| Item | Working Version | Production Version |
+| ---  | ---:            | ---: |
+| Django | 1.11 | 1.9 |
+| Python | 3.8  | 2.7 |
 
 The data shown is entirely fictional and any similarity to real life is coincidental.
 
