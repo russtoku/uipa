@@ -10,6 +10,8 @@ See the [Source Code](#source_code) section for details.
 | Django | 1.11 | 1.9 |
 | Python | 3.8  | 2.7 |
 
+*NOTE: Python 3.8 is no longer supported as of 10/07/2024.*
+
 The data shown is entirely fictional and any similarity to real life is coincidental.
 
 ## Functionality not covered
