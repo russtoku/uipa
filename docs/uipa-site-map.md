@@ -15,8 +15,6 @@ the [New Users Sign Up](#new_users_sign_up) page.
 - Periodic background processes.
 - Administrative tasks performed by the Public First Law Center.
 
-[New Users Sign Up](#new_users_sign_up))
-
 ## Background
 
 The UIPA.org website went live in Sep 2018.
@@ -528,7 +526,7 @@ actions](https://docs.djangoproject.com/en/1.11/ref/contrib/admin/actions/) docu
 
 This site map of UIPA.org is based on the source code in russtoku's fork of the Code With Aloha repos.
 
-### https://github.com/russtoku/uipa (Branch: dj_1_11; Commit: 606b906)
+https://github.com/russtoku/uipa (Branch: dj_1_11; Commit: 78ecec4)
 
 
 ```shell
@@ -540,7 +538,19 @@ $ git status
 On branch dj_1_11
 Your branch is up to date with 'origin/dj_1_11'.
 
-$ git log --pretty=ref -n 20
+$ git log --pretty=ref -n 40
+78ecec4 (Add site map documentation, 2025-01-11)
+a038397 (Add filename comment to account/settings template., 2025-01-11)
+6c07431 (Remove another part of django-overextends, 2024-12-23)
+f2a557d (Fix missing results in public body search, 2024-12-23)
+262f88f (Don't propagate log messages for all loggers, 2024-12-23)
+1fff231 (Remove django-overextends because included since Django 1.9, 2024-12-22)
+b5889b1 (Set DOCKER_DEFAULT_PLATFORM environment variable for docker compose, 2024-12-21)
+9af9326 (Ignore missing key error in foirequest/list.html for Requests, 2024-12-21)
+1791b44 (Fix footer on Account Settings to FAQ instead of Help, 2024-12-19)
+112cc6e (Python 3.8 requires digestmod argument for hmac.new(), 2024-12-19)
+c38b431 (Add fixture for another regular user, 2024-12-17)
+2eccec2 (Fix errors with publicbody/list.html and pagination.html, 2024-12-17)
 e7a0830 (Clarify why Froide source is included, 2024-12-13)
 6ac48e3 (Update README to reflect inclusion of Froide source, 2024-12-13)
 8aa9ca7 (Add fixture for a regular user, 2024-11-15)
@@ -561,6 +571,14 @@ c0cd057 (Remove unused requirement for raven, 2024-10-02)
 024b3f7 (Update to Python 3.5, 2024-08-08)
 73cc661 (Updated raven client - this will be phased out at some point, so need to upgrade, 2018-10-11)
 e530776 (Added ccs into the formated message, 2018-10-11)
+11f1630 (Updated settings to send admins error messages from uipa/froide loggers, 2017-12-06)
+d4cfc44 (Fixed settings.ADMINS not parsing to the appropriate emails, 2017-12-06)
+5d864a9 (Added in submit if nothing was touched in the form, 2017-11-26)
+cf5b979 (Added in function to catch submission of form and check for ALL CAPS, 2017-11-26)
+82c9be7 (Added logic to redirect someone to a new request if cancel is selected, 2017-11-24)
+16ade2a (Changed the ALL CAPS notice to the appropriate href, 2017-11-24)
+bb90de6 (Upgraded psycopg2 to 2.7.1 because of https://github.com/psycopg/psycopg2/issues/594, 2017-11-23)
+f542f5c (Added note to faq about ALL CAPS text. Added confirm button when leaving text area., 2017-11-23)
 ```
 
 ### Code With Aloha repos
