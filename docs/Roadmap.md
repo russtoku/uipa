@@ -9,13 +9,13 @@
 | Django | 1.11 | 1.9 |
 | Python |  3.8 | 2.7 |
 
-Repo: https://github.com/russtoku/uipa/tree/dj_1_11
+Repo: https://github.com/russtoku/uipa/tree/update
 
-Froide source merged into UIPA.org in dj_1_11 branch of russtoku's fork of UIPA.org.
+Froide source merged into UIPA.org in update branch of russtoku's fork of UIPA.org.
 
 ### Change Log
 
-- **01/11/2025:** Added site map based on dj_1_11 branch of russtoku fork.
+- **01/11/2025:** Added site map based on update branch of russtoku fork.
 - **12/23/2024:** Fixed some broken things. Removed django-overextends
 dependency because the functionality is included in Django 1.9.
 - **11/14/2024:** Incorporated froide into uipa project source instead of being
@@ -69,7 +69,7 @@ See the sections below the ROADMAP for more details.
      - Does work with Django 1.11.17.
      - Python 3.8 is no longer supported as of 10/07/2024.
      - Add [site
-     map](https://github.com/russtoku/uipa/blob/dj_1_11/docs/uipa-site-map.md). **Completed:** 01/11/2025
+     map](https://github.com/russtoku/uipa/blob/update/docs/uipa-site-map.md). **Completed:** 01/11/2025
      - TODO:
        - Create test plan and tests because there are major changes with Django
          2.0.
@@ -392,8 +392,8 @@ cb21c3a9 (tag: v5.0.0) (Stefan Wehrmeyer 2018-09-03, Bump version to 5.0.0)
 
 | Repositories | URL | Branch | Forked from |
 | :--- | :--- | :--- | :--- |
-| UIPA | [https://github.com/russtoku/uipa](https://github.com/russtoku/uipa) | dj_1_11 | [https://github.com/CodeWithAloha/uipa](https://github.com/CodeWithAloha/uipa) |
-| Froide | [https://github.com/russtoku/froide](https://github.com/russtoku/froide) | dj_1_11 | [https://github.com/CodeWithAloha/froide](https://github.com/CodeWithAloha/froide) |
+| UIPA | [https://github.com/russtoku/uipa](https://github.com/russtoku/uipa) | update | [https://github.com/CodeWithAloha/uipa](https://github.com/CodeWithAloha/uipa) |
+| Froide | [https://github.com/russtoku/froide](https://github.com/russtoku/froide) | update | [https://github.com/CodeWithAloha/froide](https://github.com/CodeWithAloha/froide) |
 
 ## Error loading User model (06/04/2024)
 

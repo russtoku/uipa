@@ -535,7 +535,7 @@ actions](https://docs.djangoproject.com/en/1.11/ref/contrib/admin/actions/) docu
 
 This site map of UIPA.org is based on the source code in russtoku's fork of the Code With Aloha repos.
 
-https://github.com/russtoku/uipa (Branch: dj_1_11; Commit: 78ecec4)
+https://github.com/russtoku/uipa (Branch: update; Commit: 78ecec4)
 
 
 ```shell
@@ -544,8 +544,8 @@ origin	https://github.com/russtoku/uipa (fetch)
 origin	https://github.com/russtoku/uipa (push)
 
 $ git status
-On branch dj_1_11
-Your branch is up to date with 'origin/dj_1_11'.
+On branch update
+Your branch is up to date with 'origin/update'.
 
 $ git log --pretty=ref -n 40
 78ecec4 (Add site map documentation, 2025-01-11)
@@ -599,7 +599,7 @@ f542f5c (Added note to faq about ALL CAPS text. Added confirm button when leavin
         - Commit Date: 10/10/2018
         - By: ryankanno (Ryan Kanno)
     - Forked: https://github.com/russtoku/uipa 
-        - Branch: dj_1_11
+        - Branch: update
         - Commit: e7a0830
         - Commit Date: 12/13/2024
 
@@ -609,5 +609,5 @@ f542f5c (Added note to faq about ALL CAPS text. Added confirm button when leavin
         - Commit: 03c6a1f
         - Commit Date: 10/10/2018
         - By: ryankanno (Ryan Kanno)
-    - Merged into https://github.com/russtoku/uipa (Branch: dj_1_11; Commit: 606b906) on 11/15/2024.
+    - Merged into https://github.com/russtoku/uipa (Branch: update; Commit: 606b906) on 11/15/2024.
 
