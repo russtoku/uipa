@@ -444,8 +444,8 @@ confirmation link in the email message that you receive.
 
 <img src="images/uipa-account-changed-email.png" alt="" width=500/>
 
-After cliking on the confirmation link in your email message, you will see
-Account Settings Page with a notice saying that your email address has been
+After clicking on the confirmation link in your email message, you will see
+the Account Settings Page with a notice saying that your email address has been
 changed.
 
 
