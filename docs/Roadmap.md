@@ -296,10 +296,10 @@ templates](https://docs.djangoproject.com/en/1.11/howto/overriding-templates/).
 
 ## Repositories
 
-| Repositories | URL | Branch | Forked from |
-| :--- | :--- | :--- | :--- |
-| UIPA | [https://github.com/CodeWithAloha/uipa](https://github.com/CodeWithAloha/uipa) | master | [https://github.com/okfde/froide-theme](https://github.com/okfde/froide-theme) |
-| Froide | [https://github.com/CodeWithAloha/froide](https://github.com/CodeWithAloha/froide) | main | [https://github.com/okfde/froide](https://github.com/okfde/froide) |
+| Repositories | URL                                     | Branch | Forked from |
+| :---         | :---                                    | :---   | :--- |
+| UIPA         | https://github.com/CodeWithAloha/uipa   | master | https://github.com/okfde/froide-theme |
+| Froide       | https://github.com/CodeWithAloha/froide | master | https://github.com/okfde/froide |
 
 UIPA.org was built from a fork of the Froide Theme repo that was renamed to
 `uipa`. It's not the only repo. Careful reading of the `README` and the
