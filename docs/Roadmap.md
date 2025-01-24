@@ -4,12 +4,12 @@
 
 ## Status
 
-| Item | Working Version | Production Version |
-| --- | ---: | ---: |
-| Django | 1.11 | 1.9 |
-| Python |  3.8 | 2.7 |
+| Item   | Working Version | Production Version |
+| ---    | ---:            | ---: |
+| Django | 1.11            | 1.9 |
+| Python |  3.8            | 2.7 |
 
-Repo: https://github.com/russtoku/uipa/tree/update
+Repo: https://github.com/CodeWithAloha/uipa/tree/master
 
 Froide source merged into UIPA.org in update branch of russtoku's fork of UIPA.org.
 
@@ -68,8 +68,7 @@ See the sections below the ROADMAP for more details.
      - **Mostly Completed:** 10/14/2024
      - Does work with Django 1.11.17.
      - Python 3.8 is no longer supported as of 10/07/2024.
-     - Add [site
-     map](https://github.com/russtoku/uipa/blob/update/docs/uipa-site-map.md). **Completed:** 01/11/2025
+     - Add [site map](uipa-site-map.md). **Completed:** 01/11/2025
      - TODO:
        - Create test plan and tests because there are major changes with Django
          2.0.
@@ -390,10 +389,10 @@ cb21c3a9 (tag: v5.0.0) (Stefan Wehrmeyer 2018-09-03, Bump version to 5.0.0)
 
 ### Repos for this upgrade
 
-| Repositories | URL | Branch | Forked from |
-| :--- | :--- | :--- | :--- |
-| UIPA | [https://github.com/russtoku/uipa](https://github.com/russtoku/uipa) | update | [https://github.com/CodeWithAloha/uipa](https://github.com/CodeWithAloha/uipa) |
-| Froide | [https://github.com/russtoku/froide](https://github.com/russtoku/froide) | update | [https://github.com/CodeWithAloha/froide](https://github.com/CodeWithAloha/froide) |
+| Repositories | URL  | Branch |
+| :---         | :--- | :---   |
+| UIPA   | https://github.com/CodeWithAloha/uipa   | master |
+| Froide | https://github.com/CodeWithAloha/froide | master |
 
 ## Error loading User model (06/04/2024)
 
