@@ -4,7 +4,7 @@ This is for developers and others who want to contribute to improve the project.
 
 ## Prerequisite libraries and programs
 
- - Python 3.8 in a virtual environment (python -m venv venv3)
+ - Python 3.8 in a virtual environment
     - **NOTE:** Use a pip version less than 24 with Python 3.8.
  - libmagic (yum install libmagic, apt-get install libmagic, etc.)
  - PostgreSQL - psycopg2 needs the libraries locally.
@@ -16,22 +16,108 @@ This is for developers and others who want to contribute to improve the project.
 
 Clone this repo and change into the directory that the repo was cloned to.
 
-Set DOCKER_DEFAULT_PLATFORM to linux/amd64 on macOS and Windows:
+If you have trouble with running the Docker images, you may need to do this:
 
-    export DOCKER_DEFAULT_PLATFORM=linux/amd64
+> Set DOCKER_DEFAULT_PLATFORM to linux/amd64 on macOS and Windows:
+>
+> $ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
-Start a PostgreSQL database and an Elasticsearch server in docker containers using:
-
-    docker compose up -d
-
-After activating your Python 3.8 virtualenv, run the first time after cloning the repo:
+Start a PostgreSQL database and an Elasticsearch server in Docker containers using:
 
 ```
-$ pip install -r requirements.txt
-$ python manage.py migrate  --noinput
-$ python manage.py loaddata uipa_org/fixtures/*
+$ docker compose up -d
+```
+
+## Set up Python virutal environment
+
+We use `uv` to manage our Python virtual environment. Install it following the
+[installation](https://docs.astral.sh/uv/getting-started/installation/) instructions.
+
+Create a Python virtual environment using:
+
+```
+$ uv python install 3.8
+
+```
+
+Change to the working directory that you checked out the repo to.
+
+Only after the first time you clone the repo to a working directory, run this command to install
+dependencies in the virtual environment.
+
+```
+$ uv sync
+```
+
+If you are running on `macos` and have installed `Postgres` using homebrew, then you'll need to tell
+the C linker where to find the ssl and/or other libraries when compiling Python packages that have
+binary libraries that need to be compiled like `psycopg2`.
+
+```
+$ LDFLAGS="-L /opt/homebrew/lib" uv sync
+```
+
+For other OSes, you may need to do the same if you see errors like:
+
+```
+      In file included from ./psycopg/psycopg.h:38:
+      ./psycopg/config.h:82:13: warning: unused function 'Dprintf' [-Wunused-function]
+         82 | static void Dprintf(const char *fmt, ...) {}
+            |             ^~~~~~~
+      1 warning generated.
+      ld: library 'ssl' not found
+      clang: error: linker command failed with exit code 1 (use -v to see invocation)
+      error: command '/usr/bin/cc' failed with exit code 1
+```
+
+After installing the dependencies, run this command to add a package that is needed to run things
+with Python 3.8.
+
+```
+$ uv pip install setuptools==56.0.0
+```
+
+The virutal environment is created in the current directory in a subdirectory named, `.venv`.
+
+## Activate the virtual environment
+
+To activate the virtual environment, source the activate script from the virtual environment.
+
+```
+$ source .venv/bin/activate
+```
+
+Verify that the version of Python is correct.
+
+```
+$ python -V
+Python 3.8.20
+```
+
+## Load the seed data
+
+In a terminal window, start up the database server and search engine using:
+
+```
+$ docker-compose up
+```
+
+In another terminal window, load the seed data by running:
+
+```
+$ bash data/seed/init_db.sh
+```
+
+### Compress the web assets
+
+Only the first time after cloning the repo, run this command to compress the web assets.
+
+```
 $ python manage.py compress
 ```
+
+However, if you make changes to the CSS styles or JavaScript files, you will need to run the above
+command again.
 
 ## Run the dev server
 
@@ -43,8 +129,7 @@ $ python manage.py runserver
 
 ## Visit the dev website
 
-At this point, visit http://127.0.0.1:8000/ in your browser and you should see the home page for
-uipa.org.
+Visit http://127.0.0.1:8000/ in your browser and you should see the home page for uipa.org.
 
 The user, `admin` (admin@uipa.org) was created from a fixture file and its password is
 *testing*. Two regular users, `lani` (lani@uipa.org) and `joe` (joe@uipa.org), were also created and
