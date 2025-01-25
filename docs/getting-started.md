@@ -46,7 +46,7 @@ Only after the first time you clone the repo to a working directory, run this co
 dependencies in the virtual environment.
 
 ```
-$ uv sync
+$ uv sync --frozen
 ```
 
 If you are running on `macos` and have installed `Postgres` using homebrew, then you'll need to tell
@@ -54,10 +54,10 @@ the C linker where to find the ssl and/or other libraries when compiling Python 
 binary libraries that need to be compiled like `psycopg2`.
 
 ```
-$ LDFLAGS="-L /opt/homebrew/lib" uv sync
+$ LDFLAGS="-L /opt/homebrew/lib" uv sync --frozen
 ```
 
-For other OSes, you may need to do the same if you see errors like:
+For other OSes, you may need to do the same if you see linker errors like:
 
 ```
       In file included from ./psycopg/psycopg.h:38:
@@ -68,13 +68,6 @@ For other OSes, you may need to do the same if you see errors like:
       ld: library 'ssl' not found
       clang: error: linker command failed with exit code 1 (use -v to see invocation)
       error: command '/usr/bin/cc' failed with exit code 1
-```
-
-After installing the dependencies, run this command to add a package that is needed to run things
-with Python 3.8.
-
-```
-$ uv pip install setuptools==56.0.0
 ```
 
 The virutal environment is created in the current directory in a subdirectory named, `.venv`.

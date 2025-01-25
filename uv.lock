@@ -465,6 +465,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/10/9c/2c45f57d43258b05bf33cf8f6c8161ea5abf8b4776a5c59d12646727cd98/rjsmin-1.0.12.tar.gz", hash = "sha256:dd9591aa73500b08b7db24367f8d32c6470021f39d5ab4e50c7c02e4401386f1", size = 446822 }
 
 [[package]]
+name = "setuptools"
+version = "56.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f6/e9/19af16328705915233299f6f1f02db95899fb00c75ac9da4757aa1e5d1de/setuptools-56.0.0.tar.gz", hash = "sha256:08a1c0f99455307c48690f00d5c2ac2c1ccfab04df00454fef854ec145b81302", size = 2054762 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ae/42/2876a3a136f8bfa9bd703518441c8db78ff1eeaddf174baa85c083c1fd15/setuptools-56.0.0-py3-none-any.whl", hash = "sha256:7430499900e443375ba9449a9cc5d78506b801e929fef4a186496012f93683b5", size = 784941 },
+]
+
+[[package]]
 name = "six"
 version = "1.17.0"
 source = { registry = "https://pypi.org/simple" }
@@ -504,6 +513,7 @@ dependencies = [
     { name = "python-magic" },
     { name = "python-mimeparse" },
     { name = "requests" },
+    { name = "setuptools" },
     { name = "unicodecsv" },
 ]
 
@@ -535,6 +545,7 @@ requires-dist = [
     { name = "python-magic", specifier = "==0.4.6" },
     { name = "python-mimeparse", specifier = ">=0.1.4" },
     { name = "requests", specifier = "==2.11.1" },
+    { name = "setuptools", specifier = "==56.0.0" },
     { name = "unicodecsv", specifier = "==0.14.1" },
 ]
 
