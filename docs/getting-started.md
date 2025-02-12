@@ -24,7 +24,7 @@ If you have trouble with running the Docker images, you may need to do this:
 
 Start a PostgreSQL database and an Elasticsearch server in Docker containers using:
 
-```
+```console
 $ docker compose up -d
 ```
 
@@ -35,7 +35,7 @@ We use `uv` to manage our Python virtual environment. Install it following the
 
 Create a Python virtual environment using:
 
-```
+```console
 $ uv python install 3.8
 
 ```
@@ -45,7 +45,7 @@ Change to the working directory that you checked out the repo to.
 Only after the first time you clone the repo to a working directory, run this command to install
 dependencies in the virtual environment.
 
-```
+```console
 $ uv sync --frozen
 ```
 
@@ -53,13 +53,13 @@ If you are running on `macos` and have installed `Postgres` using homebrew, then
 the C linker where to find the ssl and/or other libraries when compiling Python packages that have
 binary libraries that need to be compiled like `psycopg2`.
 
-```
+```console
 $ LDFLAGS="-L /opt/homebrew/lib" uv sync --frozen
 ```
 
 For other OSes, you may need to do the same if you see linker errors like:
 
-```
+```console
       In file included from ./psycopg/psycopg.h:38:
       ./psycopg/config.h:82:13: warning: unused function 'Dprintf' [-Wunused-function]
          82 | static void Dprintf(const char *fmt, ...) {}
@@ -76,13 +76,13 @@ The virutal environment is created in the current directory in a subdirectory na
 
 To activate the virtual environment, source the activate script from the virtual environment.
 
-```
+```console
 $ source .venv/bin/activate
 ```
 
 Verify that the version of Python is correct.
 
-```
+```console
 $ python -V
 Python 3.8.20
 ```
@@ -91,21 +91,21 @@ Python 3.8.20
 
 In a terminal window, start up the database server and search engine using:
 
-```
+```console
 $ docker-compose up
 ```
 
 In another terminal window, load the seed data by running:
 
-```
-$ bash data/seed/init_db.sh
+```console
+$ python manage.py loaddata uipa_org/fixtures/*
 ```
 
 ### Compress the web assets
 
 Only the first time after cloning the repo, run this command to compress the web assets.
 
-```
+```console
 $ python manage.py compress
 ```
 
@@ -116,7 +116,7 @@ command again.
 
 Run this to start the dev server:
 
-```
+```console
 $ python manage.py runserver
 ```
 
@@ -176,8 +176,8 @@ Once the page data files have been created under the fixtures directory, they ca
 a new instance of uipa.org is created. This is done by loading the page data files using this
 command:
 
-```
-python manage.py loaddata <page>
+```console
+$ python manage.py loaddata <page>
 ```
 
 where `<page>` is the name of the page data file without the `.json` extension. Multiple pages can
@@ -187,8 +187,8 @@ be loaded at the same time.
 
 Dumping the database in JSON format is done using the command:
 
-```
-python manage.py dumpdata --indent 4 > db-dump.json
+```console
+$ python manage.py dumpdata --indent 4 > db-dump.json
 ```
 
 ### Page data in JSON format
@@ -196,7 +196,7 @@ python manage.py dumpdata --indent 4 > db-dump.json
 Here's an example of the page data in JSON format for the About page in the
 `fixtures/about-page.json`:
 
-```
+```json
 [
     {
         "fields": {

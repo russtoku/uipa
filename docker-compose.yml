@@ -2,7 +2,7 @@ services:
   db:
     image: postgres:13
     volumes:
-      - pg-data:/var/lib/postgresql/data/
+      - orig-pg-data:/var/lib/postgresql/data/
     environment:
       POSTGRES_DB: uipa
       POSTGRES_USER: uipa
@@ -13,12 +13,12 @@ services:
     build:
       dockerfile: ./es.Dockerfile
     volumes:
-      - es-data:/usr/share/elasticsearch/data
-      - es-logs:/usr/share/elasticsearch/log
+      - orig-es-data:/usr/share/elasticsearch/data
+      - orig-es-logs:/usr/share/elasticsearch/log
     ports:
       - "127.0.0.1:9200:9200"
 
 volumes:
-  es-data: {}
-  es-logs: {}
-  pg-data: {}
+  orig-es-data: {}
+  orig-es-logs: {}
+  orig-pg-data: {}
