@@ -17,6 +17,15 @@ services:
       - orig-es-logs:/usr/share/elasticsearch/log
     ports:
       - "127.0.0.1:9200:9200"
+  mailsink:
+    image: fkantelberg/mail-devel:${MAILSINK_TAG:-latest}
+    environment:
+      MAIL_USER: ${MAILSINK_USER:-bogus@mailsink.dev}
+    command: [--password, "${MAILSINK_PASSWORD:-secret}", --smtp-flagged-seen, --multi-user]
+    ports:
+      - "${MAILSINK_HTTP:-127.0.0.1:4080}:4080"
+      - "${MAILSINK_SMTP:-127.0.0.1:4025}:4025"
+      - "${MAILSINK_IMAP:-127.0.0.1:4143}:4143"
 
 volumes:
   orig-es-data: {}

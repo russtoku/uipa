@@ -275,7 +275,7 @@ class Dev(UipaOrgThemeBase, Base):
             'uipa_org_logfile': {
                 'level': 'DEBUG',
                 'class': 'logging.handlers.RotatingFileHandler',
-                'filename': 'uipa_org_dev_app.log', # put in the working directory
+                'filename': os.path.join('logs', 'uipa_org_dev_app.log'),
                 'maxBytes': 1024*1024*5,  # 5MB
                 'backupCount': 10,
                 'formatter': 'verbose',
@@ -360,8 +360,34 @@ class Dev(UipaOrgThemeBase, Base):
         }
     }
 
-    # Send email to the console
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # Send email to one of:
+    #   1. Console
+    #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    #   2. mailsink server
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+    SERVER_EMAIL = 'info@dev.uipa.org'
+    DEFAULT_FROM_EMAIL = 'info@dev.uipa.org'
+
+    FOI_EMAIL_TEMPLATE = values.Value('request+{secret}@{domain}')
+    FOI_EMAIL_DOMAIN = values.Value('dev.uipa.org')
+
+    #   Official Notification Mail goes through
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = values.IntegerValue(4025)
+    EMAIL_HOST_USER = 'bogus@mailsink.dev'
+    EMAIL_HOST_PASSWORD = 'secret'
+    EMAIL_USE_TLS = values.BooleanValue(False)
+
+    #   SMTP settings for sending FoI mail
+    FOI_EMAIL_FIXED_FROM_ADDRESS = values.BooleanValue(False)
+    # When FOI_EMAIL_FIXED_FROM_ADDRESS is True, then set FOI_EMAIL_HOST_FROM.
+    FOI_EMAIL_HOST_USER = 'bogus@mailsink.dev'
+    FOI_EMAIL_HOST_PASSWORD = 'secret'
+    FOI_EMAIL_HOST = 'localhost'
+    FOI_EMAIL_PORT = values.IntegerValue(4025)
+    FOI_EMAIL_USE_TLS = values.BooleanValue(False)
+
 
     @property
     def FROIDE_CONFIG(self):
@@ -374,6 +400,7 @@ class Dev(UipaOrgThemeBase, Base):
         return config
 
     TEST_SELENIUM_DRIVER = 'chromedriver'
+
 
 class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaOrgThemeBase, Base):
 
@@ -656,6 +683,7 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
             make_public_num_days_after_due_date=365,
             doc_conversion_binary="/usr/bin/libreoffice"))
         return config
+
 
 try:
     from .local_settings import *  # noqa
