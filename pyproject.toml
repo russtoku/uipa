@@ -33,4 +33,5 @@ dependencies = [
   "lxml",
   "boto==2.43.0",
   "setuptools==56.0.0",
+  "gunicorn==23.0.0",
 ]
