@@ -1,5 +1,3 @@
-
-
 # This should have been added to supervisord
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uipa_org.settings')
 # os.environ.setdefault("DJANGO_CONFIGURATION", "Beta")

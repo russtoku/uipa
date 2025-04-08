@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # uipa_extras.py
 #
@@ -17,7 +16,7 @@ def prefill(body):
     '''
     Insert string into a textarea field
     '''
-    body.field.initial = "\n\n\n{0}\n".format(WAIVER_DELIMITER)
+    body.field.initial = f"\n\n\n{WAIVER_DELIMITER}\n"
     return body
 
 @register.simple_tag

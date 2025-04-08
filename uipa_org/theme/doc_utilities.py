@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Copyright © 2016 Ryan Kanno <ryankanno@localkinegrinds.com>
 #
@@ -71,7 +70,7 @@ def prepare_for_final_archiving(text):
         waiver_to_end = parts[1].strip()
         waiver_parts = waiver_to_end.split(FOOTER_DELIMITER)
         if len(waiver_parts) == 2:
-            return "{0}{1}{2}".format(
+            return "{}{}{}".format(
                 parts[0], FOOTER_DELIMITER, waiver_parts[1])
 
         raise Exception("Unable to find the FOOTER_DELIMITER while preparing for final archiving")
@@ -148,7 +147,7 @@ if __name__ == "__main__":
         fee_wavier)
 
     document.save(
-        './data/{0}-FALSE-Request-Access-form-12.1.15-fillable.docx'.format(
+        './data/{}-FALSE-Request-Access-form-12.1.15-fillable.docx'.format(
             datetime.datetime.utcnow().isoformat()))
 
     fee_wavier = True
@@ -167,7 +166,7 @@ if __name__ == "__main__":
         fee_wavier)
 
     document.save(
-        './data/{0}-TRUE-Request-Access-form-12.1.15-fillable.docx'.format(
+        './data/{}-TRUE-Request-Access-form-12.1.15-fillable.docx'.format(
             datetime.datetime.utcnow().isoformat()))
 
 # vim: fenc=utf-8

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Copyright © 2016 Ryan Kanno <ryankanno@localkinegrinds.com>
 #
@@ -13,8 +12,8 @@ faq_url_part = _('faq')
 help_url_part = _('help')
 
 urlpatterns = [
-    url(r'^%s/%s/$' % (help_url_part, faq_url_part), flatpage,
-       {'url': '/%s/%s/' % (help_url_part, faq_url_part)}, name='help-faq'),
+    url(r'^{}/{}/$'.format(help_url_part, faq_url_part), flatpage,
+       {'url': '/{}/{}/'.format(help_url_part, faq_url_part)}, name='help-faq'),
 ]
 
 # vim: fenc=utf-8

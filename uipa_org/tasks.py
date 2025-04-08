@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Copyright © 2016 Ryan Kanno <ryankanno@localkinegrinds.com>
 #
@@ -36,14 +35,14 @@ def private_public_reminder(*args, **kwargs):
     now = timezone.now()
     due_date_everything_should_be_made_private = now - timedelta(num_days_after_due_date)
 
-    logger.info("Attempting to warn all requests that were due on : {0}".format(due_date_everything_should_be_made_private.date()))
+    logger.info(f"Attempting to warn all requests that were due on : {due_date_everything_should_be_made_private.date()}")
 
     for foirequest in FoiRequest.objects.filter(Q(visibility=0) | Q(visibility=1), is_foi=True, due_date__date=due_date_everything_should_be_made_private.date()):
 
-        logger.info("Sending private/public reminder to request {0} on {1}".format(foirequest.pk, now))
+        logger.info(f"Sending private/public reminder to request {foirequest.pk} on {now}")
 
         try:
-            send_mail('{0}'.format(
+            send_mail('{}'.format(
                     _("%(site_name)s: Reminder that your request is being made public in 14 days") % {
                         "site_name": settings.SITE_NAME
                     },
@@ -66,18 +65,18 @@ def make_private_public(*args, **kwargs):
     now = timezone.now()
     due_date_everything_should_be_made_private = now - timedelta(num_days_after_due_date)
 
-    logger.info("Switching all private requests that were due on {0} to public requests.".format(due_date_everything_should_be_made_private))
+    logger.info(f"Switching all private requests that were due on {due_date_everything_should_be_made_private} to public requests.")
 
     for foirequest in FoiRequest.objects.filter(Q(visibility=0) | Q(visibility=1), is_foi=True, due_date__lte=due_date_everything_should_be_made_private):
 
-        logger.info("Switching private foirequest {0} to be made public on {1}".format(foirequest.pk, now))
+        logger.info(f"Switching private foirequest {foirequest.pk} to be made public on {now}")
 
         foirequest.make_public()
 
         for message in foirequest.messages:
             for attachment in message.attachments:
                 if attachment.can_approve:
-                    logger.info("Switching attachment {0} to approved".format(attachment.pk))
+                    logger.info(f"Switching attachment {attachment.pk} to approved")
                     attachment.approve_and_save()
 
 
@@ -88,7 +87,7 @@ def deferred_message_notification(*args, **kwargs):
     today_date = timezone.now().date()
     yesterday_date = today_date + timezone.timedelta(days=-1)
 
-    logger.info("Running notification service for deferred messages on {0}".format(today_date))
+    logger.info(f"Running notification service for deferred messages on {today_date}")
 
     total_deferred_messages = DeferredMessage.objects.count()
     total_deferred_messages_today = DeferredMessage.objects.filter(timestamp__date=today_date).count()
@@ -99,7 +98,7 @@ def deferred_message_notification(*args, **kwargs):
         logger.info("Deferred messages came in yesterday / today -> sending notification email")
 
         try:
-            send_mail('{0}'.format(
+            send_mail('{}'.format(
                     _("%(site_name)s: You have deferred messages from yesterday/today") % {
                         "site_name": settings.SITE_NAME
                     },

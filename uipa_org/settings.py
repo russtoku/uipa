@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 from celery.schedules import crontab
 from configurations import values
 from froide.settings import Base
@@ -37,7 +34,7 @@ class UipaOrgThemeBase(ThemeBase):
 
     @property
     def INSTALLED_APPS(self):
-        installed = super(UipaOrgThemeBase, self).INSTALLED_APPS
+        installed = super().INSTALLED_APPS
         installed += [
             'celery_haystack',
             'djcelery_email',
@@ -126,7 +123,7 @@ class UipaOrgThemeBase(ThemeBase):
 
     @property
     def FROIDE_CONFIG(self):
-        config = super(UipaOrgThemeBase, self).FROIDE_CONFIG
+        config = super().FROIDE_CONFIG
         config.update(dict(
             currency="Dollars",
             create_new_publicbody=False,
@@ -137,7 +134,7 @@ class UipaOrgThemeBase(ThemeBase):
             request_public_after_due_days=14,
             payment_possible=False,
             default_law=1,
-            greetings=[rec("Aloha (?:Mr\.?|Ms\.? .*?)")],
+            greetings=[rec(r"Aloha (?:Mr\.?|Ms\.? .*?)")],
             closings=[rec("Mahalo,?")],
             public_body_boosts={},
             dryrun=True,
@@ -155,25 +152,25 @@ class UipaOrgThemeBase(ThemeBase):
         return config
 
 
-class NginxSecureStaticEnabled(object):
+class NginxSecureStaticEnabled:
     USE_X_ACCEL_REDIRECT = True
     X_ACCEL_REDIRECT_PREFIX = values.Value('/protected')
 
 
-class SslEnabled(object):
+class SslEnabled:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
 
 
-class SentryEnabled(object):
+class SentryEnabled:
     RAVEN_CONFIG = {
         'dsn': os_env('SENTRY_DSN')
     }
 
 
-class S3Enabled(object):
+class S3Enabled:
     AWS_ACCESS_KEY_ID = os_env('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os_env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os_env('AWS_STORAGE_BUCKET_NAME')
@@ -182,12 +179,12 @@ class S3Enabled(object):
 
     AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
     AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
-    AWS_S3_CUSTOM_DOMAIN = '%s.%s' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    AWS_S3_CUSTOM_DOMAIN = '{}.{}'.format(AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
     AWS_S3_FILE_OVERWRITE = False
 
     STATICFILES_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
     STATICFILES_LOCATION = 'static'
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+    STATIC_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
     COMPRESS_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
     COMPRESS_URL = values.Value(STATIC_URL)
@@ -225,8 +222,8 @@ class Dev(UipaOrgThemeBase, Base):
     @property
     def COMPRESS_OFFLINE_CONTEXT(self):
         return {
-            "DEBUG": super(Dev, self).DEBUG,
-            "STATIC_URL": super(Dev, self).STATIC_URL
+            "DEBUG": super().DEBUG,
+            "STATIC_URL": super().STATIC_URL
         }
 
     # uploads subdirectory in the directory where this settings file lives.
@@ -391,7 +388,7 @@ class Dev(UipaOrgThemeBase, Base):
 
     @property
     def FROIDE_CONFIG(self):
-        config = super(Dev, self).FROIDE_CONFIG
+        config = super().FROIDE_CONFIG
         config.update(dict(
             dryrun=False,
             make_public_num_days_after_due_date=365,
@@ -534,7 +531,7 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
 
     @property
     def FROIDE_CONFIG(self):
-        config = super(Beta, self).FROIDE_CONFIG
+        config = super().FROIDE_CONFIG
         config.update(dict(
             payment_possible=True,
             make_public_num_days_after_due_date=365,
@@ -676,7 +673,7 @@ class Production(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled,
 
     @property
     def FROIDE_CONFIG(self):
-        config = super(Production, self).FROIDE_CONFIG
+        config = super().FROIDE_CONFIG
         config.update(dict(
             payment_possible=True,
             dryrun=False,
