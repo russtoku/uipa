@@ -34,7 +34,7 @@ class JavaScriptException(Exception):
     pass
 
 
-class CheckJSErrors(object):
+class CheckJSErrors:
     def __init__(self, driver):
         self.driver = driver
 
@@ -59,12 +59,12 @@ class TestMakingRequest(StaticLiveServerTestCase):
     def setUpClass(cls):
         cls.selenium = get_selenium()
         cls.selenium.implicitly_wait(3)
-        super(TestMakingRequest, cls).setUpClass()
+        super().setUpClass()
 
     @classmethod
     def tearDownClass(cls):
         cls.selenium.quit()
-        super(TestMakingRequest, cls).tearDownClass()
+        super().tearDownClass()
 
     def scrollTo(self, id=None, klass=None):
         if id is not None:
@@ -83,7 +83,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
 
     def do_login(self, navigate=True):
         if navigate:
-            self.selenium.get('%s%s' % (self.live_server_url, reverse('account-login')))
+            self.selenium.get('{}{}'.format(self.live_server_url, reverse('account-login')))
         email_input = self.selenium.find_element_by_id("id_email")
         email_input.send_keys(self.user.email)
         password_input = self.selenium.find_element_by_id("id_password")
@@ -92,7 +92,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
             '//form//button[contains(text(), "Log In")]').click()
 
     def test_make_not_logged_in_request(self):
-        self.selenium.get('%s%s' % (self.live_server_url,
+        self.selenium.get('{}{}'.format(self.live_server_url,
             reverse('foirequest-make_request')))
         with CheckJSErrors(self.selenium):
             search_pbs = self.selenium.find_element_by_id('id_public_body')
@@ -146,7 +146,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
         message = mail.outbox[0]
         match = re.search('http://[^/]+(/.+)', message.body)
         activate_url = match.group(1)
-        self.selenium.get('%s%s' % (self.live_server_url, activate_url))
+        self.selenium.get('{}{}'.format(self.live_server_url, activate_url))
         WebDriverWait(self.selenium, 5).until(
             lambda driver: driver.find_element_by_css_selector('#change-password-now'))
         self.assertIn('?new#change-password-now', self.selenium.current_url)
@@ -154,7 +154,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
         self.assertEqual(req.status, 'awaiting_response')
 
     def test_make_not_logged_in_request_to_public_body(self):
-        self.selenium.get('%s%s' % (self.live_server_url,
+        self.selenium.get('{}{}'.format(self.live_server_url,
             reverse('foirequest-make_request',
                 kwargs={'public_body': self.pb.slug})))
 
@@ -205,7 +205,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
 
     def test_make_logged_in_request(self):
         self.do_login()
-        self.selenium.get('%s%s' % (self.live_server_url,
+        self.selenium.get('{}{}'.format(self.live_server_url,
             reverse('foirequest-make_request')))
         with CheckJSErrors(self.selenium):
             search_pbs = self.selenium.find_element_by_id('id_public_body')
@@ -248,7 +248,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
 
     def test_make_logged_in_request_no_pb_yet(self):
         self.do_login()
-        self.selenium.get('%s%s' % (self.live_server_url,
+        self.selenium.get('{}{}'.format(self.live_server_url,
             reverse('foirequest-make_request')))
         with CheckJSErrors(self.selenium):
             self.selenium.find_element_by_id('option-emptypublicbody').click()
@@ -285,7 +285,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
         self.assertEqual(req.status, 'publicbody_needed')
 
     def test_make_request_logged_out_with_existing_account(self):
-        self.selenium.get('%s%s' % (self.live_server_url,
+        self.selenium.get('{}{}'.format(self.live_server_url,
             reverse('foirequest-make_request')))
         with CheckJSErrors(self.selenium):
             self.selenium.find_element_by_id('option-emptypublicbody').click()
@@ -364,7 +364,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
 
     def test_collapsed_menu(self):
         self.selenium.set_window_size(600, 800)
-        self.selenium.get('%s%s' % (self.live_server_url,
+        self.selenium.get('{}{}'.format(self.live_server_url,
             reverse('index')))
         self.selenium.find_element_by_css_selector('.navbar-toggle').click()
         WebDriverWait(self.selenium, 5).until(

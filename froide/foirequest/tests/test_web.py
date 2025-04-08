@@ -1,5 +1,3 @@
-
-
 from django.utils.six import text_type as str
 from django.test import TestCase
 from django.core.urlresolvers import reverse
@@ -300,7 +298,7 @@ class MediaServingTest(TestCase):
         response = self.client.get(att.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         self.assertIn('X-Accel-Redirect', response)
-        self.assertEqual(response['X-Accel-Redirect'], '%s%s' % (
+        self.assertEqual(response['X-Accel-Redirect'], '{}{}'.format(
             settings.X_ACCEL_REDIRECT_PREFIX, att.file.url))
 
     def test_attachment_not_approved(self):

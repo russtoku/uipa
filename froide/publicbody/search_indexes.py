@@ -1,5 +1,3 @@
-
-
 from django.conf import settings
 
 from haystack import indexes
@@ -33,8 +31,8 @@ class PublicBodyIndex(SearchIndex, indexes.Indexable):
         return [t.name for t in obj.tags.all()]
 
     def prepare(self, obj):
-        data = super(PublicBodyIndex, self).prepare(obj)
+        data = super().prepare(obj)
         if obj.classification in PUBLIC_BODY_BOOSTS:
             data['boost'] = PUBLIC_BODY_BOOSTS[obj.classification]
-            print("Boosting %s at %f" % (obj, data['boost']))
+            print("Boosting {} at {:f}".format(obj, data['boost']))
         return data

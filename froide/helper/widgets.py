@@ -15,21 +15,21 @@ class PriceInput(forms.TextInput):
     template_name = "bootstrap/price_input.html"
 
     def get_context(self, name, value, attrs):
-        ctx = super(PriceInput, self).get_context(name, value, attrs)
+        ctx = super().get_context(name, value, attrs)
         ctx['attrs']['class'] = 'col-xs-2'
         return ctx
 
 
 class AgreeCheckboxInput(forms.CheckboxInput):
     def __init__(self, attrs=None, check_test=bool, agree_to="", url_names=None):
-        super(AgreeCheckboxInput, self).__init__(attrs, check_test)
+        super().__init__(attrs, check_test)
         self.agree_to = agree_to
         self.url_names = url_names
 
     def render(self, name, value, attrs=None):
-        html = super(AgreeCheckboxInput, self).render(name, value, attrs)
-        return mark_safe('<label>%s %s</label>' % (html, self.agree_to %
-                dict([(k, reverse(v)) for k, v in list(self.url_names.items())])))
+        html = super().render(name, value, attrs)
+        return mark_safe('<label>{} {}</label>'.format(html, self.agree_to %
+                {k: reverse(v) for k, v in list(self.url_names.items())}))
 
 
 class TagAutocompleteTagIt(TextInput):
@@ -66,7 +66,7 @@ class TagAutocompleteTagIt(TextInput):
         self.max_tags = getattr(settings, 'TAGGING_AUTOCOMPLETE_MAX_TAGS', 20)
         self.tag_filter = kwargs.pop('tag_filter', None)
         self.autocomplete_url = kwargs.pop('autocomplete_url', None)
-        super(TagAutocompleteTagIt, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def value_from_datadict(self, data, files, name):
         """ Force comma separation of tags by adding trailing comma """
@@ -77,7 +77,7 @@ class TagAutocompleteTagIt(TextInput):
 
     def render(self, name, value, attrs=None):
         """ Render HTML code """
-        if value is not None and not isinstance(value, six.string_types):
+        if value is not None and not isinstance(value, str):
             value = edit_string_for_tags([o.tag for o in value.select_related("tag")])
         # django-tagging
         case_sensitive = 'true' if not getattr(settings, 'FORCE_LOWERCASE_TAGS', False) else 'false'
@@ -86,7 +86,7 @@ class TagAutocompleteTagIt(TextInput):
         autocomplete_min_length = getattr(settings, 'TAGGING_AUTOCOMPLETE_MIN_LENGTH', 3)
         remove_confirmation = 'true' if getattr(settings, 'TAGGING_AUTOCOMPLETE_REMOVE_CONFIRMATION', True) else 'false'
         animate = 'true' if getattr(settings, 'TAGGING_AUTOCOMPLETE_ANIMATE', True) else 'false'
-        html = super(TagAutocompleteTagIt, self).render(name, value, attrs)
+        html = super().render(name, value, attrs)
         # Subclass this field in case you need to add some custom behaviour like custom callbacks
         js = """<script type="text/javascript">window.init_jQueryTagit = window.init_jQueryTagit || [];
                 window.init_jQueryTagit.push({{

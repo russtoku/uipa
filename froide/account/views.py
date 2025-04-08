@@ -73,10 +73,10 @@ class BaseRequestListView(ListView):
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect('account-login')
-        return super(BaseRequestListView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(BaseRequestListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         no_page_query = QueryDict(self.request.GET.urlencode().encode('utf-8'),
                                   mutable=True)
         no_page_query.pop('page', None)
@@ -94,7 +94,7 @@ class MyRequestsView(BaseRequestListView):
         return FoiRequest.objects.get_dashboard_requests(self.request.user, query=self.query)
 
     def get_context_data(self, **kwargs):
-        context = super(MyRequestsView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         if 'new' in self.request.GET:
             self.request.user.is_new = True
         return context

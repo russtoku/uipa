@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 from datetime import datetime, timedelta
 import re
 
@@ -35,7 +34,7 @@ More stuff here
         closings = [
             rec("[Mm]it( den)? (freundliche(n|m)|vielen|besten) Gr(ü|u)(ß|ss)(en)?,?"),
             rec("Hochachtungsvoll,?"),
-            rec('i\. ?A\.'), rec('[iI]m Auftrag')
+            rec(r'i\. ?A\.'), rec('[iI]m Auftrag')
         ]
         removed = remove_closing(content, closings)
         self.assertNotIn('Peter Parker', removed)

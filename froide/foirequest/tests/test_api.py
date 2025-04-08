@@ -1,5 +1,3 @@
-
-
 try:
     from urllib.parse import urlencode
 except ImportError:
@@ -35,7 +33,7 @@ class ApiTest(TestCase):
         mes = factories.FoiMessageFactory.create(
             request=req,
             subject=req.user.get_full_name(),
-            plaintext='Hallo %s,\n%s\n%s' % (
+            plaintext='Hallo {},\n{}\n{}'.format(
                 req.user.get_full_name(),
                 req.secret_address,
                 req.user.address
@@ -107,7 +105,7 @@ class ApiTest(TestCase):
         self.assertEqual(response['Content-Type'], 'application/json')
         req = FoiRequest.objects.all()[0]
         factories.rebuild_index()
-        response = self.client.get('%s&%s' % (
+        response = self.client.get('{}&{}'.format(
             simple_search_url, urlencode({'q': req.title})
         ))
         self.assertEqual(response.status_code, 200)

@@ -24,7 +24,7 @@ class LatestFoiRequestsFeed(Feed):
         self.tag = tag
         self.status = status
         self.public_body = public_body
-        super(LatestFoiRequestsFeed, self).__init__()
+        super().__init__()
 
     def get_filter_string(self):
         by = []

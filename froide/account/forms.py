@@ -61,7 +61,7 @@ class NewUserBaseForm(forms.Form):
                 help_text=mark_safe(_("If you check this, your name will still appear in requests to public agencies, but we will do our best to not display it publicly. However, we cannot guarantee your anonymity")))
 
     def __init__(self, *args, **kwargs):
-        super(NewUserBaseForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if ALLOW_PSEUDONYM:
             self.fields["last_name"].help_text = mark_safe(
                     _('<a target="_blank" href="{url}">You may use a pseudonym if you don\'t need to receive postal messages</a>.')
@@ -103,7 +103,7 @@ class TermsForm(forms.Form):
             url_names={"url_terms": "help-terms", "url_privacy": "help-privacy"}))
 
     def __init__(self, *args, **kwargs):
-        super(TermsForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if HAVE_NEWSLETTER():
             self.fields['newsletter'] = forms.BooleanField(required=False,
                 label=_("Check if you want to receive our newsletter."))
@@ -126,7 +126,7 @@ class NewUserWithPasswordForm(NewUserForm):
             label=_('Password (repeat)'))
 
     def clean(self):
-        cleaned = super(NewUserWithPasswordForm, self).clean()
+        cleaned = super().clean()
         if cleaned['password'] != cleaned['password2']:
             raise forms.ValidationError(_("Passwords do not match!"))
         return cleaned
@@ -173,7 +173,7 @@ class UserChangeForm(forms.Form):
     field_order = ['email', 'newsletter']
 
     def __init__(self, user, *args, **kwargs):
-        super(UserChangeForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.user = user
         # self.fields['address'].initial = self.user.address
         self.fields['email'].initial = self.user.email
@@ -208,7 +208,7 @@ class UserEmailConfirmationForm(forms.Form):
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
-        super(UserEmailConfirmationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def clean_user_id(self):
         user_id = self.cleaned_data['user_id']
@@ -251,7 +251,7 @@ class UserDeleteForm(forms.Form):
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
-        super(UserDeleteForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def clean_password(self):
         password = self.cleaned_data['password']

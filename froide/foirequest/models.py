@@ -94,8 +94,7 @@ class FoiRequestManager(CurrentSiteManager):
 
 class PublishedFoiRequestManager(CurrentSiteManager):
     def get_queryset(self):
-        return super(PublishedFoiRequestManager,
-                self).get_queryset().filter(visibility=2, is_foi=True)\
+        return super().get_queryset().filter(visibility=2, is_foi=True)\
                         .select_related("public_body", "jurisdiction")
 
     def by_last_update(self):
@@ -248,7 +247,7 @@ class FoiRequest(models.Model):
 
     STATUS_RESOLUTION = STATUS_CHOICES + RESOLUTION_CHOICES
 
-    STATUS_RESOLUTION_DICT = dict([(x[0], x[1:]) for x in STATUS_RESOLUTION])
+    STATUS_RESOLUTION_DICT = {x[0]: x[1:] for x in STATUS_RESOLUTION}
     STATUS_RESOLUTION_DICT.update({
         'overdue': (
             _('Response overdue'),
@@ -372,15 +371,15 @@ class FoiRequest(models.Model):
     @classmethod
     def get_status_from_url(cls, status_slug):
         if cls._URLS_STATUS_DICT is None:
-            cls._URLS_STATUS_DICT = dict([
-                (str(x[0]), x[1:]) for x in cls.get_status_url()])
+            cls._URLS_STATUS_DICT = {
+                str(x[0]): x[1:] for x in cls.get_status_url()}
         return cls._URLS_STATUS_DICT.get(status_slug)
 
     @classmethod
     def get_url_from_status(cls, status):
         if cls._STATUS_URLS_DICT is None:
-            cls._STATUS_URLS_DICT = dict([
-                (str(x[-1]), x[0]) for x in cls.get_status_url()])
+            cls._STATUS_URLS_DICT = {
+                str(x[-1]): x[0] for x in cls.get_status_url()}
         return cls._STATUS_URLS_DICT.get(status)
 
     @property
@@ -431,14 +430,14 @@ class FoiRequest(models.Model):
                 kwargs={'obj_id': self.id})
 
     def get_absolute_domain_url(self):
-        return "%s%s" % (settings.SITE_URL, self.get_absolute_url())
+        return "{}{}".format(settings.SITE_URL, self.get_absolute_url())
 
     def get_absolute_domain_short_url(self):
-        return "%s%s" % (settings.SITE_URL, reverse('foirequest-shortlink',
+        return "{}{}".format(settings.SITE_URL, reverse('foirequest-shortlink',
                 kwargs={'obj_id': self.id}))
 
     def get_auth_link(self):
-        return "%s%s" % (settings.SITE_URL,
+        return "{}{}".format(settings.SITE_URL,
             reverse('foirequest-auth',
                 kwargs={"obj_id": self.id,
                     "code": self.get_auth_code()
@@ -569,7 +568,7 @@ class FoiRequest(models.Model):
 
     def get_auth_code(self):
         return salted_hmac("FoiRequestPublicBodyAuth",
-                '%s#%s' % (self.id, self.secret_address)).hexdigest()
+                '{}#{}'.format(self.id, self.secret_address)).hexdigest()
 
     def check_auth_code(self, code):
         return constant_time_compare(code, self.get_auth_code())
@@ -674,7 +673,7 @@ class FoiRequest(models.Model):
         message.html = email['html']
 
         if 'cc' in email:
-            message.ccs = ', '.join(["{0} <{1}>".format(cc_tuple[0], cc_tuple[1]) for cc_tuple in email['cc']])
+            message.ccs = ', '.join([f"{cc_tuple[0]} <{cc_tuple[1]}>" for cc_tuple in email['cc']])
 
         if not message.plaintext and message.html:
             message.plaintext = strip_tags(email['html'])
@@ -701,7 +700,7 @@ class FoiRequest(models.Model):
                     'name': str(_('NAME'))
                 }
             )
-            att.name = re.sub('[^A-Za-z0-9_\.\-]', '', att.name)
+            att.name = re.sub(r'[^A-Za-z0-9_\.\-]', '', att.name)
             att.name = att.name[:255]
             if att.name.endswith('pdf') or 'pdf' in att.filetype:
                 has_pdf = True
@@ -719,8 +718,8 @@ class FoiRequest(models.Model):
             subject, message, recipient_pb=None, send_address=True):
         message_body = message
         message = FoiMessage(request=self)
-        subject = re.sub('\s*\[#%s\]\s*$' % self.pk, '', subject)
-        message.subject = '%s [#%s]' % (subject, self.pk)
+        subject = re.sub(r'\s*\[#%s\]\s*$' % self.pk, '', subject)
+        message.subject = '{} [#{}]'.format(subject, self.pk)
         message.subject_redacted = message.redact_subject()
         message.is_response = False
         message.sender_user = user
@@ -741,8 +740,8 @@ class FoiRequest(models.Model):
     def add_escalation_message(self, subject, message, send_address=False):
         message_body = message
         message = FoiMessage(request=self)
-        subject = re.sub('\s*\[#%s\]\s*$' % self.pk, '', subject)
-        message.subject = '%s [#%s]' % (subject, self.pk)
+        subject = re.sub(r'\s*\[#%s\]\s*$' % self.pk, '', subject)
+        message.subject = '{} [#{}]'.format(subject, self.pk)
         message.subject_redacted = message.redact_subject()
         message.is_response = False
         message.is_escalation = True
@@ -781,7 +780,7 @@ class FoiRequest(models.Model):
             return settings.FOI_EMAIL_TEMPLATE.format(username=username,
                                                       secret=secret,
                                                       domain=FOI_EMAIL_DOMAIN)
-        return "%s.%s@%s" % (username, secret, FOI_EMAIL_DOMAIN)
+        return "{}.{}@{}".format(username, secret, FOI_EMAIL_DOMAIN)
 
     @classmethod
     def generate_unique_secret_address(cls, user):
@@ -882,7 +881,7 @@ class FoiRequest(models.Model):
             sender_name=user.display_name(),
             timestamp=now,
             status="awaiting_response",
-            subject='Records Request for %s: %s [#%s]' % (public_body.name, request.title, request.pk)
+            subject='Records Request for {}: {} [#{}]'.format(public_body.name, request.title, request.pk)
         )
         message.subject_redacted = message.redact_subject()
         send_address = True
@@ -1064,7 +1063,7 @@ class FoiRequest(models.Model):
             return
         if not self.user.email:
             return
-        send_mail('{0} [#{1}]'.format(
+        send_mail('{} [#{}]'.format(
                 _("%(site_name)s: Please classify the reply to your request") % {
                     "site_name": settings.SITE_NAME
                 },
@@ -1229,19 +1228,19 @@ class FoiMessage(models.Model):
         return _("message-%(id)d") % {"id": self.id}
 
     def get_absolute_url(self):
-        return "%s#%s" % (self.request.get_absolute_url(),
+        return "{}#{}".format(self.request.get_absolute_url(),
                 self.get_html_id())
 
     def get_absolute_short_url(self):
-        return "%s#%s" % (self.request.get_absolute_short_url(),
+        return "{}#{}".format(self.request.get_absolute_short_url(),
                 self.get_html_id())
 
     def get_absolute_domain_url(self):
-        return "%s#%s" % (self.request.get_absolute_domain_url(),
+        return "{}#{}".format(self.request.get_absolute_domain_url(),
                 self.get_html_id())
 
     def get_accessible_link(self):
-        return "%s#%s" % (self.request.get_accessible_link(),
+        return "{}#{}".format(self.request.get_accessible_link(),
                 self.get_html_id())
 
     def get_public_body_sender_form(self):
@@ -1250,9 +1249,9 @@ class FoiMessage(models.Model):
 
     def get_recipient(self):
         if self.recipient_public_body:
-            return mark_safe('<a href="%(url)s">%(name)s</a>' % {
-                "url": self.recipient_public_body.get_absolute_url(),
-                "name": escape(self.recipient_public_body.name)})
+            return mark_safe('<a href="{url}">{name}</a>'.format(
+                url=self.recipient_public_body.get_absolute_url(),
+                name=escape(self.recipient_public_body.name)))
         else:
             return self.recipient
 
@@ -1318,7 +1317,7 @@ class FoiMessage(models.Model):
             pb = self.sender_public_body.name
         if email:
             if pb:
-                return '%s@... (%s)' % (email.split('@')[0], pb)
+                return '{}@... ({})'.format(email.split('@')[0], pb)
             return '%s@...' % email.split('@')[0]
         else:
             return self.real_sender
@@ -1392,7 +1391,7 @@ class FoiMessage(models.Model):
     def send(self, notify=True, attachments=None):
         if settings.FROIDE_CONFIG['dryrun']:
             recp = self.recipient_email.replace("@", "+")
-            self.recipient_email = "%s@%s" % (recp, settings.FROIDE_CONFIG['dryrun_domain'])
+            self.recipient_email = "{}@{}".format(recp, settings.FROIDE_CONFIG['dryrun_domain'])
         # Use send_foi_mail here
         from_addr = make_address(self.request.secret_address,
                 self.request.user.get_full_name())
@@ -1409,7 +1408,7 @@ class FoiMessage(models.Model):
 
 
 def upload_to(instance, filename):
-    return "%s/%s/%s" % (settings.FOI_MEDIA_PATH, instance.belongs_to.id, instance.name)
+    return "{}/{}/{}".format(settings.FOI_MEDIA_PATH, instance.belongs_to.id, instance.name)
 
 
 @python_2_unicode_compatible
@@ -1471,7 +1470,7 @@ class FoiAttachment(models.Model):
         verbose_name_plural = _('Attachments')
 
     def __str__(self):
-        return "%s (%s) of %s" % (self.name, self.size, self.belongs_to)
+        return "{} ({}) of {}".format(self.name, self.size, self.belongs_to)
 
     def index_content(self):
         return "\n".join((self.name,))
@@ -1492,13 +1491,13 @@ class FoiAttachment(models.Model):
 
     def get_anchor_url(self):
         if self.belongs_to:
-            return '%s#%s' % (self.belongs_to.request.get_absolute_url(),
+            return '{}#{}'.format(self.belongs_to.request.get_absolute_url(),
                 self.get_html_id())
         return '#' + self.get_html_id()
 
     def get_absolute_url(self):
         if settings.USE_X_ACCEL_REDIRECT:
-            return '%s%s' % (settings.SITE_URL,
+            return '{}{}'.format(settings.SITE_URL,
                 reverse('foirequest-auth_message_attachment',
                     kwargs={
                         'message_id': self.belongs_to_id,
@@ -1530,7 +1529,7 @@ class FoiAttachment(models.Model):
         return False
 
     def admin_link_message(self):
-        return '<a href="%s">%s</a>' % (
+        return '<a href="{}">{}</a>'.format(
             reverse('admin:foirequest_foimessage_change',
                 args=(self.belongs_to_id,)), _('See FoiMessage'))
     admin_link_message.allow_tags = True
@@ -1606,20 +1605,20 @@ class FoiEvent(models.Model):
         verbose_name_plural = _('Request Events')
 
     def __str__(self):
-        return "%s - %s" % (self.event_name, self.request)
+        return "{} - {}".format(self.event_name, self.request)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:
             self.timestamp = timezone.now()
-        super(FoiEvent, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_html_id(self):
         # Translators: Hash part of Event URL
         return "%s-%d" % (str(_("event")), self.id)
 
     def get_absolute_url(self):
-        return "%s#%s" % (self.request.get_absolute_url(),
+        return "{}#{}".format(self.request.get_absolute_url(),
                 self.get_html_id())
 
     def get_context(self):
@@ -1648,7 +1647,7 @@ class FoiEvent(models.Model):
             return context
 
         def link(url, title):
-            return mark_safe('<a href="%s">%s</a>' % (url, escape(title)))
+            return mark_safe('<a href="{}">{}</a>'.format(url, escape(title)))
         context = self.get_context()
         if self.user:
             if not self.user.private:
@@ -1702,7 +1701,7 @@ class DeferredMessage(models.Model):
         self.request = request
         self.save()
         mail = base64.b64decode(self.mail)
-        logging.info("Attempting to redeliver mail {0}".format(mail))
+        logging.info(f"Attempting to redeliver mail {mail}")
         mail = mail.replace(self.recipient.encode('utf-8'),
                             self.request.secret_address.encode('utf-8'))
         process_mail.delay(mail, mail_type="postmark", manual=True)

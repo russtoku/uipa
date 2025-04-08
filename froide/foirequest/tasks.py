@@ -99,7 +99,7 @@ def convert_attachment(att):
                 belongs_to=att.belongs_to,
                 name=filename).exists():
             name, extension = filename.rsplit('.', 1)
-            filename = '%s_converted.%s' % (name, extension)
+            filename = '{}_converted.{}'.format(name, extension)
 
         new_att = FoiAttachment(
             belongs_to=att.belongs_to,

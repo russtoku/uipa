@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
-
 import re
 from datetime import datetime, timedelta
 import os
 import zipfile
 
-from mock import patch
+from unittest.mock import patch
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
@@ -109,7 +106,7 @@ class RequestTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         message = mail.outbox[0]
         self.assertEqual(mail.outbox[0].to[0], post['user_email'])
-        match = re.search('/%d/%d/(\w+)/' % (user.pk, req.pk),
+        match = re.search(r'/%d/%d/(\w+)/' % (user.pk, req.pk),
                 message.body)
         self.assertIsNotNone(match)
         secret = match.group(1)
@@ -127,10 +124,10 @@ class RequestTest(TestCase):
         self.assertIn('Legal Note: This mail was sent through a Freedom Of Information Portal.', message.body)
         self.assertIn(req.secret_address, message.extra_headers.get('Reply-To', ''))
         if settings.FROIDE_CONFIG['dryrun']:
-            self.assertEqual(message.to[0], "%s@%s" % (req.public_body.email.replace("@", "+"), settings.FROIDE_CONFIG['dryrun_domain']))
+            self.assertEqual(message.to[0], "{}@{}".format(req.public_body.email.replace("@", "+"), settings.FROIDE_CONFIG['dryrun_domain']))
         else:
             self.assertEqual(message.to[0], req.public_body.email)
-        self.assertEqual(message.subject, '%s [#%s]' % (req.title, req.pk))
+        self.assertEqual(message.subject, '{} [#{}]'.format(req.title, req.pk))
         resp = self.client.post(reverse('foirequest-set_status',
             kwargs={"slug": req.slug}))
         self.assertEqual(resp.status_code, 400)
@@ -364,11 +361,11 @@ class RequestTest(TestCase):
         self.assertEqual(len(messages), 1)
         message = messages[0]
         if settings.FROIDE_CONFIG['dryrun']:
-            self.assertEqual(message.to[0], "%s@%s" % (
+            self.assertEqual(message.to[0], "{}@{}".format(
                 pb.email.replace("@", "+"), settings.FROIDE_CONFIG['dryrun_domain']))
         else:
             self.assertEqual(message.to[0], pb.email)
-        self.assertEqual(message.subject, '%s [#%s]' % (req.title, req.pk))
+        self.assertEqual(message.subject, '{} [#{}]'.format(req.title, req.pk))
 
     def test_redirect_after_request(self):
         response = self.client.get(
@@ -701,7 +698,7 @@ class RequestTest(TestCase):
         self.assertEqual(len(req.messages), 2)
         self.assertEqual(len(mail.outbox), 3)
         notification = mail.outbox[-1]
-        match = re.search('https?://[^/]+(/.*?/%d/[^\s]+)' % req.user.pk,
+        match = re.search(r'https?://[^/]+(/.*?/%d/[^\s]+)' % req.user.pk,
                 notification.body)
         self.assertIsNotNone(match)
         url = match.group(1)
@@ -1102,7 +1099,7 @@ class RequestTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         message = mail.outbox[0]
         self.assertEqual(message.to[0], post['user_email'])
-        match = re.search('/(\d+)/%d/(\w+)/' % (same_req2.pk), message.body)
+        match = re.search(r'/(\d+)/%d/(\w+)/' % (same_req2.pk), message.body)
         self.assertIsNotNone(match)
         new_user = User.objects.get(id=int(match.group(1)))
         self.assertFalse(new_user.is_active)
@@ -1206,7 +1203,7 @@ class RequestTest(TestCase):
     def test_search(self):
         pb = PublicBody.objects.all()[0]
         factories.rebuild_index()
-        response = self.client.get('%s?q=%s' % (
+        response = self.client.get('{}?q={}'.format(
             reverse('foirequest-search'), pb.name[:6]))
         self.assertIn(pb.name, response.content.decode('utf-8'))
         self.assertEqual(response.status_code, 200)
@@ -1610,8 +1607,8 @@ class PackageFoiRequestTest(TestCase):
         fr = FoiRequest.objects.all()[0]
         bytes = package_foirequest(fr)
         zfile = zipfile.ZipFile(BytesIO(bytes), 'r')
-        filenames = ['20\d{2}-\d{2}-\d{2}_1_requester\.txt', '20\d{2}-\d{2}-\d{2}_1_publicbody\.txt',
-                     '20\d{2}-\d{2}-\d{2}_1-file_\d+\.pdf', '20\d{2}-\d{2}-\d{2}_1-file_\d+\.pdf']
+        filenames = [r'20\d{2}-\d{2}-\d{2}_1_requester\.txt', r'20\d{2}-\d{2}-\d{2}_1_publicbody\.txt',
+                     r'20\d{2}-\d{2}-\d{2}_1-file_\d+\.pdf', r'20\d{2}-\d{2}-\d{2}_1-file_\d+\.pdf']
         zip_names = zfile.namelist()
         self.assertEqual(len(filenames), len(zip_names))
         for zname, fname in zip(zip_names, filenames):

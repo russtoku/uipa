@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 import requests
 
 from django.contrib.auth import get_user_model
@@ -19,7 +18,7 @@ from froide.publicbody.models import (PublicBody, PublicBodyTag, Jurisdiction, F
 User = get_user_model()
 
 
-class CSVImporter(object):
+class CSVImporter:
     def __init__(self):
         self.user = User.objects.order_by('id')[0]
         self.site = Site.objects.get_current()

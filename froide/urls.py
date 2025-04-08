@@ -121,12 +121,12 @@ privacy_url_part = _('privacy')
 urlpatterns += [
     url(r'^%s/$' % help_url_part, flatpage,
         {'url': '/%s/' % help_url_part}, name='help-index'),
-    url(r'^%s/%s/$' % (help_url_part, about_url_part), flatpage,
-        {'url': '/%s/%s/' % (help_url_part, about_url_part)}, name='help-about'),
-    url(r'^%s/%s/$' % (help_url_part, terms_url_part), flatpage,
-        {'url': '/%s/%s/' % (help_url_part, terms_url_part)}, name='help-terms'),
-    url(r'^%s/%s/$' % (help_url_part, privacy_url_part), flatpage,
-        {'url': '/%s/%s/' % (help_url_part, privacy_url_part)}, name='help-privacy'),
+    url(r'^{}/{}/$'.format(help_url_part, about_url_part), flatpage,
+        {'url': '/{}/{}/'.format(help_url_part, about_url_part)}, name='help-about'),
+    url(r'^{}/{}/$'.format(help_url_part, terms_url_part), flatpage,
+        {'url': '/{}/{}/'.format(help_url_part, terms_url_part)}, name='help-terms'),
+    url(r'^{}/{}/$'.format(help_url_part, privacy_url_part), flatpage,
+        {'url': '/{}/{}/'.format(help_url_part, privacy_url_part)}, name='help-privacy'),
 ]
 
 
@@ -150,7 +150,7 @@ USE_X_ACCEL_REDIRECT = getattr(settings, 'USE_X_ACCEL_REDIRECT', False)
 
 if USE_X_ACCEL_REDIRECT:
     urlpatterns += [
-        url(r'^%s%s/' % (settings.MEDIA_URL[1:], settings.FOI_MEDIA_PATH),
+        url(r'^{}{}/'.format(settings.MEDIA_URL[1:], settings.FOI_MEDIA_PATH),
             include('froide.foirequest.media_urls'))
     ]
 

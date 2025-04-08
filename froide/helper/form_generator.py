@@ -1,9 +1,7 @@
-
-
 import re
 
 
-class FormProcessor(object):
+class FormProcessor:
     CHECKBOX = re.compile(r"^(\s*)\[(\s*[xo]?\s*)\](.*)", re.MULTILINE)
     RADIOBOX = re.compile(r"^(\s*)\((\s*[xo]?\s*)\)(.*)", re.MULTILINE)
     radio_count = 0
@@ -37,7 +35,7 @@ class FormProcessor(object):
                     in_form = True
                 else:
                     if in_option and not output_option:
-                        line = "%s %s" % (line, self.get_last_default_option())
+                        line = "{} {}".format(line, self.get_last_default_option())
                     line = line + "\n"
                     was_form = False
                 in_option = False
@@ -92,7 +90,7 @@ class HtmlFormPreprocessor(FormProcessor):
 
 class TextFormPreprocessor(FormProcessor):
     def __init__(self, post_data):
-        super(TextFormPreprocessor, self).__init__()
+        super().__init__()
         self.post_data = post_data
         self.last_default_option = None
 
@@ -124,7 +122,7 @@ class TextFormPreprocessor(FormProcessor):
         return None
 
 
-class FormGenerator(object):
+class FormGenerator:
     def __init__(self, text, post=None):
         self.text = text
         self.post = post

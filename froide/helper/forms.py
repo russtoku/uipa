@@ -21,7 +21,7 @@ class TagObjectForm(forms.Form):
             self.resource_name = kwargs.pop('resource_name')
 
         kwargs['initial'] = {'tags': edit_string_for_tags([o for o in tags])}
-        super(TagObjectForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.fields['tags'] = TagField(label=_("Tags"),
             widget=TagAutocompleteTagIt(

@@ -5,7 +5,7 @@ from django.contrib.flatpages.views import flatpage
 from .views import new_terms
 
 
-class AcceptNewTermsMiddleware(object):
+class AcceptNewTermsMiddleware:
     def process_view(self, request, view_func, view_args, view_kwargs):
         if not hasattr(request, 'user'):
             raise ImproperlyConfigured(

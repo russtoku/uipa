@@ -53,10 +53,10 @@ class RequestForm(forms.Form):
 
     def __init__(self, user=None, list_of_laws=(), default_law=None,
                  hide_law_widgets=True, **kwargs):
-        super(RequestForm, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.user = user
         self.list_of_laws = list_of_laws
-        self.indexed_laws = dict([(l.pk, l) for l in self.list_of_laws])
+        self.indexed_laws = {l.pk: l for l in self.list_of_laws}
         self.default_law = default_law
 
         self.fields["public_body"].widget.set_initial_jurisdiction(
@@ -72,7 +72,7 @@ class RequestForm(forms.Form):
             choices=((l.pk, l.name) for l in list_of_laws))
 
     def laws_to_json(self):
-        return json.dumps(dict([(l.id, l.as_dict()) for l in self.list_of_laws]))
+        return json.dumps({l.id: l.as_dict() for l in self.list_of_laws})
 
     def clean_public_body(self):
         pb = self.cleaned_data['public_body']
@@ -109,7 +109,7 @@ class RequestForm(forms.Form):
         except ValueError:
             return ''
         try:
-            return '%s:%s' % (kind, value)
+            return '{}:{}'.format(kind, value)
         except ValueError:
             return ''
 
@@ -158,7 +158,7 @@ class MessagePublicBodySenderForm(forms.Form):
         if "prefix" not in kwargs:
             kwargs['prefix'] = "m%d" % message.id
         self.message = message
-        super(MessagePublicBodySenderForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def clean_sender(self):
         pk = self.cleaned_data['sender']
@@ -183,7 +183,7 @@ class SendMessageForm(forms.Form):
             label=_("Your message"))
 
     def __init__(self, foirequest, *args, **kwargs):
-        super(SendMessageForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.foirequest = foirequest
 
         choices = [(0, _("Default address of %(publicbody)s") % {
@@ -253,7 +253,7 @@ class EscalationMessageForm(forms.Form):
             label=_("Your message"), )
 
     def __init__(self, foirequest, *args, **kwargs):
-        super(EscalationMessageForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.foirequest = foirequest
 
     def clean_message(self):
@@ -277,22 +277,22 @@ class EscalationMessageForm(forms.Form):
 
 class PublicBodySuggestionsForm(forms.Form):
     def __init__(self, queryset, *args, **kwargs):
-        super(PublicBodySuggestionsForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields['suggestion'] = forms.ChoiceField(label=_("Suggestions"),
             widget=forms.RadioSelect,
             choices=((s.public_body.id, mark_safe(
-                '''%(name)s - <a class="info-link" href="%(url)s">%(link)s</a><br/>
-                <span class="help">%(reason)s</span>''' % {
-                    "name": escape(s.public_body.name),
-                    "url": s.public_body.get_absolute_url(),
-                    "link": _("More Info"),
-                    "reason": _("Reason for this suggestion: %(reason)s") % {"reason": s.reason}
-                })) for s in queryset))
+                '''{name} - <a class="info-link" href="{url}">{link}</a><br/>
+                <span class="help">{reason}</span>'''.format(
+                    name=escape(s.public_body.name),
+                    url=s.public_body.get_absolute_url(),
+                    link=_("More Info"),
+                    reason=_("Reason for this suggestion: %(reason)s") % {"reason": s.reason}
+                ))) for s in queryset))
 
 
 class FoiRequestStatusForm(forms.Form):
     def __init__(self, foirequest, *args, **kwargs):
-        super(FoiRequestStatusForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.foirequest = foirequest
         self.fields['refusal_reason'] = forms.CharField(
             label=_("Refusal Reason"),
@@ -399,7 +399,7 @@ class FoiRequestStatusForm(forms.Form):
 
 class ConcreteLawForm(forms.Form):
     def __init__(self, foirequest, *args, **kwargs):
-        super(ConcreteLawForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.foirequest = foirequest
         self.possible_laws = foirequest.law.combined.all()
         self.fields['law'] = forms.TypedChoiceField(label=_("Information Law"),
@@ -412,7 +412,7 @@ class ConcreteLawForm(forms.Form):
     def clean(self):
         if self.foirequest.law is None or not self.foirequest.law.meta:
             raise forms.ValidationError(_("Invalid FoI Request for this operation"))
-        indexed_laws = dict([(l.pk, l) for l in self.possible_laws])
+        indexed_laws = {l.pk: l for l in self.possible_laws}
         if "law" not in self.cleaned_data:
             return
         if self.cleaned_data["law"]:
@@ -426,7 +426,7 @@ class ConcreteLawForm(forms.Form):
                     name=self.foi_law.name)
 
 
-class PostalScanMixin(object):
+class PostalScanMixin:
     def clean_scan(self):
         scan = self.cleaned_data.get("scan")
         if scan:
@@ -447,7 +447,7 @@ class PostalScanMixin(object):
 
 
 class PostalReplyForm(forms.Form, PostalScanMixin):
-    scan_help_text = mark_safe(_("Uploaded scans can be PDF, JPG or PNG and no greater than {0} MB. Please make sure to <strong>redact/black out all private information concerning you</strong>.".format(settings.DATA_UPLOAD_MAX_MEMORY_SIZE/(1024 * 1024))))
+    scan_help_text = mark_safe(_(f"Uploaded scans can be PDF, JPG or PNG and no greater than {settings.DATA_UPLOAD_MAX_MEMORY_SIZE/(1024 * 1024)} MB. Please make sure to <strong>redact/black out all private information concerning you</strong>."))
     date = forms.DateField(
             widget=forms.TextInput(attrs={
                 "class": "form-control",

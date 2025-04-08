@@ -144,15 +144,15 @@ class FoiRequestResource(ModelResource):
 
     def prepend_urls(self):
         return [
-            url(r"^(?P<resource_name>%s)/search%s$" % (
+            url(r"^(?P<resource_name>{})/search{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_search'), name="api_get_search"),
-            url(r"^(?P<resource_name>%s)/simplesearch%s$" % (
+            url(r"^(?P<resource_name>{})/simplesearch{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_simple_search'), name="api_get_simple_search"),
-            url(r"^(?P<resource_name>%s)/tags/autocomplete%s$" % (
+            url(r"^(?P<resource_name>{})/tags/autocomplete{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_tags_autocomplete'), name="api_get_tags_autocomplete"),

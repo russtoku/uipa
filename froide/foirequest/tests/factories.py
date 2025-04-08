@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 from datetime import datetime, timedelta
 import random
 import string
@@ -41,7 +40,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     first_name = 'Jane'
     last_name = factory.Sequence(lambda n: 'D%se' % ('o' * min(20, int(n))))
     username = factory.Sequence(lambda n: 'user_%s' % n)
-    email = factory.LazyAttribute(lambda o: '%s.%s@example.org' % (
+    email = factory.LazyAttribute(lambda o: '{}.{}@example.org'.format(
         o.first_name.lower(), o.last_name.lower()))
     password = factory.PostGenerationMethodCall('set_password', 'froide')
     is_staff = False
@@ -59,7 +58,7 @@ class JurisdictionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Jurisdiction
 
-    name = factory.Sequence(lambda n: 'Jurisdiction {0}'.format(n))
+    name = factory.Sequence(lambda n: f'Jurisdiction {n}')
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
     description = ''
     hidden = False
@@ -70,7 +69,7 @@ class PublicBodyTagFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PublicBodyTag
 
-    name = factory.Sequence(lambda n: 'Public Body Tag {0}'.format(n))
+    name = factory.Sequence(lambda n: f'Public Body Tag {n}')
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
 
 
@@ -78,7 +77,7 @@ class PublicBodyFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PublicBody
 
-    name = factory.Sequence(lambda n: 'Pübli€ Body {0}'.format(random_name()))
+    name = factory.Sequence(lambda n: f'Pübli€ Body {random_name()}')
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
     description = ''
     url = 'http://example.com'
@@ -108,15 +107,15 @@ class FoiLawFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = FoiLaw
 
-    name = factory.Sequence(lambda n: 'FoiLaw {0}'.format(n))
+    name = factory.Sequence(lambda n: f'FoiLaw {n}')
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
     description = 'Description'
     long_description = 'Long description'
     created = timezone.now() - timedelta(days=600)
     updated = timezone.now() - timedelta(days=300)
     meta = False
-    letter_start = factory.Sequence(lambda n: 'Dear Sir or Madam, {0}'.format(n))
-    letter_end = factory.LazyAttribute(lambda o: 'Requesting according to {0}.\n\n Regards\nUsername'.format(o.name))
+    letter_start = factory.Sequence(lambda n: f'Dear Sir or Madam, {n}')
+    letter_end = factory.LazyAttribute(lambda o: f'Requesting according to {o.name}.\n\n Regards\nUsername')
     jurisdiction = factory.SubFactory(JurisdictionFactory)
     priority = 3
     url = "http://example.com"
@@ -133,9 +132,9 @@ class FoiRequestFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = FoiRequest
 
-    title = factory.Sequence(lambda n: 'My FoiRequest Number {0}'.format(n))
+    title = factory.Sequence(lambda n: f'My FoiRequest Number {n}')
     slug = factory.LazyAttribute(lambda o: slugify(o.title))
-    description = factory.Sequence(lambda n: 'Desc {0}'.format(n))
+    description = factory.Sequence(lambda n: f'Desc {n}')
     resolution = ''
     public_body = factory.LazyAttribute(lambda o: PublicBodyFactory())
     public = True
@@ -148,7 +147,7 @@ class FoiRequestFactory(factory.django.DjangoModelFactory):
     due_date = timezone.now() + timedelta(days=14)
 
     secret_address = factory.LazyAttribute(
-        lambda o: '%s.%s@fragdenstaat.de' % (o.user.username, ''.join([random.choice(string.hexdigits) for x in range(8)])))
+        lambda o: '{}.{}@fragdenstaat.de'.format(o.user.username, ''.join([random.choice(string.hexdigits) for x in range(8)])))
     secret = ''
     same_as = None
     same_as_count = 0
@@ -169,7 +168,7 @@ class DeferredMessageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = DeferredMessage
 
-    recipient = factory.Sequence(lambda n: 'blub%s@fragdenstaat.de'.format(n))
+    recipient = factory.Sequence(lambda n: f'blub%s@fragdenstaat.de')
     timestamp = timezone.now() - timedelta(hours=1)
     request = None
     mail = factory.LazyAttribute(lambda o:
@@ -223,7 +222,7 @@ class FoiAttachmentFactory(factory.django.DjangoModelFactory):
         model = FoiAttachment
 
     belongs_to = factory.SubFactory(FoiMessageFactory)
-    name = factory.Sequence(lambda n: "file_{0}.pdf".format(n))
+    name = factory.Sequence(lambda n: f"file_{n}.pdf")
     file = TEST_PDF_URL
     size = 500
     filetype = 'application/pdf'

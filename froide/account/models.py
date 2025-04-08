@@ -73,7 +73,7 @@ class User(AbstractUser):
             return str(_("<< Name Not Public >>"))
         else:
             if self.organization:
-                return '%s (%s)' % (self.get_full_name(), self.organization)
+                return '{} ({})'.format(self.get_full_name(), self.organization)
             else:
                 return self.get_full_name()
 
@@ -123,7 +123,7 @@ class User(AbstractUser):
         return UserChangeForm(self, *args, **kwargs)
 
 
-class AccountManager(object):
+class AccountManager:
     def __init__(self, user):
         self.user = user
 
@@ -133,7 +133,7 @@ class AccountManager(object):
         first = slugify(firstname)
         last = slugify(lastname)
         if first and last:
-            base = "%s.%s" % (first[0], last)
+            base = "{}.{}".format(first[0], last)
         elif last:
             base = last
         elif first:
@@ -212,7 +212,7 @@ class AccountManager(object):
             "secret": secret,
             "email": email
         }
-        url = '%s%s?%s' % (
+        url = '{}{}?{}'.format(
             settings.SITE_URL,
             reverse('account-change_email'),
             urlencode(url_kwargs)

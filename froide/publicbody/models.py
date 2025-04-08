@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import json
 from datetime import timedelta
 
@@ -59,7 +58,7 @@ class Jurisdiction(models.Model):
             kwargs={'slug': self.slug})
 
     def get_absolute_domain_url(self):
-        return "%s%s" % (settings.SITE_URL, self.get_absolute_url())
+        return "{}{}".format(settings.SITE_URL, self.get_absolute_url())
 
 
 @python_2_unicode_compatible
@@ -104,13 +103,13 @@ class FoiLaw(models.Model):
         verbose_name_plural = _("Freedom of Information Laws")
 
     def __str__(self):
-        return "%s (%s)" % (self.name, self.jurisdiction)
+        return "{} ({})".format(self.name, self.jurisdiction)
 
     def get_absolute_url(self):
         return reverse('publicbody-foilaw-show', kwargs={'slug': self.slug})
 
     def get_absolute_domain_url(self):
-        return "%s%s" % (settings.SITE_URL, self.get_absolute_url())
+        return "{}{}".format(settings.SITE_URL, self.get_absolute_url())
 
     @property
     def letter_start_form(self):
@@ -138,7 +137,7 @@ class FoiLaw(models.Model):
         not_applicable = [('n/a', _("No law can be applied"))]
         if self.meta:
             return (not_applicable +
-                    [(l[0], "%s: %s" % (law.name, l[1]))
+                    [(l[0], "{}: {}".format(law.name, l[1]))
                     for law in self.combined.all()
                     for l in law.get_refusal_reason_choices()[1:]])
         else:
@@ -224,7 +223,7 @@ class TaggedPublicBody(ItemBase):
 
 class PublicBodyManager(CurrentSiteManager):
     def get_queryset(self):
-        return super(PublicBodyManager, self).get_queryset()\
+        return super().get_queryset()\
                 .exclude(email="")\
                 .filter(email__isnull=False)
 
@@ -303,7 +302,7 @@ class PublicBody(models.Model):
             'address', 'domain')
 
     def __str__(self):
-        return "%s (%s)" % (self.name, self.jurisdiction)
+        return "{} ({})".format(self.name, self.jurisdiction)
 
     @property
     def created_by(self):
@@ -335,10 +334,10 @@ class PublicBody(models.Model):
         return reverse('publicbody-show', kwargs={"slug": self.slug})
 
     def get_absolute_domain_url(self):
-        return "%s%s" % (settings.SITE_URL, self.get_absolute_url())
+        return "{}{}".format(settings.SITE_URL, self.get_absolute_url())
 
     def get_label(self):
-        return mark_safe('%(name)s - <a href="%(url)s" class="target-new info-link">%(detail)s</a>' % {"name": escape(self.name), "url": self.get_absolute_url(), "detail": _("More Info")})
+        return mark_safe('{name} - <a href="{url}" class="target-new info-link">{detail}</a>'.format(name=escape(self.name), url=self.get_absolute_url(), detail=_("More Info")))
 
     def confirm(self):
         if self.confirmed:

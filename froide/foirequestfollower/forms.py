@@ -14,7 +14,7 @@ class FollowRequestForm(forms.Form):
     def __init__(self, foirequest, user, *args, **kwargs):
         self.foirequest = foirequest
         self.user = user
-        super(FollowRequestForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if not self.user.is_authenticated:
             self.fields["email"] = forms.EmailField(label=_("Your Email address"),
                     widget=forms.TextInput(attrs={"placeholder": _("email address")}))

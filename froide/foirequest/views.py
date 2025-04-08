@@ -304,7 +304,7 @@ def make_request(request, public_body=None, public_body_id=None):
             'public_body': public_body.slug
         })
         # Keep the query string for subject, body intact on redirect
-        return redirect('%s?%s' % (url, request.META['QUERY_STRING']),
+        return redirect('{}?{}'.format(url, request.META['QUERY_STRING']),
                         permanent=True)
 
     public_body_form = None
@@ -446,7 +446,7 @@ def submit_request(request, public_body=None):
             redirect_url = request_form.cleaned_data['redirect_url']
             if is_safe_url(redirect_url):
                 return redirect(redirect_url)
-        return redirect('%s%s' % (foi_request.get_absolute_url(), _('?request-made')))
+        return redirect('{}{}'.format(foi_request.get_absolute_url(), _('?request-made')))
     else:
         AccountManager(user).send_confirmation_mail(request_id=foi_request.pk,
                 password=password)
@@ -842,7 +842,7 @@ def make_same_request(request, slug, message_id):
         messages.add_message(request, messages.ERROR, throttle_message)
         return render_400(request)
 
-    body = "%s\n\n%s" % (foirequest.description,
+    body = "{}\n\n{}".format(foirequest.description,
             _('Please see this request on %(site_name)s where you granted access to this information: %(url)s') % {
                 'url': foirequest.get_absolute_domain_short_url(),
                 'site_name': settings.SITE_NAME
@@ -917,7 +917,7 @@ def redact_attachment(request, slug, attachment_id):
         if path is None:
             return render_400(request)
         name = attachment.name.rsplit('.', 1)[0]
-        name = re.sub('[^\w\.\-]', '', name)
+        name = re.sub(r'[^\w\.\-]', '', name)
         pdf_file = File(open(path, 'rb'))
         if already:
             att = already

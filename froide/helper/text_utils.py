@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 
 from html.entities import name2codepoint
@@ -34,7 +33,7 @@ def unescape(text):
             except KeyError:
                 pass
         return text  # leave as is
-    return re.sub("&#?\w+;", fixup, text)
+    return re.sub(r"&#?\w+;", fixup, text)
 
 
 def split_text_by_separator(text, separator=None):
@@ -49,7 +48,7 @@ def split_text_by_separator(text, separator=None):
 
 
 def replace_word(needle, replacement, content):
-    return re.sub('(^|\W)%s($|\W)' % re.escape(needle),
+    return re.sub(r'(^|\W)%s($|\W)' % re.escape(needle),
                     '\\1%s\\2' % replacement, content, re.U)
 
 

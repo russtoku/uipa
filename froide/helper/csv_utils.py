@@ -10,13 +10,12 @@ def export_csv_response(generator, name='export.csv'):
     return response
 
 
-class FakeFile(object):
+class FakeFile:
     # unicodecsv doesn't return values
     # so temp store them in here
     def write(self, string):
         self._last_string = string
-        if six.PY3:
-            self._last_string = self._last_string.encode('utf-8')
+        self._last_string = self._last_string.encode('utf-8')
 
 
 def get_dict(self, fields):
@@ -35,15 +34,12 @@ def get_dict(self, fields):
         if value is None:
             d[field] = ""
         else:
-            d[field] = six.text_type(value)
+            d[field] = str(value)
     return d
 
 
 def export_csv(queryset, fields):
-    if six.PY3:
-        import csv
-    else:
-        import unicodecsv as csv
+    import csv
 
     f = FakeFile()
     writer = csv.DictWriter(f, fields)
@@ -59,4 +55,4 @@ def export_csv(queryset, fields):
 
 
 def export_csv_bytes(generator):
-    return six.binary_type().join(generator)
+    return bytes().join(generator)

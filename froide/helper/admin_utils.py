@@ -9,7 +9,7 @@ from taggit.models import TaggedItem
 from .forms import TagObjectForm
 
 
-class AdminTagAllMixIn(object):
+class AdminTagAllMixIn:
     def tag_all(self, request, queryset):
         """
         Add tag to all selected objects
@@ -125,7 +125,7 @@ class ForeignKeyFilter(admin.FieldListFilter):
     template = "helper/admin/fk_filter.html"
 
     def __init__(self, field, request, params, model, model_admin, field_path):
-        super(ForeignKeyFilter, self).__init__(
+        super().__init__(
             field, request, params, model, model_admin, field_path)
         self.lookup_val = request.GET.get(self.field_path, None)
 

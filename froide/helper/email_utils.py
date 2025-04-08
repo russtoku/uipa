@@ -53,7 +53,7 @@ class UnsupportedMailFormat(Exception):
     pass
 
 
-class EmailParser(object):
+class EmailParser:
 
     def parse_dispositions(self, dispo):
         dispos = dispo.strip().split(";", 1)

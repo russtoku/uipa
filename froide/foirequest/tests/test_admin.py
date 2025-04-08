@@ -1,5 +1,3 @@
-
-
 from django.test import TestCase
 from django.contrib.admin.sites import AdminSite
 from django.test.client import RequestFactory

@@ -97,7 +97,7 @@ def get_alternative_mail(req):
         domains = domains[1:]
 
     random.shuffle(domains)
-    return '%s_%s@%s' % (name, req.pk, domains[0])
+    return '{}_{}@{}'.format(name, req.pk, domains[0])
 
 
 def get_foirequest_from_mail(email):
@@ -128,30 +128,30 @@ def get_foirequest_from_mail(email):
 def _deliver_mail(email, mail_string=None, manual=False):
     from .models import DeferredMessage
 
-    logger.info("Attempting to deliver message {0}".format(email))
+    logger.info(f"Attempting to deliver message {email}")
 
     received_list = email['to'] + email['cc'] \
             + email['resent_to'] + email['resent_cc']
     # TODO: BCC?
 
-    logger.info("Received list is {0}".format(received_list))
+    logger.info(f"Received list is {received_list}")
 
     domains = settings.FOI_EMAIL_DOMAIN
     if isinstance(domains, string_types):
         domains = [domains]
 
-    logger.info("Domain filter is {0}".format(domains))
+    logger.info(f"Domain filter is {domains}")
 
     mail_filter = lambda x: x[1].endswith(tuple(["@%s" % d for d in domains]))
     received_list = [r for r in received_list if mail_filter(r)]
 
-    logger.info("Filter received list is {0}".format(received_list))
+    logger.info(f"Filter received list is {received_list}")
 
     # normalize to first FOI_EMAIL_DOMAIN
     received_list = [(x[0], '@'.join(
         (x[1].split('@')[0], domains[0]))) for x in received_list]
 
-    logger.info("Normalized filter received list is {0}".format(received_list))
+    logger.info(f"Normalized filter received list is {received_list}")
 
     if mail_string is not None:
         # make original mail storeable as unicode
@@ -166,11 +166,11 @@ def _deliver_mail(email, mail_string=None, manual=False):
 
     for received in received_list:
 
-        logger.info("Attempting to parse {0}".format(received))
+        logger.info(f"Attempting to parse {received}")
 
         secret_mail = received[1]
 
-        logger.info("Secret mail {0}".format(secret_mail))
+        logger.info(f"Secret mail {secret_mail}")
 
         if secret_mail in already:
             continue
@@ -193,8 +193,8 @@ def _deliver_mail(email, mail_string=None, manual=False):
         # Check for spam
         if not manual:
             messages = foi_request.response_messages()
-            reply_domains = set(m.sender_email.split('@')[1] for m in messages
-                             if m.sender_email and '@' in m.sender_email)
+            reply_domains = {m.sender_email.split('@')[1] for m in messages
+                             if m.sender_email and '@' in m.sender_email}
             reply_domains.add(foi_request.public_body.email.split('@')[1])
             strip_subdomains = lambda x: '.'.join(x.split('.')[-2:])
             # Strip subdomains
@@ -208,17 +208,16 @@ def _deliver_mail(email, mail_string=None, manual=False):
                         spam=True, subject=_('Possible Spam Mail received'), body=spam_message)
                     continue
 
-        logger.info("Attempting to add message from email to foi_request {0}".format(foi_request.pk))
+        logger.info(f"Attempting to add message from email to foi_request {foi_request.pk}")
         foi_request.add_message_from_email(email, mail_string)
 
 
 def _fetch_mail():
-    for rfc_data in get_unread_mails(settings.FOI_EMAIL_HOST_IMAP,
+    yield from get_unread_mails(settings.FOI_EMAIL_HOST_IMAP,
             settings.FOI_EMAIL_PORT_IMAP,
             settings.FOI_EMAIL_ACCOUNT_NAME,
             settings.FOI_EMAIL_ACCOUNT_PASSWORD,
-            ssl=settings.FOI_EMAIL_USE_SSL):
-        yield rfc_data
+            ssl=settings.FOI_EMAIL_USE_SSL)
 
 
 def fetch_and_process():
@@ -250,16 +249,16 @@ def package_foirequest(foirequest):
                 is_converted=False
             )
             if message.is_response:
-                filename = '%s_%s.txt' % (date_prefix, ugettext('publicbody'))
+                filename = '{}_{}.txt'.format(date_prefix, ugettext('publicbody'))
             else:
-                filename = '%s_%s.txt' % (date_prefix, ugettext('requester'))
+                filename = '{}_{}.txt'.format(date_prefix, ugettext('requester'))
 
             zfile.writestr(filename, message.get_formated(att_queryset).encode('utf-8'))
 
             for attachment in att_queryset:
                 if not attachment.file:
                     continue
-                filename = '%s-%s' % (date_prefix, attachment.name)
+                filename = '{}-{}'.format(date_prefix, attachment.name)
                 try:
                     zfile.write(attachment.file.path, arcname=filename)
                 except:

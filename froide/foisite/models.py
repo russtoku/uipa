@@ -19,11 +19,11 @@ class FoiSite(models.Model):
         verbose_name_plural = _('FOI Sites')
 
     def __str__(self):
-        return '%s (%s)' % (self.name, self.country_name)
+        return '{} ({})'.format(self.name, self.country_name)
 
     def save(self, *args, **kwargs):
         self.country_code = self.country_code.upper()
-        super(FoiSite, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 try:
     from django.contrib.gis.geoip import GeoIP
@@ -31,14 +31,14 @@ except ImportError:
     GeoIP = None  # noqa
 
 
-class SiteAdivsor(object):
+class SiteAdivsor:
     def __init__(self):
         self.geoip = GeoIP()
         self.sites = None
 
     def update(self):
         sites = FoiSite.objects.filter(enabled=True)
-        self.sites = dict([(f.country_code, f) for f in sites])
+        self.sites = {f.country_code: f for f in sites}
 
     def refresh(self):
         self.sites = None
@@ -50,7 +50,7 @@ class SiteAdivsor(object):
         return self.sites.get(result['country_code'], None)
 
 
-class DummyAdvisor(object):
+class DummyAdvisor:
     def refresh(self):
         pass
 

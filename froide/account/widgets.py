@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 class ConfirmationWidget(forms.TextInput):
 
     def render(self, name, value=None, attrs=None):
-        output = super(ConfirmationWidget, self).render(
+        output = super().render(
             name, value=value, attrs=attrs
         )
         return render_to_string(

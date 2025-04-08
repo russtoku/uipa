@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 from difflib import SequenceMatcher
 import re
 
@@ -25,7 +24,7 @@ def highlight_request(message):
     except ValueError:
         return content
     offset = index + len(description)
-    return mark_safe('<div class="foldin">%s</div><div class="highlight">%s</div><div class="foldin-bottom print-show" style="display:none" id="letter_end">%s</div>' % (
+    return mark_safe('<div class="foldin">{}</div><div class="highlight">{}</div><div class="foldin-bottom print-show" style="display:none" id="letter_end">{}</div>'.format(
             escape(content[:index]),
             urlizetrunc(escape(description), 40),
             escape(content[offset:]))

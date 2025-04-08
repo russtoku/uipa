@@ -114,15 +114,15 @@ class PublicBodyResource(ModelResource):
 
     def prepend_urls(self):
         return [
-            url(r"^(?P<resource_name>%s)/search%s$" % (
+            url(r"^(?P<resource_name>{})/search{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_search'), name="api_get_search"),
-            url(r"^(?P<resource_name>%s)/autocomplete%s$" % (
+            url(r"^(?P<resource_name>{})/autocomplete{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_autocomplete'), name="api_get_autocomplete"),
-            url(r"^(?P<resource_name>%s)/tags/autocomplete%s$" % (
+            url(r"^(?P<resource_name>{})/tags/autocomplete{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_tags_autocomplete'), name="api_get_tags_autocomplete"),
@@ -157,7 +157,7 @@ class PublicBodyResource(ModelResource):
                 return None
 
             sqs = sorted(sqs, key=lambda x: x.name)
-            names = ["%s (%s)" % (x.name, jur_get(x)) for x in sqs]
+            names = ["{} ({})".format(x.name, jur_get(x)) for x in sqs]
             data = [{"name": x.name, "jurisdiction": jur_get(x),
                      "id": x.pk, "url": x.url} for x in sqs]
         response = {

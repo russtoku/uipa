@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 from configurations import Configuration, importer, values
 importer.install(check_options=True)
 
@@ -367,7 +364,7 @@ class Base(Configuration):
         currency="Euro",
         default_law=1,
         search_engine_query="http://www.google.de/search?as_q=%(query)s&as_epq=&as_oq=&as_eq=&hl=en&lr=&cr=&as_ft=i&as_filetype=&as_qdr=all&as_occt=any&as_dt=i&as_sitesearch=%(domain)s&as_rights=&safe=images",
-        greetings=[rec("Dear (?:Mr\.?|Ms\.? .*?)")],
+        greetings=[rec(r"Dear (?:Mr\.?|Ms\.? .*?)")],
         closings=[rec("Sincerely yours,?")],
         public_body_boosts={},
         dryrun=False,
@@ -427,11 +424,11 @@ class Dev(Base):
     pass
 
 
-class ThemeBase(object):
+class ThemeBase:
 
     @property
     def INSTALLED_APPS(self):
-        installed = super(ThemeBase, self).INSTALLED_APPS
+        installed = super().INSTALLED_APPS
         installed.default += [
             self.FROIDE_THEME
         ]
@@ -439,7 +436,7 @@ class ThemeBase(object):
 
     @property
     def TEMPLATES(self):
-        TEMP = super(ThemeBase, self).TEMPLATES
+        TEMP = super().TEMPLATES
         if self.FROIDE_THEME is not None:
             TEMP[0]['OPTIONS']['loaders'] = ['froide.helper.theme_utils.ThemeLoader'] + TEMP[0]['OPTIONS']['loaders']
         return TEMP
@@ -450,7 +447,7 @@ class Test(Base):
 
     @property
     def TEMPLATES(self):
-        TEMP = super(Test, self).TEMPLATES
+        TEMP = super().TEMPLATES
         TEMP[0]['OPTIONS']['debug'] = True
         return TEMP
 
@@ -463,11 +460,11 @@ class Test(Base):
 
     @property
     def FROIDE_CONFIG(self):
-        config = dict(super(Test, self).FROIDE_CONFIG)
+        config = dict(super().FROIDE_CONFIG)
         config.update(dict(
             doc_conversion_call_func=self._fake_convert_pdf,
             default_law=10000,
-            greetings=[rec("Dear ((?:Mr\.?|Ms\.?) .*),?"), rec('Sehr geehrter? ((Herr|Frau) .*),?')],
+            greetings=[rec(r"Dear ((?:Mr\.?|Ms\.?) .*),?"), rec('Sehr geehrter? ((Herr|Frau) .*),?')],
             closings=[rec("Sincerely yours,?"), rec('Mit freundlichen Grüßen')],
             public_body_officials_public=False
         ))
@@ -475,7 +472,7 @@ class Test(Base):
 
     @property
     def MEDIA_ROOT(self):
-        return os.path.abspath(os.path.join(super(Test, self).PROJECT_ROOT, "tests", "testdata"))
+        return os.path.abspath(os.path.join(super().PROJECT_ROOT, "tests", "testdata"))
 
     MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
     CACHES = values.CacheURLValue('locmem://')
@@ -500,7 +497,7 @@ class Test(Base):
         return {
             'default': {
                 'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-                'PATH': os.path.join(super(Test, self).PROJECT_ROOT, 'tests/froide_test_whoosh_db'),
+                'PATH': os.path.join(super().PROJECT_ROOT, 'tests/froide_test_whoosh_db'),
             },
         }
 
@@ -516,7 +513,7 @@ class Test(Base):
     ]
 
 
-class German(object):
+class German:
     LANGUAGE_CODE = "de"
     LANGUAGES = (
         ('de', gettext('German')),
@@ -547,7 +544,7 @@ class German(object):
 
     @property
     def FROIDE_CONFIG(self):
-        german_config = dict(super(German, self).FROIDE_CONFIG)
+        german_config = dict(super().FROIDE_CONFIG)
         german_config.update({
             "payment_possible": True,
             "currency": "Euro",
@@ -559,7 +556,7 @@ class German(object):
                 "Kommunalverwaltung": 1.7,
                 "Andere": 0.8
             },
-            'greetings': [rec("Sehr geehrt(er? (?:Herr|Frau)(?: ?Dr\.?)?(?: ?Prof\.?)? .*)")],
+            'greetings': [rec(r"Sehr geehrt(er? (?:Herr|Frau)(?: ?Dr\.?)?(?: ?Prof\.?)? .*)")],
             'closings': [rec("Mit freundlichen Gr\xfc\xdfen,?"), rec("Mit den besten Gr\xfc\xdfen,?")]
         })
         return german_config
@@ -570,7 +567,7 @@ class Production(Base):
 
     @property
     def TEMPLATES(self):
-        TEMP = super(Production, self).TEMPLATES
+        TEMP = super().TEMPLATES
         TEMP[0]['OPTIONS']['debug'] = False
         return TEMP
 
@@ -580,13 +577,13 @@ class Production(Base):
     COMPRESS_OFFLINE = values.BooleanValue(True)
 
 
-class SSLSite(object):
+class SSLSite:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
 
 
-class NginxSecureStatic(object):
+class NginxSecureStatic:
     USE_X_ACCEL_REDIRECT = True
     X_ACCEL_REDIRECT_PREFIX = values.Value('/protected')
 
@@ -595,7 +592,7 @@ class SSLNginxProduction(SSLSite, NginxSecureStatic, Production):
     pass
 
 
-class AmazonS3(object):
+class AmazonS3:
     STATICFILES_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
     COMPRESS_STORAGE = values.Value('froide.helper.storage_utils.CachedS3BotoStorage')
 
@@ -620,7 +617,7 @@ class Heroku(Production):
 
     @property
     def LOGGING(self):
-        logging = super(Heroku, self).LOGGING
+        logging = super().LOGGING
         logging['handlers']['console']['stream'] = sys.stdout
         logging['loggers']['django.request']['handlers'] = ['console']
         return logging

@@ -247,12 +247,12 @@ class DeferredMessageAdmin(admin.ModelAdmin):
         import json
         parser = EmailParser()
         for deferred in queryset:
-            logger.info("Encoded email: {0}".format(deferred.encoded_mail()))
+            logger.info(f"Encoded email: {deferred.encoded_mail()}")
             email = parser.parse_postmark(json.loads(deferred.encoded_mail().decode('utf-8')))
             # email = parser.parse(BytesIO(deferred.encoded_mail()))
-            logger.info("Attempting to parse deferred email {0}".format(email))
+            logger.info(f"Attempting to parse deferred email {email}")
             if 'subject' in email:
-                logger.info("Email subject is {0}".format(email['subject']))
+                logger.info("Email subject is {}".format(email['subject']))
             match = SUBJECT_REQUEST_ID.search(email['subject'])
             if match is not None:
                 try:
