@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:13
+    image: postgres:14-bookworm
     volumes:
       - orig-pg-data:/var/lib/postgresql/data/
     environment:
