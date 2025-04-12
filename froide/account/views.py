@@ -1,12 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404, QueryDict
 from django.contrib import auth
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import SetPasswordForm
-from django.contrib.auth.views import password_reset_confirm as django_password_reset_confirm
+##from django.contrib.auth.views import password_reset_confirm as django_password_reset_confirm
+from django.contrib.auth.views import (
+    INTERNAL_RESET_SESSION_TOKEN,
+    PasswordResetConfirmView,
+)
+from django.http.response import HttpResponseRedirect
+
 from django.utils.http import urlsafe_base64_decode, is_safe_url
 from django.views.generic import ListView
 
@@ -255,27 +261,52 @@ def send_reset_password_link(request):
     return login(request, context={"reset_form": form}, status=400)
 
 
-def password_reset_confirm(request, uidb64=None, token=None):
-    # TODO: Fix this code
-    # - don't sniff response
-    # - make redirect
+##def password_reset_confirm(request, uidb64=None, token=None):
+##    # TODO: Fix this code
+##    # - don't sniff response
+##    # - make redirect
+##
+##    response = django_password_reset_confirm(request, uidb64=uidb64, token=token,
+##            template_name='account/password_reset_confirm.html',
+##            post_reset_redirect=reverse('account-show'))
+##
+##    if response.status_code == 302:
+##        uid = urlsafe_base64_decode(uidb64)
+##        user = auth.get_user_model().objects.get(pk=uid)
+##        login_user(request, user)
+##        messages.add_message(request, messages.SUCCESS,
+##                _('Your password has been set and you are now logged in.'))
+##        if 'next' in request.session and is_safe_url(
+##                    url=request.session['next'],
+##                    host=request.get_host()):
+##            response['Location'] = request.session['next']
+##            del request.session['next']
+##    return response
 
-    response = django_password_reset_confirm(request, uidb64=uidb64, token=token,
-            template_name='account/password_reset_confirm.html',
-            post_reset_redirect=reverse('account-show'))
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "account/password_reset_confirm.html"
+    form_class = SetPasswordForm
 
-    if response.status_code == 302:
-        uid = urlsafe_base64_decode(uidb64)
-        user = auth.get_user_model().objects.get(pk=uid)
+    def form_valid(self, form: SetPasswordForm) -> HttpResponseRedirect:
+        # Taken from parent class
+        user = form.save()
+        del self.request.session[INTERNAL_RESET_SESSION_TOKEN]
+
         login_user(request, user)
-        messages.add_message(request, messages.SUCCESS,
-                _('Your password has been set and you are now logged in.'))
-        if 'next' in request.session and is_safe_url(
-                    url=request.session['next'],
-                    host=request.get_host()):
-            response['Location'] = request.session['next']
-            del request.session['next']
-    return response
+        messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                _('Your password has been set and you are now logged in.')
+        )
+
+        # Skip parent class implemntation
+        return super(PasswordResetConfirmView, self).form_valid(form)
+
+    def get_success_url(self) -> str:
+        """
+        Returns the supplied success URL.
+        """
+        return get_redirect_url(self.request, default=reverse("account-show"))
 
 
 def account_settings(request, context=None, status=200):

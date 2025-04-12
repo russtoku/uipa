@@ -114,8 +114,14 @@ class Migration(migrations.Migration):
             name='TaggedPublicBody',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('content_object', models.ForeignKey(to='publicbody.PublicBody')),
-                ('tag', models.ForeignKey(related_name='publicbodies', to='publicbody.PublicBodyTag')),
+                #('content_object', models.ForeignKey(to='publicbody.PublicBody')),
+                #('tag', models.ForeignKey(related_name='publicbodies', to='publicbody.PublicBodyTag')),
+                ('content_object',
+                 models.ForeignKey(to='publicbody.PublicBody',
+                                   on_delete=models.deletion.CASCADE)),
+                ('tag', models.ForeignKey(related_name='publicbodies',
+                                          to='publicbody.PublicBodyTag',
+                                          on_delete=models.deletion.CASCADE)),
             ],
             options={
                 'verbose_name': 'Tagged Public Body',

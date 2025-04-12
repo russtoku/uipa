@@ -1,10 +1,23 @@
 from django.conf.urls import url
+from django.urls import path, re_path
 
-from .views import (MyRequestsView,
-    FollowingRequestsView, account_settings,
-    new_terms, logout, login, signup, confirm,
-    send_reset_password_link, change_password, password_reset_confirm,
-    change_user, change_email, go, delete_account,
+from .views import (
+    MyRequestsView,
+    FollowingRequestsView,
+    CustomPasswordResetConfirmView,
+    account_settings,
+    new_terms,
+    logout,
+    login,
+    signup,
+    confirm,
+    send_reset_password_link,
+    change_password,
+    ##password_reset_confirm,
+    change_user,
+    change_email,
+    go,
+    delete_account,
 )
 
 urlpatterns = [
@@ -23,8 +36,13 @@ urlpatterns = [
     url(r'^confirm/(?P<user_id>\d+)/(?P<secret>\w{32})/$', confirm, name='account-confirm'),
     url(r'^confirm/(?P<user_id>\d+)/(?P<request_id>\d+)/(?P<secret>\w{32})/$',
         confirm, name='account-confirm'),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        password_reset_confirm, name='account-password_reset_confirm'),
+    #url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    #    password_reset_confirm, name='account-password_reset_confirm'),
+    path(
+        "reset/<uidb64>/<token>/",
+        CustomPasswordResetConfirmView.as_view(),
+        name="account-password_reset_confirm",
+    ),
     url(r'^go/(?P<user_id>\d+)/(?P<secret>\w{32})(?P<url>/.*)$', go,
         name='account-go'),
 ]

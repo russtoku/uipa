@@ -3,14 +3,14 @@ import re
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import router
 from django.template.response import TemplateResponse
 from django.utils.safestring import mark_safe
 from django.contrib.admin import helpers
 from django.utils.six import BytesIO
 
-import floppyforms.__future__ as forms
+import floppyforms as forms
 
 from froide.helper.admin_utils import (make_nullfilter, AdminTagAllMixIn,
                                       ForeignKeyFilter, TaggitListFilter)

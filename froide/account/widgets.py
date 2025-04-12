@@ -1,4 +1,4 @@
-import floppyforms.__future__ as forms
+import floppyforms as forms
 
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe

@@ -1,6 +1,7 @@
 from configurations import Configuration, importer, values
 importer.install(check_options=True)
 
+import django
 import os
 import sys
 import re
@@ -153,6 +154,8 @@ class Base(Configuration):
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': (
                 os.path.join(PROJECT_ROOT, "templates"),
+                os.path.join(os.path.dirname(django.__file__),
+                             "forms/templates/"),
             ),
             'OPTIONS': {
                 'debug': values.BooleanValue(DEBUG),
@@ -175,7 +178,7 @@ class Base(Configuration):
         }
     ]
 
-    MIDDLEWARE_CLASSES = [
+    MIDDLEWARE = [
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.locale.LocaleMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -504,7 +507,7 @@ class Test(Base):
     CELERY_ALWAYS_EAGER = True
     CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
-    MIDDLEWARE_CLASSES = [
+    MIDDLEWARE = [
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',

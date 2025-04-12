@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
-import floppyforms.__future__ as forms
+import floppyforms as forms
 
 from taggit.forms import TagField
 from taggit.utils import edit_string_for_tags

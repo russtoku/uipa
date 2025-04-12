@@ -148,8 +148,8 @@ class Migration(migrations.Migration):
             name='TaggedFoiRequest',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('content_object', models.ForeignKey(to='foirequest.FoiRequest')),
-                ('tag', models.ForeignKey(related_name='foirequest_taggedfoirequest_items', to='taggit.Tag')),
+                ('content_object', models.ForeignKey(to='foirequest.FoiRequest', on_delete=models.CASCADE)),
+                ('tag', models.ForeignKey(related_name='foirequest_taggedfoirequest_items', to='taggit.Tag', on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'FoI Request Tag',

@@ -1,6 +1,6 @@
 from django.utils.six import text_type as str
 from django.test import TestCase
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 

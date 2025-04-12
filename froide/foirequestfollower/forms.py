@@ -1,7 +1,7 @@
-import floppyforms.__future__ as forms
+import floppyforms as forms
 
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
