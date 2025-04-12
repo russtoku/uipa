@@ -8,7 +8,7 @@ from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.utils.crypto import constant_time_compare
-from django.utils.encoding import python_2_unicode_compatible
+#from django.utils.encoding import python_2_unicode_compatible
 
 from froide.foirequest.models import FoiRequest
 
@@ -49,7 +49,6 @@ class FoiRequestFollowerManager(models.Manager):
             )
 
 
-@python_2_unicode_compatible
 class FoiRequestFollower(models.Model):
     request = models.ForeignKey(FoiRequest, on_delete=models.CASCADE,
             verbose_name=_("Freedom of Information Request"))

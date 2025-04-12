@@ -2,10 +2,9 @@ from django.db import models
 from django.conf import settings
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
+#from django.utils.encoding import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class FoiSite(models.Model):
     country_code = models.CharField(_('Country Code'), max_length=5)
     country_name = models.CharField(_('Country Name'), max_length=255)

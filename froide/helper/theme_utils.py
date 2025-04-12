@@ -7,7 +7,7 @@ from django.core.exceptions import ImproperlyConfigured, SuspiciousFileOperation
 from django.utils._os import safe_join
 from django.template.loaders.app_directories import Loader
 from django.template import Origin
-from django.utils import six
+#from django.utils import six
 
 fs_encoding = sys.getfilesystemencoding() or sys.getdefaultencoding()
 
@@ -21,10 +21,7 @@ if getattr(settings, 'FROIDE_THEME', None) is not None:
         raise ImproperlyConfigured('ImportError {}: {}'.format(app, e.args[0]))
     theme_template_dir = os.path.join(
             os.path.dirname(mod.__file__), 'templates')
-    if os.path.isdir(theme_template_dir):
-        if not six.PY3:
-            theme_template_dir = theme_template_dir.decode(fs_encoding)
-    else:
+    if not os.path.isdir(theme_template_dir):
         theme_template_dir = None
 
 

@@ -5,11 +5,11 @@ try:
 except ImportError:
     from urllib.parse import urlencode
 
-from django.utils.six import text_type as str
+#from django.utils.six import text_type as str
 from django.db import models, transaction, IntegrityError
 from django.conf import settings
 from django import dispatch
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string

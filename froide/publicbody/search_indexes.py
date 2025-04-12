@@ -1,6 +1,7 @@
 from django.conf import settings
 
 from haystack import indexes
+from haystack import fields
 
 try:
     from celery_haystack.indexes import CelerySearchIndex as SearchIndex
@@ -13,12 +14,12 @@ PUBLIC_BODY_BOOSTS = settings.FROIDE_CONFIG.get("public_body_boosts", {})
 
 
 class PublicBodyIndex(SearchIndex, indexes.Indexable):
-    text = indexes.EdgeNgramField(document=True, use_template=True)
-    name = indexes.CharField(model_attr='name', boost=1.5)
-    name_auto = indexes.NgramField(model_attr='name')
-    jurisdiction = indexes.FacetCharField(model_attr='jurisdiction__name', default='')
-    tags = indexes.FacetMultiValueField()
-    url = indexes.CharField(model_attr='get_absolute_url')
+    text = fields.EdgeNgramField(document=True, use_template=True)
+    name = fields.CharField(model_attr='name', boost=1.5)
+    name_auto = fields.NgramField(model_attr='name')
+    jurisdiction = fields.FacetCharField(model_attr='jurisdiction__name', default='')
+    tags = fields.FacetMultiValueField()
+    url = fields.CharField(model_attr='get_absolute_url')
 
     def get_model(self):
         return PublicBody

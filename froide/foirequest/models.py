@@ -4,12 +4,11 @@ from datetime import timedelta
 import json
 import re
 
-from django.utils.six import string_types, text_type as str
 from django.db import models
 from django.db.models import Q, When, Case, Value
 from django.db import transaction, IntegrityError
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _, ungettext_lazy
+from django.utils.translation import gettext_lazy as _, ngettext_lazy
 from django.contrib.sites.models import Site
 from django.contrib.sites.managers import CurrentSiteManager
 from django.urls import reverse
@@ -23,7 +22,6 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escape, strip_tags
 from django.utils.crypto import salted_hmac, constant_time_compare
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
@@ -148,7 +146,6 @@ class TaggedFoiRequest(TaggedItemBase):
         verbose_name_plural = _('FoI Request Tags')
 
 
-@python_2_unicode_compatible
 class FoiRequest(models.Model):
     STATUS_CHOICES = (
         ('awaiting_user_confirmation',
@@ -627,7 +624,7 @@ class FoiRequest(models.Model):
         if self.is_overdue() and self.awaits_response():
             days = (timezone.now() - self.due_date).days + 1
             message = render_to_string('foirequest/emails/overdue_reply.txt', {
-                'due': ungettext_lazy(
+                'due': ngettext_lazy(
                     "%(count)s day",
                     "%(count)s days",
                     days) % {'count': days},
@@ -1083,7 +1080,7 @@ class FoiRequest(models.Model):
         if user is None:
             return
         count = len(req_event_dict)
-        subject = ungettext_lazy(
+        subject = ngettext_lazy(
             "%(site_name)s: Update on one of your request",
             "%(site_name)s: Update on %(count)s of your requests",
             count) % {
@@ -1151,7 +1148,6 @@ class FoiMessageManager(models.Manager):
         return self.get_queryset().filter(sender_user=user), 'timestamp'
 
 
-@python_2_unicode_compatible
 class FoiMessage(models.Model):
     request = models.ForeignKey(FoiRequest,
             verbose_name=_("Freedom of Information Request"),
@@ -1411,7 +1407,6 @@ def upload_to(instance, filename):
     return "{}/{}/{}".format(settings.FOI_MEDIA_PATH, instance.belongs_to.id, instance.name)
 
 
-@python_2_unicode_compatible
 class FoiAttachment(models.Model):
     belongs_to = models.ForeignKey(FoiMessage, null=True,
             verbose_name=_("Belongs to request"), on_delete=models.CASCADE)
@@ -1548,7 +1543,6 @@ class FoiEventManager(models.Manager):
         return event
 
 
-@python_2_unicode_compatible
 class FoiEvent(models.Model):
     request = models.ForeignKey(FoiRequest,
             verbose_name=_("Freedom of Information Request"),
@@ -1668,7 +1662,6 @@ class FoiEvent(models.Model):
         return mark_safe(self.event_texts[self.event_name] % self.get_html_context())
 
 
-@python_2_unicode_compatible
 class DeferredMessage(models.Model):
     recipient = models.CharField(max_length=255, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)

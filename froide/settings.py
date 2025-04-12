@@ -133,6 +133,9 @@ class Base(Configuration):
 
     # ######## Backends, Finders, Processors, Classes ####
 
+    #  Change to models for Django 3.2.
+    DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
     AUTH_USER_MODEL = values.Value('account.User')
     CUSTOM_AUTH_USER_MODEL_DB = values.Value('')
 
@@ -154,8 +157,6 @@ class Base(Configuration):
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': (
                 os.path.join(PROJECT_ROOT, "templates"),
-                os.path.join(os.path.dirname(django.__file__),
-                             "forms/templates/"),
             ),
             'OPTIONS': {
                 'debug': values.BooleanValue(DEBUG),

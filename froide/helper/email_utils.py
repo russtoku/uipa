@@ -21,7 +21,8 @@ from email.utils import parseaddr, formataddr, parsedate_tz, getaddresses
 import imaplib
 import re
 
-from django.utils.six import BytesIO, text_type as str, binary_type as bytes
+#from django.utils.six import BytesIO, text_type as str, binary_type as bytes
+from io import BytesIO
 
 import pytz
 
@@ -171,7 +172,9 @@ class EmailParser:
                     charset, 'replace'))
 
     def get(self, field):
-        if isinstance(field, bytes):
+        # Convert to str if not str.
+        #if isinstance(field, bytes):
+        if isinstance(field, str):
             return field
         return str(field)
 

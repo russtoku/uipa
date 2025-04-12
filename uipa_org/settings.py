@@ -210,6 +210,7 @@ class S3Enabled:
 
 class Dev(UipaOrgThemeBase, Base):
 
+    TEMPLATE_DEBUG = True
     DEBUG = True
     ALLOWED_HOSTS = values.TupleValue(('localhost', '127.0.0.1'))
 
@@ -359,9 +360,9 @@ class Dev(UipaOrgThemeBase, Base):
 
     # Send email to one of:
     #   1. Console
-    #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     #   2. mailsink server
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
     SERVER_EMAIL = 'info@dev.uipa.org'
     DEFAULT_FROM_EMAIL = 'info@dev.uipa.org'

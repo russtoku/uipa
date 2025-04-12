@@ -5,8 +5,8 @@ description = "UIPA.org upgrade to current Python and Django"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-  "django~=2.0",
-  "django-appconf==1.0.2",
+  "django~=3.0",
+  "django-appconf",
   "Markdown",
   "importlib-metadata<5.0",
   "celery<5.0",
@@ -23,7 +23,7 @@ dependencies = [
   "django-storages==1.5.0",
   "dj-database-url==0.4.1",
   "django-cache-url==1.2.0",
-  "django-compressor==2.1",
+  "django-compressor==2.4",
   "django-contrib-comments",
   "unicodecsv==0.14.1",
   "honcho==0.6.6",
@@ -35,3 +35,12 @@ dependencies = [
   "setuptools==56.0.0",
   "gunicorn==23.0.0",
 ]
+
+[dependency-groups]
+dev = [
+  "black == 24.*",
+  "pytest-django",
+  "factory-boy",
+  "mock",
+  "selenium",
+ ]

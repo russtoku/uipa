@@ -3,15 +3,11 @@ import requests
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
-from django.utils.six import StringIO, BytesIO, PY3
+#from django.utils.six import StringIO, BytesIO, PY3
 
 from taggit.utils import parse_tags
 
-if PY3:
-    import csv
-else:
-    import unicodecsv as csv
-
+import csv
 
 from froide.publicbody.models import (PublicBody, PublicBodyTag, Jurisdiction, FoiLaw)
 
@@ -37,8 +33,7 @@ class CSVImporter:
         """
         csv_file should be encoded in utf-8
         """
-        if PY3:
-            csv_file = StringIO(csv_file.read().decode('utf-8'))
+        csv_file = StringIO(csv_file.read().decode('utf-8'))
         reader = csv.DictReader(csv_file)
         for row in reader:
             self.import_row(row)

@@ -2,7 +2,7 @@ import datetime
 import re
 import json
 
-from django.utils.six import text_type as str
+#from django.utils.six import text_type as str
 from django.conf import settings
 from django.core.files import File
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -42,6 +42,8 @@ from .foi_mail import package_foirequest
 from .hooks import registry
 from .utils import check_throttle
 
+import logging
+logger = logging.getLogger(__name__)
 
 X_ACCEL_REDIRECT_PREFIX = getattr(settings, 'X_ACCEL_REDIRECT_PREFIX', '')
 User = get_user_model()
@@ -268,7 +270,7 @@ def show(request, slug, template_name="foirequest/show.html",
         "object": obj,
         "active_tab": active_tab
     })
-    breakpoint()
+    logging.info(f"calling render({request}, {template_name}, {context}, {status}")
     return render(request, template_name, context, status=status)
 
 

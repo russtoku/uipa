@@ -2,7 +2,7 @@ import json
 from datetime import timedelta
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
 from django.contrib.sites.managers import CurrentSiteManager
 from django.urls import reverse
@@ -11,7 +11,6 @@ from django.utils.text import Truncator
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 
 from taggit.managers import TaggableManager
 from taggit.models import TagBase, ItemBase
@@ -35,7 +34,6 @@ class JurisdictionManager(models.Manager):
         return self.get_visible().annotate(num_publicbodies=models.Count('publicbody'))
 
 
-@python_2_unicode_compatible
 class Jurisdiction(models.Model):
     name = models.CharField(_("Name"), max_length=255)
     slug = models.SlugField(_("Slug"), max_length=255)
@@ -61,7 +59,6 @@ class Jurisdiction(models.Model):
         return "{}{}".format(settings.SITE_URL, self.get_absolute_url())
 
 
-@python_2_unicode_compatible
 class FoiLaw(models.Model):
     name = models.CharField(_("Name"), max_length=255)
     slug = models.SlugField(_("Slug"), max_length=255)
@@ -236,7 +233,6 @@ class PublicBodyManager(CurrentSiteManager):
         return self.get_queryset()
 
 
-@python_2_unicode_compatible
 class PublicBody(models.Model):
     name = models.CharField(_("Name"), max_length=255)
     other_names = models.TextField(_("Other names"), default="", blank=True)

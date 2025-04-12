@@ -1,4 +1,3 @@
-from django.utils import six
 from django.http import StreamingHttpResponse
 
 from taggit.utils import edit_string_for_tags

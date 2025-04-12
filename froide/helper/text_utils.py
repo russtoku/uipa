@@ -2,7 +2,7 @@ import re
 
 from html.entities import name2codepoint
 
-from django.utils.six import text_type as str, unichr as chr
+#from django.utils.six import text_type as str, unichr as chr
 
 SEPARATORS = re.compile(r'(\s*-{5}\w+ \w+-{5}\s*|^--\s*$)', re.UNICODE | re.M)
 

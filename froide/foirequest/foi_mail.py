@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.mail import get_connection, EmailMessage, mail_managers
 from django.urls import reverse
 from django.utils.translation import override, ugettext, ugettext_lazy as _
-from django.utils.six import BytesIO, string_types
+#from django.utils.six import BytesIO, string_types
 
 from froide.helper.email_utils import (EmailParser, get_unread_mails,
                                        make_address)
@@ -91,7 +91,7 @@ def create_deferred(secret_mail, mail_string, b64_encoded=False, spam=False,
 def get_alternative_mail(req):
     name = get_name_from_number(req.pk)
     domains = settings.FOI_EMAIL_DOMAIN
-    if isinstance(domains, string_types):
+    if isinstance(domains, str):
         domains = [domains]
     if len(domains) > 1:
         domains = domains[1:]
@@ -137,7 +137,7 @@ def _deliver_mail(email, mail_string=None, manual=False):
     logger.info(f"Received list is {received_list}")
 
     domains = settings.FOI_EMAIL_DOMAIN
-    if isinstance(domains, string_types):
+    if isinstance(domains, str):
         domains = [domains]
 
     logger.info(f"Domain filter is {domains}")
