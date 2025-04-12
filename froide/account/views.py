@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import Http404, QueryDict
 from django.contrib import auth
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import SetPasswordForm
 ##from django.contrib.auth.views import password_reset_confirm as django_password_reset_confirm
@@ -13,7 +13,7 @@ from django.contrib.auth.views import (
 )
 from django.http.response import HttpResponseRedirect
 
-from django.utils.http import urlsafe_base64_decode, is_safe_url
+from django.utils.http import urlsafe_base64_decode, url_has_allowed_host_and_scheme
 from django.views.generic import ListView
 
 from froide.foirequest.models import FoiRequest, FoiEvent
@@ -395,7 +395,7 @@ def delete_account(request):
 def new_terms(request, next=None):
     if next is None:
         next = request.GET.get('next', '/')
-    if not is_safe_url(url=next, host=request.get_host()):
+    if not url_has_allowed_host_and_scheme(url=next, host=request.get_host()):
         next = '/'
     if not request.user.is_authenticated:
         return redirect(next)

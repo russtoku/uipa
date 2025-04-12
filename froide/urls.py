@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path, re_path
 from django.urls import include, path
 from django.urls import reverse
 from django.conf.urls.static import static
@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.flatpages.views import flatpage
 from django.contrib.sitemaps import Sitemap
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 
@@ -58,54 +58,54 @@ urlpatterns = []
 
 if settings.FROIDE_THEME:
     urlpatterns += [
-        url(r'^', include('%s.urls' % settings.FROIDE_THEME)),
+        path('', include('%s.urls' % settings.FROIDE_THEME)),
     ]
 
 if settings.FROIDE_CONFIG.get('api_activated', True):
     urlpatterns += [
-        url(r'^api/', include(v1_api.urls)),
+        path('api/', include(v1_api.urls)),
     ]
 
 urlpatterns += [
     # Translators: URL part
-    url(r'^$', index, name='index'),
-    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
-    url(r'^dashboard/$', dashboard, name='dashboard')
+    path('', index, name='index'),
+    re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
+    path('dashboard/', dashboard, name='dashboard')
 ]
 
 if len(settings.LANGUAGES) > 1:
     urlpatterns += [
-        url(r'^i18n/', include('django.conf.urls.i18n'))
+        path('i18n/', include('django.conf.urls.i18n'))
     ]
 
 urlpatterns += [
     # Translators: request URL
-    url(r'^%s/' % _('make-request'), include('froide.foirequest.make_request_urls')),
+    re_path(r'^%s/' % _('make-request'), include('froide.foirequest.make_request_urls')),
     # Translators: URL part
-    url(r'^%s/' % _('requests'), include('froide.foirequest.urls')),
+    re_path(r'^%s/' % _('requests'), include('froide.foirequest.urls')),
     # Translators: request URL
-    url(r'^%s/' % _('request'), include('froide.foirequest.request_urls')),
+    re_path(r'^%s/' % _('request'), include('froide.foirequest.request_urls')),
     # Translators: Short-request URL
-    url(r"^%s/(?P<obj_id>\d+)/?$" % _('r'), shortlink, name="foirequest-shortlink"),
+    re_path(r"^%s/(?P<obj_id>\d+)/?$" % _('r'), shortlink, name="foirequest-shortlink"),
     # Translators: Short-request auth URL
-    url(r"^%s/(?P<obj_id>\d+)/auth/(?P<code>[0-9a-f]+)/$" % _('r'), auth, name="foirequest-auth"),
+    re_path(r"^%s/(?P<obj_id>\d+)/auth/(?P<code>[0-9a-f]+)/$" % _('r'), auth, name="foirequest-auth"),
     # Translators: follow request URL
-    url(r'^%s/' % _('follow'), include('froide.foirequestfollower.urls')),
+    re_path(r'^%s/' % _('follow'), include('froide.foirequestfollower.urls')),
     # Translators: URL part
-    url(r"^%s/(?P<slug>[-\w]+)/$" % _('entity'), show_publicbody,
+    re_path(r"^%s/(?P<slug>[-\w]+)/$" % _('entity'), show_publicbody,
             name="publicbody-show"),
-    url(r"^%s/$" % _('entity'), lambda request: HttpResponseRedirect(reverse('publicbody-list'))),
+    re_path(r"^%s/$" % _('entity'), lambda request: HttpResponseRedirect(reverse('publicbody-list'))),
     # Translators: URL part
-    url(r'^%s/' % _('entities'), include('froide.publicbody.urls')),
+    re_path(r'^%s/' % _('entities'), include('froide.publicbody.urls')),
     # Translators: URL part
-    url(r'^%s/' % _('law'), include('froide.publicbody.law_urls')),
+    re_path(r'^%s/' % _('law'), include('froide.publicbody.law_urls')),
     # Translators: URL part
-    url(r'^%s/' % _('account'), include('froide.account.urls')),
+    re_path(r'^%s/' % _('account'), include('froide.account.urls')),
     # Translators: URL part
-    url(r'^%s/' % _('profile'), include('froide.account.profile_urls')),
+    re_path(r'^%s/' % _('profile'), include('froide.account.profile_urls')),
     # Translators: URL part
-    url(r'^%s/' % _('search'), search, name="foirequest-search"),
-    url(r'^comments/', include('django_comments.urls')),
+    re_path(r'^%s/' % _('search'), search, name="foirequest-search"),
+    path('comments/', include('django_comments.urls')),
     # Secret URLs
     ##url(r'^%s/' % SECRET_URLS.get('admin', 'admin'), include(admin.site.urls))
     path("%s/" % SECRET_URLS.get("admin", "admin"), admin.site.urls),
@@ -121,13 +121,13 @@ terms_url_part = _('terms')
 privacy_url_part = _('privacy')
 
 urlpatterns += [
-    url(r'^%s/$' % help_url_part, flatpage,
+    re_path(r'^%s/$' % help_url_part, flatpage,
         {'url': '/%s/' % help_url_part}, name='help-index'),
-    url(r'^{}/{}/$'.format(help_url_part, about_url_part), flatpage,
+    re_path(r'^{}/{}/$'.format(help_url_part, about_url_part), flatpage,
         {'url': '/{}/{}/'.format(help_url_part, about_url_part)}, name='help-about'),
-    url(r'^{}/{}/$'.format(help_url_part, terms_url_part), flatpage,
+    re_path(r'^{}/{}/$'.format(help_url_part, terms_url_part), flatpage,
         {'url': '/{}/{}/'.format(help_url_part, terms_url_part)}, name='help-terms'),
-    url(r'^{}/{}/$'.format(help_url_part, privacy_url_part), flatpage,
+    re_path(r'^{}/{}/$'.format(help_url_part, privacy_url_part), flatpage,
         {'url': '/{}/{}/'.format(help_url_part, privacy_url_part)}, name='help-privacy'),
 ]
 
@@ -136,7 +136,7 @@ if SECRET_URLS.get('postmark_inbound'):
     from froide.foirequest.views import postmark_inbound
 
     urlpatterns += [
-        url(r'^postmark/%s/' % SECRET_URLS['postmark_inbound'],
+        re_path(r'^postmark/%s/' % SECRET_URLS['postmark_inbound'],
             postmark_inbound, name="foirequest-postmark_inbound")
     ]
 
@@ -144,7 +144,7 @@ if SECRET_URLS.get('postmark_bounce'):
     from froide.foirequest.views import postmark_bounce
 
     urlpatterns += [
-        url(r'^postmark/%s/' % SECRET_URLS['postmark_bounce'],
+        re_path(r'^postmark/%s/' % SECRET_URLS['postmark_bounce'],
             postmark_bounce, name="foirequest-postmark_bounce")
     ]
 
@@ -152,7 +152,7 @@ USE_X_ACCEL_REDIRECT = getattr(settings, 'USE_X_ACCEL_REDIRECT', False)
 
 if USE_X_ACCEL_REDIRECT:
     urlpatterns += [
-        url(r'^{}{}/'.format(settings.MEDIA_URL[1:], settings.FOI_MEDIA_PATH),
+        re_path(r'^{}{}/'.format(settings.MEDIA_URL[1:], settings.FOI_MEDIA_PATH),
             include('froide.foirequest.media_urls'))
     ]
 
@@ -162,7 +162,7 @@ if settings.DEBUG:
 
 # Catch all Jurisdiction patterns
 urlpatterns += [
-    url(r'^(?P<slug>[\w-]+)/', include('froide.publicbody.jurisdiction_urls'))
+    re_path(r'^(?P<slug>[\w-]+)/', include('froide.publicbody.jurisdiction_urls'))
 ]
 
 

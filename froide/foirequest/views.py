@@ -11,8 +11,8 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.translation import ugettext_lazy as _
-from django.utils.http import is_safe_url
+from django.utils.translation import gettext_lazy as _
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.http import Http404, HttpResponse
 from django.template.defaultfilters import slugify
 from django.contrib import messages
@@ -447,7 +447,7 @@ def submit_request(request, public_body=None):
                 _('Your request has been sent.'))
         if request_form.cleaned_data['redirect_url']:
             redirect_url = request_form.cleaned_data['redirect_url']
-            if is_safe_url(redirect_url):
+            if url_has_allowed_host_and_scheme(redirect_url):
                 return redirect(redirect_url)
         return redirect('{}{}'.format(foi_request.get_absolute_url(), _('?request-made')))
     else:

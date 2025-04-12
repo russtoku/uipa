@@ -1,5 +1,5 @@
-from django.conf.urls import url
-from django.urls import path, re_path
+from django.urls import path
+from django.urls import re_path
 
 from .views import (
     MyRequestsView,
@@ -21,20 +21,20 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^$', MyRequestsView.as_view(), name='account-show'),
-    url(r'^following/$', FollowingRequestsView.as_view(), name='account-following'),
-    url(r'^settings/$', account_settings, name='account-settings'),
-    url(r'^terms/$', new_terms, name='account-new_terms'),
-    url(r'^logout/$', logout, name='account-logout'),
-    url(r'^login/$', login, name='account-login'),
-    url(r'^signup/$', signup, name='account-signup'),
-    url(r'^reset/$', send_reset_password_link, name='account-send_reset_password_link'),
-    url(r'^change_password/$', change_password, name='account-change_password'),
-    url(r'^change_user/$', change_user, name='account-change_user'),
-    url(r'^change-email/$', change_email, name='account-change_email'),
-    url(r'^delete-account/$', delete_account, name='account-delete_account'),
-    url(r'^confirm/(?P<user_id>\d+)/(?P<secret>\w{32})/$', confirm, name='account-confirm'),
-    url(r'^confirm/(?P<user_id>\d+)/(?P<request_id>\d+)/(?P<secret>\w{32})/$',
+    path('', MyRequestsView.as_view(), name='account-show'),
+    path('following/', FollowingRequestsView.as_view(), name='account-following'),
+    path('settings/', account_settings, name='account-settings'),
+    path('terms/', new_terms, name='account-new_terms'),
+    path('logout/', logout, name='account-logout'),
+    path('login/', login, name='account-login'),
+    path('signup/', signup, name='account-signup'),
+    path('reset/', send_reset_password_link, name='account-send_reset_password_link'),
+    path('change_password/', change_password, name='account-change_password'),
+    path('change_user/', change_user, name='account-change_user'),
+    path('change-email/', change_email, name='account-change_email'),
+    path('delete-account/', delete_account, name='account-delete_account'),
+    re_path(r'^confirm/(?P<user_id>\d+)/(?P<secret>\w{32})/$', confirm, name='account-confirm'),
+    re_path(r'^confirm/(?P<user_id>\d+)/(?P<request_id>\d+)/(?P<secret>\w{32})/$',
         confirm, name='account-confirm'),
     #url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     #    password_reset_confirm, name='account-password_reset_confirm'),
@@ -43,6 +43,6 @@ urlpatterns = [
         CustomPasswordResetConfirmView.as_view(),
         name="account-password_reset_confirm",
     ),
-    url(r'^go/(?P<user_id>\d+)/(?P<secret>\w{32})(?P<url>/.*)$', go,
+    re_path(r'^go/(?P<user_id>\d+)/(?P<secret>\w{32})(?P<url>/.*)$', go,
         name='account-go'),
 ]

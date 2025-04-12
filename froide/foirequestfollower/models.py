@@ -2,7 +2,7 @@ import hmac
 
 from django.db import models
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _, ungettext_lazy
+from django.utils.translation import gettext_lazy as _, ngettext_lazy
 from django.urls import reverse
 from django.dispatch import receiver
 from django.template.loader import render_to_string
@@ -116,7 +116,7 @@ class FoiRequestFollower(models.Model):
             template = 'foirequestfollower/update_follower.txt'
 
         count = len(req_event_dict)
-        subject = ungettext_lazy(
+        subject = ngettext_lazy(
             "%(site_name)s: Update on followed request",
             "%(site_name)s: Update on %(count)s followed requests",
             count) % {

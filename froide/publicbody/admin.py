@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
 import floppyforms as forms
@@ -24,6 +24,7 @@ class PublicBodyAdminForm(forms.ModelForm):
         }
 
 
+@admin.register(PublicBody)
 class PublicBodyAdmin(admin.ModelAdmin, AdminTagAllMixIn):
     form = PublicBodyAdminForm
 
@@ -43,10 +44,15 @@ class PublicBodyAdmin(admin.ModelAdmin, AdminTagAllMixIn):
 
     actions = ['export_csv', 'remove_from_index', 'tag_all']
 
+    @admin.action(
+        description=_("Export to CSV")
+    )
     def export_csv(self, request, queryset):
         return export_csv_response(PublicBody.export_csv(queryset))
-    export_csv.short_description = _("Export to CSV")
 
+    @admin.action(
+        description=_("Remove from search index")
+    )
     def remove_from_index(self, request, queryset):
         from haystack import connections as haystack_connections
 
@@ -56,9 +62,9 @@ class PublicBodyAdmin(admin.ModelAdmin, AdminTagAllMixIn):
                 backend.remove(obj)
 
         self.message_user(request, _("Removed from search index"))
-    remove_from_index.short_description = _("Remove from search index")
 
 
+@admin.register(FoiLaw)
 class FoiLawAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('name', 'meta', 'jurisdiction',)
@@ -67,12 +73,14 @@ class FoiLawAdmin(admin.ModelAdmin):
     filter_horizontal = ('combined',)
 
 
+@admin.register(Jurisdiction)
 class JurisdictionAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_filter = ['hidden', 'rank']
     list_display = ['name', 'hidden', 'rank']
 
 
+@admin.register(PublicBodyTag)
 class PublicBodyTagAdmin(admin.ModelAdmin):
     list_display = ["name", "slug", "is_topic", "rank"]
     list_filter = ['is_topic', 'rank']
@@ -81,12 +89,8 @@ class PublicBodyTagAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
 
 
+@admin.register(TaggedPublicBody)
 class TaggedPublicBodyAdmin(admin.ModelAdmin):
     raw_id_fields = ('content_object', 'tag')
 
 
-admin.site.register(PublicBody, PublicBodyAdmin)
-admin.site.register(FoiLaw, FoiLawAdmin)
-admin.site.register(Jurisdiction, JurisdictionAdmin)
-admin.site.register(PublicBodyTag, PublicBodyTagAdmin)
-admin.site.register(TaggedPublicBody, TaggedPublicBodyAdmin)

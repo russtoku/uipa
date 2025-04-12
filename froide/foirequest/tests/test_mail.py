@@ -5,7 +5,7 @@ import os
 from django.test import TestCase
 from django.core import mail
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from django.utils.six import BytesIO
 from django.urls import reverse

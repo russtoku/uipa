@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 from django import forms
 from django.conf import settings
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.admin import helpers
@@ -39,6 +39,7 @@ class CustomUserCreationForm(UserCreationForm):
         )
 
 
+@admin.register(User)
 class UserAdmin(DjangoUserAdmin):
     # The forms to add and change user instances
     add_form = CustomUserCreationForm
@@ -62,10 +63,15 @@ class UserAdmin(DjangoUserAdmin):
     actions = ['export_csv', 'resend_activation',
                'send_mail', 'delete_sessions', 'cancel_users']
 
+    @admin.action(
+        description=_("Export to CSV")
+    )
     def export_csv(self, request, queryset):
         return export_csv_response(User.export_csv(queryset))
-    export_csv.short_description = _("Export to CSV")
 
+    @admin.action(
+        description=_("Resend activation mail")
+    )
     def resend_activation(self, request, queryset):
         rows_updated = 0
 
@@ -91,8 +97,10 @@ class UserAdmin(DjangoUserAdmin):
             )
 
         self.message_user(request, _("%d activation mails sent." % rows_updated))
-    resend_activation.short_description = _("Resend activation mail")
 
+    @admin.action(
+        description=_("Send mail to users")
+    )
     def send_mail(self, request, queryset):
         """
         Mark selected requests as same as the one we are choosing now.
@@ -135,20 +143,22 @@ class UserAdmin(DjangoUserAdmin):
         # Display the confirmation page
         return TemplateResponse(request, 'account/admin_send_mail.html',
             context)
-    send_mail.short_description = _("Send mail to users")
 
+    @admin.action(
+        description=_('Delete sessions of users')
+    )
     def delete_sessions(self, request, queryset):
         for user in queryset:
             delete_all_unexpired_sessions_for_user(user)
         self.message_user(request, _("Sessions deleted."))
         return None
-    delete_sessions.short_description = _('Delete sessions of users')
 
+    @admin.action(
+        description=_('Cancel account of users')
+    )
     def cancel_users(self, request, queryset):
         for user in queryset:
             cancel_user(user)
         self.message_user(request, _("Users canceled."))
         return None
-    cancel_users.short_description = _('Cancel account of users')
 
-admin.site.register(User, UserAdmin)

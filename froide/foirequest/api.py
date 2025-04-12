@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import re_path
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
 
@@ -144,15 +144,15 @@ class FoiRequestResource(ModelResource):
 
     def prepend_urls(self):
         return [
-            url(r"^(?P<resource_name>{})/search{}$".format(
+            re_path(r"^(?P<resource_name>{})/search{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_search'), name="api_get_search"),
-            url(r"^(?P<resource_name>{})/simplesearch{}$".format(
+            re_path(r"^(?P<resource_name>{})/simplesearch{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_simple_search'), name="api_get_simple_search"),
-            url(r"^(?P<resource_name>{})/tags/autocomplete{}$".format(
+            re_path(r"^(?P<resource_name>{})/tags/autocomplete{}$".format(
                     self._meta.resource_name,
                     utils.trailing_slash()
             ), self.wrap_view('get_tags_autocomplete'), name="api_get_tags_autocomplete"),

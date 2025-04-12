@@ -4,15 +4,15 @@
 #
 # Distributed under terms of the MIT license.
 
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib.flatpages.views import flatpage
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 faq_url_part = _('faq')
 help_url_part = _('help')
 
 urlpatterns = [
-    url(r'^{}/{}/$'.format(help_url_part, faq_url_part), flatpage,
+    re_path(r'^{}/{}/$'.format(help_url_part, faq_url_part), flatpage,
        {'url': '/{}/{}/'.format(help_url_part, faq_url_part)}, name='help-faq'),
 ]
 

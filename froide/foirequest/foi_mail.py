@@ -7,7 +7,7 @@ import random
 from django.conf import settings
 from django.core.mail import get_connection, EmailMessage, mail_managers
 from django.urls import reverse
-from django.utils.translation import override, ugettext, ugettext_lazy as _
+from django.utils.translation import override, gettext, gettext_lazy as _
 #from django.utils.six import BytesIO, string_types
 
 from froide.helper.email_utils import (EmailParser, get_unread_mails,
@@ -249,9 +249,9 @@ def package_foirequest(foirequest):
                 is_converted=False
             )
             if message.is_response:
-                filename = '{}_{}.txt'.format(date_prefix, ugettext('publicbody'))
+                filename = '{}_{}.txt'.format(date_prefix, gettext('publicbody'))
             else:
-                filename = '{}_{}.txt'.format(date_prefix, ugettext('requester'))
+                filename = '{}_{}.txt'.format(date_prefix, gettext('requester'))
 
             zfile.writestr(filename, message.get_formated(att_queryset).encode('utf-8'))
 

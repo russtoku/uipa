@@ -1,5 +1,5 @@
 from django.contrib.admin.filters import SimpleListFilter
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.template.response import TemplateResponse
 from django.contrib import admin
@@ -10,6 +10,9 @@ from .forms import TagObjectForm
 
 
 class AdminTagAllMixIn:
+    @admin.action(
+        description=_("Add tag to all selected")
+    )
     def tag_all(self, request, queryset):
         """
         Add tag to all selected objects
@@ -50,7 +53,6 @@ class AdminTagAllMixIn:
         # Display the confirmation page
         return TemplateResponse(request, 'admin_utils/admin_tag_all.html',
             context)
-    tag_all.short_description = _("Add tag to all selected")
 
 
 class NullFilter(SimpleListFilter):

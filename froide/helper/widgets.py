@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.forms.widgets import TextInput
 from django.conf import settings
 #from django.utils import six
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from taggit.utils import edit_string_for_tags
 

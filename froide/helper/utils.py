@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 def get_next(request):
     # This is not a view
-    return request.GET.get("next", request.META.get("HTTP_REFERER", "/"))
+    return request.GET.get("next", request.headers.get("referer", "/"))
 
 
 def render_code(code, request, context={}):
@@ -25,7 +25,7 @@ def render_403(request, message=''):
 
 
 def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    x_forwarded_for = request.headers.get('x-forwarded-for')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[-1].strip()
     else:

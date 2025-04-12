@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from django.utils.translation import ugettext_lazy as _, ungettext
+from django.utils.translation import gettext_lazy as _, ngettext
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.sitemaps import Sitemap
@@ -109,7 +109,7 @@ def confirm(request):
             _('This request was already confirmed.'))
     else:
         messages.add_message(request, messages.ERROR,
-                ungettext('%(count)d message was sent.',
+                ngettext('%(count)d message was sent.',
                     '%(count)d messages were sent', result
                     ) % {"count": result})
     return redirect('admin:publicbody_publicbody_change', pb.id)

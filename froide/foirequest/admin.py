@@ -1,7 +1,7 @@
 import re
 
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.db import router
@@ -51,6 +51,7 @@ class FoiRequestTagsFilter(TaggitListFilter):
     tag_class = TaggedFoiRequest
 
 
+@admin.register(FoiRequest)
 class FoiRequestAdmin(admin.ModelAdmin, AdminTagAllMixIn):
     form = FoiRequestAdminForm
 
@@ -78,16 +79,23 @@ class FoiRequestAdmin(admin.ModelAdmin, AdminTagAllMixIn):
     raw_id_fields = ('same_as', 'public_body', 'user',)
     save_on_top = True
 
+    @admin.action(
+        description=_("Mark selected requests as checked")
+    )
     def mark_checked(self, request, queryset):
         rows_updated = queryset.update(checked=True)
         self.message_user(request, _("%d request(s) successfully marked as checked." % rows_updated))
-    mark_checked.short_description = _("Mark selected requests as checked")
 
+    @admin.action(
+        description=_("Mark selected requests as not FoI")
+    )
     def mark_not_foi(self, request, queryset):
         rows_updated = queryset.update(is_foi=False)
         self.message_user(request, _("%d request(s) successfully marked as not FoI." % rows_updated))
-    mark_not_foi.short_description = _("Mark selected requests as not FoI")
 
+    @admin.action(
+        description=_("Mark selected requests as identical to...")
+    )
     def mark_same_as(self, request, queryset):
         """
         Mark selected requests as same as the one we are choosing now.
@@ -128,8 +136,10 @@ class FoiRequestAdmin(admin.ModelAdmin, AdminTagAllMixIn):
         # Display the confirmation page
         return TemplateResponse(request, 'foirequest/admin_mark_same_as.html',
             context)
-    mark_same_as.short_description = _("Mark selected requests as identical to...")
 
+    @admin.action(
+        description=_("Remove from search index")
+    )
     def remove_from_index(self, request, queryset):
         from haystack import connections as haystack_connections
 
@@ -139,8 +149,10 @@ class FoiRequestAdmin(admin.ModelAdmin, AdminTagAllMixIn):
                 backend.remove(obj)
 
         self.message_user(request, _("Removed from search index"))
-    remove_from_index.short_description = _("Remove from search index")
 
+    @admin.action(
+        description=_("Confirm request if unconfirmed")
+    )
     def confirm_request(self, request, queryset):
         foireq = queryset[0]
         if foireq.status != 'awaiting_user_confirmation':
@@ -149,17 +161,20 @@ class FoiRequestAdmin(admin.ModelAdmin, AdminTagAllMixIn):
         self.message_user(request, _("Message send successfully!"))
         FoiRequest.confirmed_request(foireq.user, foireq.pk)
         return None
-    confirm_request.short_description = _("Confirm request if unconfirmed")
 
+    @admin.action(
+        description=_("Set only visible to requester")
+    )
     def set_visible_to_user(self, request, queryset):
         queryset.update(visibility=1)
         self.message_user(request, _("Selected requests are now only visible to requester."))
-    set_visible_to_user.short_description = _("Set only visible to requester")
 
+    @admin.action(
+        description=_("Unpublish")
+    )
     def unpublish(self, request, queryset):
         queryset.update(public=False)
         self.message_user(request, _("Selected requests are now unpublished."))
-    unpublish.short_description = _("Unpublish")
 
 
 class FoiAttachmentInline(admin.TabularInline):
@@ -167,6 +182,7 @@ class FoiAttachmentInline(admin.TabularInline):
     raw_id_fields = ('redacted', 'converted')
 
 
+@admin.register(FoiMessage)
 class FoiMessageAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ('subject', 'timestamp', 'sender_email', 'recipient_email',)
@@ -181,6 +197,7 @@ class FoiMessageAdmin(admin.ModelAdmin):
     ]
 
 
+@admin.register(FoiAttachment)
 class FoiAttachmentAdmin(admin.ModelAdmin):
     raw_id_fields = ('belongs_to', 'redacted', 'converted')
     ordering = ('-id',)
@@ -192,16 +209,23 @@ class FoiAttachmentAdmin(admin.ModelAdmin):
     search_fields = ['name']
     actions = ['approve', 'cannot_approve', 'convert']
 
+    @admin.action(
+        description=_("Mark selected as approved")
+    )
     def approve(self, request, queryset):
         rows_updated = queryset.update(approved=True)
         self.message_user(request, _("%d attachment(s) successfully approved." % rows_updated))
-    approve.short_description = _("Mark selected as approved")
 
+    @admin.action(
+        description=_("Mark selected as NOT approvable")
+    )
     def cannot_approve(self, request, queryset):
         rows_updated = queryset.update(can_approve=False)
         self.message_user(request, _("%d attachment(s) successfully marked as not approvable." % rows_updated))
-    cannot_approve.short_description = _("Mark selected as NOT approvable")
 
+    @admin.action(
+        description=_("Convert to PDF")
+    )
     def convert(self, request, queryset):
         if not queryset:
             return
@@ -210,9 +234,9 @@ class FoiAttachmentAdmin(admin.ModelAdmin):
                     instance.name.endswith(FoiAttachment.CONVERTABLE_FILETYPES)):
                 convert_attachment_task.delay(instance.pk)
         self.message_user(request, _("Conversion tasks started."))
-    convert.short_description = _("Convert to PDF")
 
 
+@admin.register(FoiEvent)
 class FoiEventAdmin(admin.ModelAdmin):
     list_display = ('event_name', 'request', 'timestamp',)
     list_filter = ('event_name', 'public')
@@ -222,6 +246,7 @@ class FoiEventAdmin(admin.ModelAdmin):
     raw_id_fields = ('request', 'user', 'public_body')
 
 
+@admin.register(PublicBodySuggestion)
 class PublicBodySuggestionAdmin(admin.ModelAdmin):
     list_display = ('request', 'public_body', 'user', 'reason',)
     search_fields = ['request', 'reason']
@@ -230,6 +255,7 @@ class PublicBodySuggestionAdmin(admin.ModelAdmin):
     raw_id_fields = ('request', 'public_body', 'user')
 
 
+@admin.register(DeferredMessage)
 class DeferredMessageAdmin(admin.ModelAdmin):
     model = DeferredMessage
 
@@ -243,6 +269,9 @@ class DeferredMessageAdmin(admin.ModelAdmin):
 
     save_on_top = True
 
+    @admin.action(
+        description=_("Auto-Redeliver based on subject")
+    )
     def auto_redeliver(self, request, queryset):
         import json
         parser = EmailParser()
@@ -260,7 +289,6 @@ class DeferredMessageAdmin(admin.ModelAdmin):
                     deferred.redeliver(req)
                 except FoiRequest.DoesNotExist:
                     continue
-    auto_redeliver.short_description = _("Auto-Redeliver based on subject")
 
     def redeliver(self, request, queryset, auto=False):
         """
@@ -308,9 +336,3 @@ class DeferredMessageAdmin(admin.ModelAdmin):
     redeliver.short_description = _("Redeliver to...")
 
 
-admin.site.register(FoiRequest, FoiRequestAdmin)
-admin.site.register(FoiMessage, FoiMessageAdmin)
-admin.site.register(FoiAttachment, FoiAttachmentAdmin)
-admin.site.register(FoiEvent, FoiEventAdmin)
-admin.site.register(PublicBodySuggestion, PublicBodySuggestionAdmin)
-admin.site.register(DeferredMessage, DeferredMessageAdmin)

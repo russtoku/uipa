@@ -3,7 +3,7 @@ from datetime import timedelta
 from django.utils import timezone
 from django.core.mail import mail_managers
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from froide.helper.date_utils import format_seconds
 

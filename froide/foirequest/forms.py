@@ -2,9 +2,9 @@ import json
 import magic
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils import timezone
 
@@ -432,7 +432,7 @@ class PostalScanMixin:
         if scan:
             scan.seek(0)
             content_type = magic.from_buffer(scan.read(1024), mime=True)
-            content_type = force_text(content_type)
+            content_type = force_str(content_type)
             scan.seek(0)
             if content_type:
                 scan.content_type = content_type

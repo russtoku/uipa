@@ -20,7 +20,7 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from froide.helper.text_utils import replace_greetings, replace_word
 from froide.helper.csv_utils import export_csv, get_dict
 
-user_activated_signal = dispatch.Signal(providing_args=[])
+user_activated_signal = dispatch.Signal()
 
 
 class User(AbstractUser):
