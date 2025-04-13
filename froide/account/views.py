@@ -18,7 +18,7 @@ from django.views.generic import ListView
 
 from froide.foirequest.models import FoiRequest, FoiEvent
 from froide.helper.auth import login_user
-from froide.helper.utils import render_403
+from froide.helper.utils import get_redirect_url, render_403
 
 from .forms import (UserLoginForm, PasswordResetForm, NewUserForm,
         UserEmailConfirmationForm, UserChangeForm, UserDeleteForm, TermsForm)
@@ -292,7 +292,7 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         user = form.save()
         del self.request.session[INTERNAL_RESET_SESSION_TOKEN]
 
-        login_user(request, user)
+        login_user(self.request, user)
         messages.add_message(
                 self.request,
                 messages.SUCCESS,
