@@ -516,7 +516,7 @@ class FoiRequest(models.Model):
     def followed_by(self, user):
         from froide.foirequestfollower.models import FoiRequestFollower
         try:
-            if isinstance(user, string_types):
+            if isinstance(user, str):
                 return FoiRequestFollower.objects.get(request=self,
                         email=user, confirmed=True)
             else:
@@ -767,7 +767,7 @@ class FoiRequest(models.Model):
         template = getattr(settings, 'FOI_EMAIL_TEMPLATE', None)
 
         domains = settings.FOI_EMAIL_DOMAIN
-        if isinstance(domains, string_types):
+        if isinstance(domains, str):
             domains = [domains]
         FOI_EMAIL_DOMAIN = domains[0]
 
