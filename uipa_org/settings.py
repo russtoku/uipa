@@ -271,6 +271,7 @@ class Dev(UipaOrgThemeBase, Base):
                 'level': 'DEBUG',
                 'filters': ['require_debug_true'],
                 'class': 'logging.StreamHandler',
+                'formatter': 'verbose',
             },
             'uipa_org_logfile': {
                 'level': 'DEBUG',
@@ -292,11 +293,11 @@ class Dev(UipaOrgThemeBase, Base):
                 'level': 'DEBUG',
                 'propagate': False,
             },
-            # Use instead of 'django.request' to log all requests; added in Django 1.11.
+            # Use instead of 'django.request' to log all requests;
+            # added in Django 1.11. Doesn't propagate upward.
             'django.server': {
                 'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG',
-                'propagate': False,
             },
             'django.security': {
                 'handlers': ['uipa_org_logfile'],
@@ -304,7 +305,7 @@ class Dev(UipaOrgThemeBase, Base):
                 'propagate': False,
             },
             'django.db.backends': {
-                'level': 'DEBUG',
+                'level': 'INFO', # DEBUG when needed
                 'handlers': ['uipa_org_logfile'],
                 'propagate': False,
             },
@@ -316,6 +317,11 @@ class Dev(UipaOrgThemeBase, Base):
             'uipa_org': {
                 'handlers': ['uipa_org_logfile'],
                 'level': 'DEBUG',
+                'propagate': False,
+            },
+            'django.utils.autoreload': {
+                'level': 'WARNING',
+                'handlers': ['uipa_org_logfile'],
                 'propagate': False,
             },
         }
@@ -491,6 +497,7 @@ class Beta(SentryEnabled, NginxSecureStaticEnabled, S3Enabled, SslEnabled, UipaO
                 'level': 'DEBUG',
                 'filters': ['require_debug_true'],
                 'class': 'logging.StreamHandler',
+                'formatter': 'verbose',
             },
             'uipa_org_logfile': {
                 'level': 'DEBUG',
