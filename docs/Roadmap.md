@@ -6,8 +6,8 @@
 
 | Item   | Working Version | Production Version |
 | ---    | ---:            | ---: |
-| Django | 1.11            | 1.9 |
-| Python |  3.8            | 2.7 |
+| Django | 3.2.25            | 1.9 |
+| Python |  3.9.21            | 2.7 |
 
 Repo: https://github.com/CodeWithAloha/uipa/tree/master
 
