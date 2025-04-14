@@ -21,7 +21,6 @@ from email.utils import parseaddr, formataddr, parsedate_tz, getaddresses
 import imaplib
 import re
 
-#from django.utils.six import BytesIO, text_type as str, binary_type as bytes
 from io import BytesIO
 
 import pytz

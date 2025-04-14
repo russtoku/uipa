@@ -1,4 +1,5 @@
 from datetime import datetime
+from io import BytesIO
 import json
 import os
 
@@ -7,7 +8,6 @@ from django.core import mail
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from django.utils.six import BytesIO
 from django.urls import reverse
 from django.test.utils import override_settings
 

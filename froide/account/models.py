@@ -5,7 +5,6 @@ try:
 except ImportError:
     from urllib.parse import urlencode
 
-#from django.utils.six import text_type as str
 from django.db import models, transaction, IntegrityError
 from django.conf import settings
 from django import dispatch

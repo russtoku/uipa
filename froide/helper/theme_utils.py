@@ -7,7 +7,6 @@ from django.core.exceptions import ImproperlyConfigured, SuspiciousFileOperation
 from django.utils._os import safe_join
 from django.template.loaders.app_directories import Loader
 from django.template import Origin
-#from django.utils import six
 
 fs_encoding = sys.getfilesystemencoding() or sys.getdefaultencoding()
 

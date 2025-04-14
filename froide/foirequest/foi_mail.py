@@ -1,4 +1,5 @@
 import base64
+from io import BytesIO
 import json
 import zipfile
 from email.utils import parseaddr
@@ -8,7 +9,6 @@ from django.conf import settings
 from django.core.mail import get_connection, EmailMessage, mail_managers
 from django.urls import reverse
 from django.utils.translation import override, gettext, gettext_lazy as _
-#from django.utils.six import BytesIO, string_types
 
 from froide.helper.email_utils import (EmailParser, get_unread_mails,
                                        make_address)

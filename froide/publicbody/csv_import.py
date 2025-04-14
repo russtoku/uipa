@@ -1,9 +1,10 @@
+from io import BytesIO
+from io import StringIO
 import requests
 
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
-#from django.utils.six import StringIO, BytesIO, PY3
 
 from taggit.utils import parse_tags
 

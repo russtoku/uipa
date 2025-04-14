@@ -1,6 +1,7 @@
-import re
 from datetime import datetime, timedelta
+from io import BytesIO
 import os
+import re
 import zipfile
 
 from unittest.mock import patch
@@ -11,7 +12,6 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core import mail
 from django.utils import timezone
-from django.utils.six import BytesIO
 from django.test.utils import override_settings
 
 from froide.publicbody.models import PublicBody, FoiLaw
@@ -252,9 +252,9 @@ class RequestTest(TestCase):
                 {"subject": "Test-Subject", "body": "This is a test body",
                     "user_email": "test@example.com"})
         self.assertEqual(response.status_code, 400)
-        self.assertFormError(response, 'user_form', 'first_name',
+        self.assertFormError(response.context['user_form'], 'first_name',
                 ['This field is required.'])
-        self.assertFormError(response, 'user_form', 'last_name',
+        self.assertFormError(response.context['user_form'], 'last_name',
                 ['This field is required.'])
 
     def test_logged_in_request_new_public_body_missing(self):
@@ -263,11 +263,11 @@ class RequestTest(TestCase):
                 {"subject": "Test-Subject", "body": "This is a test body",
                 "public_body": "new"})
         self.assertEqual(response.status_code, 400)
-        self.assertFormError(response, 'public_body_form', 'name',
+        self.assertFormError(response.context['public_body_form'], 'name',
                 ['This field is required.'])
-        self.assertFormError(response, 'public_body_form', 'email',
+        self.assertFormError(response.context['public_body_form'], 'email',
                 ['This field is required.'])
-        self.assertFormError(response, 'public_body_form', 'url',
+        self.assertFormError(response.context['public_body_form'], 'url',
                 ['This field is required.'])
 
     def test_logged_in_request_new_public_body(self):

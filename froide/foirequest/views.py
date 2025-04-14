@@ -2,7 +2,6 @@ import datetime
 import re
 import json
 
-#from django.utils.six import text_type as str
 from django.conf import settings
 from django.core.files import File
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -68,7 +67,7 @@ def dashboard(request):
         return render_403(request)
     context = {}
     user = {}
-    start_date = timezone.utc.localize(datetime.datetime(2011, 7, 30))
+    start_date = datetime.timezone.utc.localize(datetime.datetime(2011, 7, 30))
     for u in User.objects.filter(
             is_active=True,
             date_joined__gte=start_date):

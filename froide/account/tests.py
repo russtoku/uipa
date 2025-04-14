@@ -6,7 +6,6 @@ try:
 except ImportError:
     from urllib.parse import urlencode
 
-from django.utils.six import text_type as str
 from django.test import TestCase
 from django.contrib.admin.sites import AdminSite
 from django.test.client import RequestFactory

@@ -18,7 +18,7 @@ from .tasks import _batch_update
 User = get_user_model()
 
 
-class FoiRequestFollowerFactory(factory.DjangoModelFactory):
+class FoiRequestFollowerFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = FoiRequestFollower
 
