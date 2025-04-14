@@ -12,7 +12,7 @@ def get_next(request) -> str:
 
 
 def render_code(
-    code: int, request: HttpRequest, context: Optional[Dict[str, str]] = None
+    code: int, request: HttpRequest, context: dict[str, str] | None = None
 ) -> HttpResponse:
     if context == None:
         context = {}
@@ -29,7 +29,7 @@ def render_405(request) -> HttpResponse:
 
 def render_403(
     request: HttpRequest, message: str = ""
-) -> Union[HttpResponseRedirect, HttpResponse]:
+) -> HttpResponseRedirect | HttpResponse:
     if not request.user.is_authenticated:
         return get_redirect(
             request,
@@ -52,7 +52,7 @@ def get_redirect_url(
     default: str = "/",
     next: None = None,
     allowed_hosts: None = None,
-    params: Optional[Dict[str, str]] = None,
+    params: dict[str, str] | None = None,
     keep_session: bool = False,
 ) -> str:
     if next is None:
@@ -95,7 +95,7 @@ def get_redirect(request: HttpRequest, **kwargs) -> HttpResponseRedirect:
         return redirect("/")
 
 
-def update_query_params(url: str, params: Dict[str, str]) -> str:
+def update_query_params(url: str, params: dict[str, str]) -> str:
     """
     Given a URL, update the query parameters and return the
     modified URL.

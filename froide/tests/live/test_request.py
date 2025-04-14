@@ -146,7 +146,7 @@ class TestMakingRequest(StaticLiveServerTestCase):
         message = mail.outbox[0]
         match = re.search('http://[^/]+(/.+)', message.body)
         activate_url = match.group(1)
-        self.selenium.get('{}{}'.format(self.live_server_url, activate_url))
+        self.selenium.get(f'{self.live_server_url}{activate_url}')
         WebDriverWait(self.selenium, 5).until(
             lambda driver: driver.find_element_by_css_selector('#change-password-now'))
         self.assertIn('?new#change-password-now', self.selenium.current_url)

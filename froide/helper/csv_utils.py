@@ -54,4 +54,4 @@ def export_csv(queryset, fields):
 
 
 def export_csv_bytes(generator):
-    return bytes().join(generator)
+    return b''.join(generator)

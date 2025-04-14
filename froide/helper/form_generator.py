@@ -35,7 +35,7 @@ class FormProcessor:
                     in_form = True
                 else:
                     if in_option and not output_option:
-                        line = "{} {}".format(line, self.get_last_default_option())
+                        line = f"{line} {self.get_last_default_option()}"
                     line = line + "\n"
                     was_form = False
                 in_option = False

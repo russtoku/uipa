@@ -179,12 +179,12 @@ class S3Enabled:
 
     AWS_S3_HOST = 's3-us-west-1.amazonaws.com'
     AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
-    AWS_S3_CUSTOM_DOMAIN = '{}.{}'.format(AWS_STORAGE_BUCKET_NAME, AWS_S3_HOST)
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_HOST}'
     AWS_S3_FILE_OVERWRITE = False
 
     STATICFILES_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
     STATICFILES_LOCATION = 'static'
-    STATIC_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/"
 
     COMPRESS_STORAGE = values.Value('uipa_org.custom_storages.CachedS3BotoStorage')
     COMPRESS_URL = values.Value(STATIC_URL)

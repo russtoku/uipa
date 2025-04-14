@@ -73,7 +73,7 @@ class User(AbstractUser):
             return str(_("<< Name Not Public >>"))
         else:
             if self.organization:
-                return '{} ({})'.format(self.get_full_name(), self.organization)
+                return f'{self.get_full_name()} ({self.organization})'
             else:
                 return self.get_full_name()
 
@@ -133,7 +133,7 @@ class AccountManager:
         first = slugify(firstname)
         last = slugify(lastname)
         if first and last:
-            base = "{}.{}".format(first[0], last)
+            base = f"{first[0]}.{last}"
         elif last:
             base = last
         elif first:

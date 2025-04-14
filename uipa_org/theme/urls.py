@@ -12,8 +12,8 @@ faq_url_part = _('faq')
 help_url_part = _('help')
 
 urlpatterns = [
-    re_path(r'^{}/{}/$'.format(help_url_part, faq_url_part), flatpage,
-       {'url': '/{}/{}/'.format(help_url_part, faq_url_part)}, name='help-faq'),
+    re_path(fr'^{help_url_part}/{faq_url_part}/$', flatpage,
+       {'url': f'/{help_url_part}/{faq_url_part}/'}, name='help-faq'),
 ]
 
 # vim: fenc=utf-8

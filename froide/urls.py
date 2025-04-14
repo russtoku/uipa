@@ -123,12 +123,12 @@ privacy_url_part = _('privacy')
 urlpatterns += [
     re_path(r'^%s/$' % help_url_part, flatpage,
         {'url': '/%s/' % help_url_part}, name='help-index'),
-    re_path(r'^{}/{}/$'.format(help_url_part, about_url_part), flatpage,
-        {'url': '/{}/{}/'.format(help_url_part, about_url_part)}, name='help-about'),
-    re_path(r'^{}/{}/$'.format(help_url_part, terms_url_part), flatpage,
-        {'url': '/{}/{}/'.format(help_url_part, terms_url_part)}, name='help-terms'),
-    re_path(r'^{}/{}/$'.format(help_url_part, privacy_url_part), flatpage,
-        {'url': '/{}/{}/'.format(help_url_part, privacy_url_part)}, name='help-privacy'),
+    re_path(fr'^{help_url_part}/{about_url_part}/$', flatpage,
+        {'url': f'/{help_url_part}/{about_url_part}/'}, name='help-about'),
+    re_path(fr'^{help_url_part}/{terms_url_part}/$', flatpage,
+        {'url': f'/{help_url_part}/{terms_url_part}/'}, name='help-terms'),
+    re_path(fr'^{help_url_part}/{privacy_url_part}/$', flatpage,
+        {'url': f'/{help_url_part}/{privacy_url_part}/'}, name='help-privacy'),
 ]
 
 
@@ -152,7 +152,7 @@ USE_X_ACCEL_REDIRECT = getattr(settings, 'USE_X_ACCEL_REDIRECT', False)
 
 if USE_X_ACCEL_REDIRECT:
     urlpatterns += [
-        re_path(r'^{}{}/'.format(settings.MEDIA_URL[1:], settings.FOI_MEDIA_PATH),
+        re_path(fr'^{settings.MEDIA_URL[1:]}{settings.FOI_MEDIA_PATH}/',
             include('froide.foirequest.media_urls'))
     ]
 

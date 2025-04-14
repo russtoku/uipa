@@ -127,7 +127,7 @@ class RequestTest(TestCase):
             self.assertEqual(message.to[0], "{}@{}".format(req.public_body.email.replace("@", "+"), settings.FROIDE_CONFIG['dryrun_domain']))
         else:
             self.assertEqual(message.to[0], req.public_body.email)
-        self.assertEqual(message.subject, '{} [#{}]'.format(req.title, req.pk))
+        self.assertEqual(message.subject, f'{req.title} [#{req.pk}]')
         resp = self.client.post(reverse('foirequest-set_status',
             kwargs={"slug": req.slug}))
         self.assertEqual(resp.status_code, 400)
@@ -365,7 +365,7 @@ class RequestTest(TestCase):
                 pb.email.replace("@", "+"), settings.FROIDE_CONFIG['dryrun_domain']))
         else:
             self.assertEqual(message.to[0], pb.email)
-        self.assertEqual(message.subject, '{} [#{}]'.format(req.title, req.pk))
+        self.assertEqual(message.subject, f'{req.title} [#{req.pk}]')
 
     def test_redirect_after_request(self):
         response = self.client.get(

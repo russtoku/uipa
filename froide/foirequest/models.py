@@ -427,7 +427,7 @@ class FoiRequest(models.Model):
                 kwargs={'obj_id': self.id})
 
     def get_absolute_domain_url(self):
-        return "{}{}".format(settings.SITE_URL, self.get_absolute_url())
+        return f"{settings.SITE_URL}{self.get_absolute_url()}"
 
     def get_absolute_domain_short_url(self):
         return "{}{}".format(settings.SITE_URL, reverse('foirequest-shortlink',
@@ -565,7 +565,7 @@ class FoiRequest(models.Model):
 
     def get_auth_code(self):
         return salted_hmac("FoiRequestPublicBodyAuth",
-                '{}#{}'.format(self.id, self.secret_address)).hexdigest()
+                f'{self.id}#{self.secret_address}').hexdigest()
 
     def check_auth_code(self, code):
         return constant_time_compare(code, self.get_auth_code())
@@ -716,7 +716,7 @@ class FoiRequest(models.Model):
         message_body = message
         message = FoiMessage(request=self)
         subject = re.sub(r'\s*\[#%s\]\s*$' % self.pk, '', subject)
-        message.subject = '{} [#{}]'.format(subject, self.pk)
+        message.subject = f'{subject} [#{self.pk}]'
         message.subject_redacted = message.redact_subject()
         message.is_response = False
         message.sender_user = user
@@ -738,7 +738,7 @@ class FoiRequest(models.Model):
         message_body = message
         message = FoiMessage(request=self)
         subject = re.sub(r'\s*\[#%s\]\s*$' % self.pk, '', subject)
-        message.subject = '{} [#{}]'.format(subject, self.pk)
+        message.subject = f'{subject} [#{self.pk}]'
         message.subject_redacted = message.redact_subject()
         message.is_response = False
         message.is_escalation = True
@@ -777,7 +777,7 @@ class FoiRequest(models.Model):
             return settings.FOI_EMAIL_TEMPLATE.format(username=username,
                                                       secret=secret,
                                                       domain=FOI_EMAIL_DOMAIN)
-        return "{}.{}@{}".format(username, secret, FOI_EMAIL_DOMAIN)
+        return f"{username}.{secret}@{FOI_EMAIL_DOMAIN}"
 
     @classmethod
     def generate_unique_secret_address(cls, user):
@@ -878,7 +878,7 @@ class FoiRequest(models.Model):
             sender_name=user.display_name(),
             timestamp=now,
             status="awaiting_response",
-            subject='Records Request for {}: {} [#{}]'.format(public_body.name, request.title, request.pk)
+            subject=f'Records Request for {public_body.name}: {request.title} [#{request.pk}]'
         )
         message.subject_redacted = message.redact_subject()
         send_address = True
@@ -1404,7 +1404,7 @@ class FoiMessage(models.Model):
 
 
 def upload_to(instance, filename):
-    return "{}/{}/{}".format(settings.FOI_MEDIA_PATH, instance.belongs_to.id, instance.name)
+    return f"{settings.FOI_MEDIA_PATH}/{instance.belongs_to.id}/{instance.name}"
 
 
 class FoiAttachment(models.Model):
@@ -1465,7 +1465,7 @@ class FoiAttachment(models.Model):
         verbose_name_plural = _('Attachments')
 
     def __str__(self):
-        return "{} ({}) of {}".format(self.name, self.size, self.belongs_to)
+        return f"{self.name} ({self.size}) of {self.belongs_to}"
 
     def index_content(self):
         return "\n".join((self.name,))
@@ -1599,7 +1599,7 @@ class FoiEvent(models.Model):
         verbose_name_plural = _('Request Events')
 
     def __str__(self):
-        return "{} - {}".format(self.event_name, self.request)
+        return f"{self.event_name} - {self.request}"
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -1641,7 +1641,7 @@ class FoiEvent(models.Model):
             return context
 
         def link(url, title):
-            return mark_safe('<a href="{}">{}</a>'.format(url, escape(title)))
+            return mark_safe(f'<a href="{url}">{escape(title)}</a>')
         context = self.get_context()
         if self.user:
             if not self.user.private:

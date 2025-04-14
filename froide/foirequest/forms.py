@@ -109,7 +109,7 @@ class RequestForm(forms.Form):
         except ValueError:
             return ''
         try:
-            return '{}:{}'.format(kind, value)
+            return f'{kind}:{value}'
         except ValueError:
             return ''
 

@@ -18,7 +18,7 @@ class FoiSite(models.Model):
         verbose_name_plural = _('FOI Sites')
 
     def __str__(self):
-        return '{} ({})'.format(self.name, self.country_name)
+        return f'{self.name} ({self.country_name})'
 
     def save(self, *args, **kwargs):
         self.country_code = self.country_code.upper()

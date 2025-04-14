@@ -97,7 +97,7 @@ def get_alternative_mail(req):
         domains = domains[1:]
 
     random.shuffle(domains)
-    return '{}_{}@{}'.format(name, req.pk, domains[0])
+    return f'{name}_{req.pk}@{domains[0]}'
 
 
 def get_foirequest_from_mail(email):
@@ -258,7 +258,7 @@ def package_foirequest(foirequest):
             for attachment in att_queryset:
                 if not attachment.file:
                     continue
-                filename = '{}-{}'.format(date_prefix, attachment.name)
+                filename = f'{date_prefix}-{attachment.name}'
                 try:
                     zfile.write(attachment.file.path, arcname=filename)
                 except:
