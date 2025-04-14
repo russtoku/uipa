@@ -31,17 +31,11 @@ an editable dependency.
 version supported for Django 1.11.29).
 - **04/28/2024:** Started.
 
-### Next steps
-
-See the sections below the ROADMAP for more details.
-
-- Upgrade to Python 3.10 and Django 4.2.
-- **7** (*Figure out deployment for production*) can be put on hold for a while.
 
 
 ## ROADMAP
 
-  1. Upgrade Django to 1.11.29 (LTS; last version to support Python 2.7)
+  1. ✅ Upgrade Django to 1.11.29 (LTS; last version to support Python 2.7)
      with Python 2.7.15.
      - **Completed:** 10/03/2024
         - Can't add public bodies in Admin site.
@@ -63,14 +57,14 @@ See the sections below the ROADMAP for more details.
          If you need the old behavior of get_model(), set the require_ready
          argument to False.
 
-  2. Upgrade Python to 3.7 (highest supported by Django 1.11.17).
+  2. ✅ Upgrade Python to 3.7 (highest supported by Django 1.11.17).
      - **Completed:** 10/08/2024
         - Search is working with elasticsearch and django-haystack (supports
         only up to elasticsearch 2.x).
         - No pysolr/Solr.
         - 2to3 refactorings.
 
-  3. Upgrade Python to 3.8
+  3. ✅ Upgrade Python to 3.8
      - **Mostly Completed:** 10/14/2024
      - Does work with Django 1.11.17.
      - Python 3.8 is no longer supported as of 10/07/2024.
@@ -88,12 +82,12 @@ See the sections below the ROADMAP for more details.
          - If don't need the GIS stuff, see:
            https://github.com/jazzband/django-floppyforms/issues/189#issuecomment-379546682
 
-  4. Incorporate froide as apps instead of a dependency. (Added 11/1/2024)
+  4. ✅ Incorporate froide as apps instead of a dependency. (Added 11/1/2024)
      - **Completed:** 11/17/2024
      - This makes it easier to make changes to froide by eliminating the need to
        maintain two repos for the UIPA.org website.
 
-  5. Remove django-overextends dependency because Django 1.9 already provides
+  5. ✅ Remove django-overextends dependency because Django 1.9 already provides
      the same capabilities. (Added 11/15/2024)
      - **Completed:** 12/22/2024
      - Remove `overextends` from `INSTALLED_APPS` in `froide/settings.py`.
@@ -101,20 +95,15 @@ See the sections below the ROADMAP for more details.
      - Change `overextends` to `extends` in templates under `uipa_org`
        directory.
 
-  6. ~~Set up Postfix in a Docker container.~~ Create local test mail server.
+  6. ✅ ~~Set up Postfix in a Docker container.~~ Create local test mail server.
      - **Completed:** 12/22/2024
      - **Created test mail server program:** 10/18/2024; see
       [https://github.com/russtoku/test-mail-server](https://github.com/russtoku/test-mail-server)
      - **Completed:** 03/29/2025
        - Send outgoing from UIPA to it.
 
-  7. Figure out deployment for production.
-      - What are the pieces?
-     - TODO:
-       - Pull incoming email to UIPA from it.
-
-  8. Upgrade Django to 2.0.13 (needs Python 3.4+).
-     - **Worked through to 14.:** 04/13/2025
+  7. ✅ Upgrade Django to 2.0.13 (needs Python 3.4+).
+     - **Worked through to 13.:** 04/13/2025
      - https://docs.djangoproject.com/en/2.0/releases/2.0/
 
      - Run with `-Wa` to show deprecations.
@@ -148,19 +137,19 @@ See the sections below the ROADMAP for more details.
        - Using User.is_authenticated() and User.is_anonymous() as methods
          rather than properties is no longer supported
 
-  9. Upgrade Django to 2.115.
-     - **Worked through to 14.:** 04/13/2025
+  8. ✅ Upgrade Django to 2.115.
+     - **Worked through to 13.:** 04/13/2025
 
- 10. Upgrade Django to 2.2.28 (supports Python 3.9) so we can use
+  9. ✅ Upgrade Django to 2.2.28 (supports Python 3.9) so we can use
      https://github.com/adamchainz/django-upgrade.
-     - **Worked through to 14.:** 04/13/2025
+     - **Worked through to 13.:** 04/13/2025
      - Started using it while working through upgrade of Django from 1.11.
 
- 11. Upgrade Python to 3.9 (highest supported by Django 2.2.17).
+ 10. ✅ Upgrade Python to 3.9 (highest supported by Django 2.2.17).
      - **Completed:** 04/13/2025
 
- 12. Upgrade Django to 3.0.14 (needs Python 3.6+, supports 3.9 as of 3.0.11).
-     - **Worked through to 14.:** 04/13/2025
+ 11. ✅ Upgrade Django to 3.0.14 (needs Python 3.6+, supports 3.9 as of 3.0.11).
+     - **Worked through to 13.:** 04/13/2025
      - ASGI support
      - Model.save() no longer attempts to find a row when saving a new Model
        instance and a default value for the primary key is provided, and
@@ -169,23 +158,24 @@ See the sections below the ROADMAP for more details.
      - New default value for the FILE_UPLOAD_PERMISSIONS setting
      - New default values for security settings
 
- 13. Upgrade Django to 3.1.14 (needs Python 3.6+, supports 3.9 as of 3.1.3).
-     - **Worked through to 14.:** 04/13/2025
+ 12. ✅ Upgrade Django to 3.1.14 (needs Python 3.6+, supports 3.9 as of 3.1.3).
+     - **Worked through to 13.:** 04/13/2025
      - Asynchronous views and middleware support
      - JSONField for all supported database backends
 
- 14. Upgrade Django to 3.2.25 (needs Python 3.6+, supports 3.10 as of 3.2.9).
+ 13. ✅ Upgrade Django to 3.2.25 (needs Python 3.6+, supports 3.10 as of 3.2.9).
      - **Completed:** 04/13/2025
      - Automatic AppConfig discovery
      - django.core.paginator.Paginator.get_elided_page_range() method
        allows generating a page range with some of the values elided
      - Response headers are now stored in HttpResponse.headers
 
- 15. Upgrade Python to 3.10 (highest supported by Django 3.2.9).
+ 14. ✅ Upgrade Python to 3.10 (highest supported by Django 3.2.9).
      - **Completed:** 04/13/2025
      - Works with Django 3.2.25.
 
- 16. Upgrade Django to 4.0.10 (needs Python 3.8+)
+ 15. ✅ Upgrade Django to 4.0.10 (needs Python 3.8+)
+     - **Worked through to 17.:** 04/14/2025
      - Python standard library’s zoneinfo is now the default timezone
        implementation
      - scrypt password hasher
@@ -203,7 +193,8 @@ See the sections below the ROADMAP for more details.
        order to allow proper capture when testing
      - Dropped support for PostgreSQL 9.6
 
- 17. Upgrade Django to 4.1.13 (needs Python 3.8+, support 3.11 as of 4.1.3)
+ 16. ✅ Upgrade Django to 4.1.13 (needs Python 3.8+, support 3.11 as of 4.1.3)
+     - **Worked through to 17.:** 04/14/2025
      - Asynchronous handlers for class-based views
      - Asynchronous ORM interface
      - Check, unique, and exclusion constraints defined in the
@@ -214,7 +205,8 @@ See the sections below the ROADMAP for more details.
      - Dropped support for PostgreSQL 10
      - default_app_config application configuration variable is removed
 
- 18. Upgrade Django to 4.2 (needs Python 3.8+, supports 3.12 as of 4.2.8)
+ 17. ✅ Upgrade Django to 4.2 (needs Python 3.8+, supports 3.12 as of 4.2.8)
+     - **Completed.:** 04/14/2025
      - Psycopg 3 support; psycopg 3 introduces some breaking changes over
        psycopg2
      - Dropped support for PostgreSQL 11
@@ -223,7 +215,21 @@ See the sections below the ROADMAP for more details.
      - undocumented django.http.multipartparser.parse_header() function is
        removed. Use django.utils.http.parse_header_parameters() instead
 
- 19. Upgrade Python to 3.12 (highest supported by Django 4.2.8).
+ 18. Upgrade Python to 3.12 (highest supported by Django 5.0).
+
+ 19. Upgrade Django to 5.0 (needs Python 3.10+, supports 3.12)
+     - https://docs.djangoproject.com/en/5.2/releases/5.0/#features-removed-in-5-0
+
+ 20. Upgrade Django to 5.1 (needs Python 3.10+, supports 3.13)
+     - https://docs.djangoproject.com/en/5.2/releases/5.1/#features-removed-in-5-1
+
+ 21. Upgrade Django to 5.2 (needs Python 3.10+, supports 3.13)
+     - https://docs.djangoproject.com/en/5.2/releases/5.2/#features-deprecated-in-5-2
+
+ 22. Pull incoming email to UIPA and process it (Celery tasks).
+
+ 23. Figure out deployment for production.
+      - What are the pieces?
 
 
 ## What is this about?
