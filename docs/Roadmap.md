@@ -11,7 +11,7 @@ time to work on things to keep UIPA.org running with currently supported version
 
 | Item   | Working Version | Production Version |
 | ---    | ---:            | ---: |
-| Django | 3.2.25            | 1.9 |
+| Django | 4.2.20            | 1.9 |
 | Python |  3.10.16            | 2.7 |
 
 Repo: https://github.com/CodeWithAloha/uipa/tree/master
