@@ -1,6 +1,11 @@
-# Roadmap to updgrade UIPA to Django 4.2 and Python 3.10
+# Roadmap to updgrade UIPA to supported versions of Django and Python
 
-*Last update: 01/11/2025*  
+*Last update: 04/14/2025*  
+
+## Goal
+
+As of the last update, we should be targeting Django 5.2 and Python 3.13. This should provide enough
+time to work on things to keep UIPA.org running with currently supported versions.
 
 ## Status
 
@@ -286,9 +291,14 @@ templates](https://docs.djangoproject.com/en/1.11/howto/overriding-templates/).
 
 | Version | Latest Release | End of Mainstream Support | End of Extended Support |
 | :--- | :--- | :--- | :--- |
-| Django 5.2 LTS  | Coming April 2025 | December 2025 | April 2028 |
-| Django 5.1      | 5.1.4   | April 2025 | December 2025 |
+| Django 5.2 LTS  | 5.2 | December 2025 | April 2028 |
+| Django 5.1      | 5.1.8   | April 2025 | December 2025 |
 | Django 4.2 LTS  | 4.2.17  | 12/04/2024 | April 2026 |
+
+#### Unsupported
+
+| Version | Latest Release | End of Mainstream Support | End of Extended Support |
+| :--- | :--- | :--- | :--- |
 | Django 3.2 LTS  | 3.2.25  | 12/07/2021 | April 2024 |
 | Django 2.2 LTS  | 2.2.28  | 12/02/2019 | April 2022 |
 | Django 1.11 LTS | 1.11.29 | 12/02/2017 | April 2020 |
@@ -296,13 +306,18 @@ templates](https://docs.djangoproject.com/en/1.11/howto/overriding-templates/).
 
 ### [Python](https://devguide.python.org/versions/#supported-versions)
 
-| Version | Latest Release | End of Support |
+| Version | Latest Release | End of Life |
 | :--- | :--- | :--- |
-| Python 3.13 | 3.13.1 (12/03/2024) | October 2029 |
+| Python 3.13 | 3.13.3 (04/08/2025) | October 2029 |
 | Python 3.12 | 3.12.8 (12/03/2024) | October 2028 |
 | Python 3.11 | 3.11.11 (12/03/2024 source only) | October 2027 |
 | Python 3.10 | 3.10.16 (12/03/2024 source only) | October 2026 |
 | Python 3.9 | 3.9.21 (12/03/2024 source only) | October 2025 |
+
+#### Unsupported
+
+| Version | Last Release | End of Life |
+| :--- | :--- | :--- |
 | Python 3.8 | 3.8.20 (09/06/2024 source only) | October 2024 |
 
 ## Repositories
