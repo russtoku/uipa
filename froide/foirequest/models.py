@@ -343,18 +343,18 @@ class FoiRequest(models.Model):
         )
 
     # Custom Signals
-    message_sent = django.dispatch.Signal(providing_args=["message"])
-    message_received = django.dispatch.Signal(providing_args=["message"])
-    request_created = django.dispatch.Signal(providing_args=[])
-    request_to_public_body = django.dispatch.Signal(providing_args=[])
-    status_changed = django.dispatch.Signal(providing_args=["status", "data"])
-    became_overdue = django.dispatch.Signal(providing_args=[])
-    became_asleep = django.dispatch.Signal(providing_args=[])
-    public_body_suggested = django.dispatch.Signal(providing_args=["suggestion"])
-    set_concrete_law = django.dispatch.Signal(providing_args=['name'])
-    made_public = django.dispatch.Signal(providing_args=[])
-    add_postal_reply = django.dispatch.Signal(providing_args=[])
-    escalated = django.dispatch.Signal(providing_args=[])
+    message_sent = django.dispatch.Signal()  # providing_args=["message"]
+    message_received = django.dispatch.Signal()  # providing_args=["message"]
+    request_created = django.dispatch.Signal()  # providing_args=[]
+    request_to_public_body = django.dispatch.Signal()  # providing_args=[]
+    status_changed = django.dispatch.Signal()  # providing_args=["status", "data"]
+    became_overdue = django.dispatch.Signal()  # providing_args=[]
+    became_asleep = django.dispatch.Signal()  # providing_args=[]
+    public_body_suggested = django.dispatch.Signal()  # providing_args=["suggestion"]
+    set_concrete_law = django.dispatch.Signal()  # providing_args=['name']
+    made_public = django.dispatch.Signal()  # providing_args=[]
+    add_postal_reply = django.dispatch.Signal()  # providing_args=[]
+    escalated = django.dispatch.Signal()  # providing_args=[]
 
     def __str__(self):
         return _("Request '%s'") % self.title
@@ -1456,7 +1456,7 @@ class FoiAttachment(models.Model):
         "text/plain"
     )
 
-    attachment_published = django.dispatch.Signal(providing_args=[])
+    attachment_published = django.dispatch.Signal()  # providing_args=[]
 
     class Meta:
         ordering = ('name',)
