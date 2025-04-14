@@ -7,7 +7,7 @@
 | Item   | Working Version | Production Version |
 | ---    | ---:            | ---: |
 | Django | 3.2.25            | 1.9 |
-| Python |  3.9.21            | 2.7 |
+| Python |  3.10.16            | 2.7 |
 
 Repo: https://github.com/CodeWithAloha/uipa/tree/master
 
@@ -176,6 +176,8 @@ See the sections below the ROADMAP for more details.
      - Response headers are now stored in HttpResponse.headers
 
  15. Upgrade Python to 3.10 (highest supported by Django 3.2.9).
+     - **Completed:** 04/13/2025
+     - Works with Django 3.2.25.
 
  16. Upgrade Django to 4.0.10 (needs Python 3.8+)
      - Python standard library’s zoneinfo is now the default timezone
