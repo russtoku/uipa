@@ -15,6 +15,7 @@ Froide source merged into UIPA.org in update branch of russtoku's fork of UIPA.o
 
 ### Change Log
 
+- **04/13/2025:** Upgraded to Django 3.2.25 and Python 3.9.21.
 - **01/11/2025:** Added site map based on update branch of russtoku fork.
 - **12/23/2024:** Fixed some broken things. Removed django-overextends
 dependency because the functionality is included in Django 1.9.
@@ -28,8 +29,7 @@ version supported for Django 1.11.29).
 
 See the sections below the ROADMAP for more details.
 
-- Finish up **3** (*Upgrade Python to 3.8*) before tackling **8** (*Upgrade Django to
-2.0.13*).
+- Upgrade to Python 3.10 and Django 4.2.
 - **7** (*Figure out deployment for production*) can be put on hold for a while.
 
 
@@ -99,14 +99,16 @@ See the sections below the ROADMAP for more details.
      - **Completed:** 12/22/2024
      - **Created test mail server program:** 10/18/2024; see
       [https://github.com/russtoku/test-mail-server](https://github.com/russtoku/test-mail-server)
-     - TODO:
+     - **Completed:** 03/29/2025
        - Send outgoing from UIPA to it.
-       - Pull incoming email to UIPA from it.
 
   7. Figure out deployment for production.
       - What are the pieces?
+     - TODO:
+       - Pull incoming email to UIPA from it.
 
   8. Upgrade Django to 2.0.13 (needs Python 3.4+).
+     - **Worked through to 14.:** 04/13/2025
      - https://docs.djangoproject.com/en/2.0/releases/2.0/
 
      - Run with `-Wa` to show deprecations.
@@ -141,13 +143,18 @@ See the sections below the ROADMAP for more details.
          rather than properties is no longer supported
 
   9. Upgrade Django to 2.115.
+     - **Worked through to 14.:** 04/13/2025
 
  10. Upgrade Django to 2.2.28 (supports Python 3.9) so we can use
      https://github.com/adamchainz/django-upgrade.
+     - **Worked through to 14.:** 04/13/2025
+     - Started using it while working through upgrade of Django from 1.11.
 
  11. Upgrade Python to 3.9 (highest supported by Django 2.2.17).
+     - **Completed:** 04/13/2025
 
  12. Upgrade Django to 3.0.14 (needs Python 3.6+, supports 3.9 as of 3.0.11).
+     - **Worked through to 14.:** 04/13/2025
      - ASGI support
      - Model.save() no longer attempts to find a row when saving a new Model
        instance and a default value for the primary key is provided, and
@@ -157,10 +164,12 @@ See the sections below the ROADMAP for more details.
      - New default values for security settings
 
  13. Upgrade Django to 3.1.14 (needs Python 3.6+, supports 3.9 as of 3.1.3).
+     - **Worked through to 14.:** 04/13/2025
      - Asynchronous views and middleware support
      - JSONField for all supported database backends
 
  14. Upgrade Django to 3.2.25 (needs Python 3.6+, supports 3.10 as of 3.2.9).
+     - **Completed:** 04/13/2025
      - Automatic AppConfig discovery
      - django.core.paginator.Paginator.get_elided_page_range() method
        allows generating a page range with some of the values elided
@@ -197,7 +206,7 @@ See the sections below the ROADMAP for more details.
      - Dropped support for PostgreSQL 10
      - default_app_config application configuration variable is removed
 
- 18. Upgrade Django to 4.2 (needs Python 3.8+, support 3.12 as of 4.2.8)
+ 18. Upgrade Django to 4.2 (needs Python 3.8+, supports 3.12 as of 4.2.8)
      - Psycopg 3 support; psycopg 3 introduces some breaking changes over
        psycopg2
      - Dropped support for PostgreSQL 11
