@@ -20,6 +20,7 @@ Froide source merged into UIPA.org in update branch of russtoku's fork of UIPA.o
 
 ### Change Log
 
+- **04/14/2025:** Upgraded to Django 4.2.20 and Python 3.10.16.
 - **04/13/2025:** Upgraded to Django 3.2.25 and Python 3.9.21.
 - **01/11/2025:** Added site map based on update branch of russtoku fork.
 - **12/23/2024:** Fixed some broken things. Removed django-overextends
