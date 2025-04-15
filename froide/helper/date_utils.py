@@ -1,43 +1,65 @@
-from datetime import timedelta, datetime
 import calendar
-
-import pytz
+from datetime import timedelta, datetime
+from typing import Tuple
 
 from django.conf import settings
 from django.utils import timezone
 from django.utils.timesince import timeuntil
 
-PYTZ_TIME_ZONE = pytz.timezone(settings.TIME_ZONE)
+MONTHS_IN_YEAR = 12
 
 
-def format_seconds(seconds):
+def format_seconds(seconds: int) -> str:
     now = timezone.now()
     future = now + timedelta(seconds=seconds)
     return timeuntil(future, now)
 
 
-def calculate_month_range_de(date, months=1):
-    """ Should calculate after German BGB Law § 130 and § 188"""
-    assert months < 12, "Can't calculate month_range > 12"
+def calculate_month_range_de(date: datetime, months: int = 1) -> datetime:
+    """Should calculate after German BGB Law § 130 and § 188"""
 
+    current_tz = timezone.get_current_timezone()
+
+    # make sure we are in our timezone
+    if not isinstance(date, datetime):
+        date = datetime(date.year, date.month, date.day, 23, 59, 59)
+
+    if timezone.is_naive(date):
+        date = date.replace(tzinfo=current_tz)
+
+    date = timezone.localtime(date)
+
+    tempdate = date
     if date.hour >= 22:  # After 22h next working day is receival
-        tempdate = advance_after_holiday(date + timedelta(days=1))
-    else:
-        tempdate = advance_after_holiday(date)
-    tempdate = tempdate + timedelta(days=(31 * months))
-    m = tempdate.month
-    y = tempdate.year
+        tempdate = date + timedelta(days=1)
+    # Receival only on working days
+    tempdate = advance_after_holiday(tempdate)
+    # § 187 (1) BGB Fristbeginn
+    tempdate += timedelta(days=1)
+    # § 188 BGB (2) Fristende
+    # endigt im Falle des § 187 Abs. 1 mit dem Ablauf desjenigen Tages
+    # der letzten Woche oder des letzten Monats, welcher durch seine
+    # Benennung oder seine Zahl dem Tage entspricht, in den das Ereignis
+    # oder der Zeitpunkt fällt,
+    m = tempdate.month + (months % MONTHS_IN_YEAR)
+    y = tempdate.year + (months // MONTHS_IN_YEAR) + ((m - 1) // MONTHS_IN_YEAR)
+    m = m % MONTHS_IN_YEAR
+    if m == 0:
+        m = 12
     d = tempdate.day
+    # § 188 BGB (3) Fristende
     last_day = calendar.monthrange(y, m)[1]
     if d > last_day:
         d = last_day
-    due = datetime(y, m, d, 0, 0, 0)
-    due = advance_after_holiday(due)
-    due += timedelta(days=1)
-    return PYTZ_TIME_ZONE.localize(due)
+    naive_due = datetime(y, m, d, 0, 0, 0)
+    # Move Fristende to after holiday.
+    naive_due = advance_after_holiday(naive_due)
+    # Return first day after Fristende
+    naive_due += timedelta(days=1)
+    return naive_due.replace(tzinfo=current_tz)
 
 
-def calculate_workingday_range(date, days):
+def calculate_workingday_range(date: datetime, days: int):
     one_day = timedelta(days=1)
     while days > 0:
         date += one_day
@@ -46,23 +68,25 @@ def calculate_workingday_range(date, days):
     return date
 
 
-def is_holiday(date):
+def is_holiday(date: datetime) -> bool:
     if settings.HOLIDAYS_WEEKENDS:
         if date.weekday() > 4:
             return True
     if (date.month, date.day) in settings.HOLIDAYS:
         return True
-    if hasattr(settings, "HOLIDAYS_FOR_EASTER") and \
-            settings.HOLIDAYS_FOR_EASTER:
+    if hasattr(settings, "HOLIDAYS_FOR_EASTER") and settings.HOLIDAYS_FOR_EASTER:
         easter_sunday = calc_easter(date.year)
         easter_sunday = datetime(*easter_sunday)
-        easter_holidays = [(easter_sunday + timedelta(days=x)).date() for x in settings.HOLIDAYS_FOR_EASTER]
+        easter_holidays = [
+            (easter_sunday + timedelta(days=x)).date()
+            for x in settings.HOLIDAYS_FOR_EASTER
+        ]
         if date.date() in easter_holidays:
             return True
     return False
 
 
-def advance_after_holiday(date):
+def advance_after_holiday(date: datetime) -> datetime:
     one_day = timedelta(days=1)
     while is_holiday(date):
         date += one_day
@@ -71,7 +95,7 @@ def advance_after_holiday(date):
 
 # (c) Martin Diers, licensed under MIT
 # taken from: http://code.activestate.com/recipes/576517-calculate-easter-western-given-a-year/
-def calc_easter(year):
+def calc_easter(year: int) -> Tuple[int, int, int]:
     "Returns Easter as a year, month, day tuple."
     a = year % 19
     b = year // 100

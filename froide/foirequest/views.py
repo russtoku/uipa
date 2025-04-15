@@ -67,7 +67,7 @@ def dashboard(request):
         return render_403(request)
     context = {}
     user = {}
-    start_date = datetime.timezone.utc.localize(datetime.datetime(2011, 7, 30))
+    start_date = datetime.UTC.localize(datetime.datetime(2011, 7, 30))
     for u in User.objects.filter(
             is_active=True,
             date_joined__gte=start_date):

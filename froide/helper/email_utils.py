@@ -10,20 +10,17 @@ import time
 
 import base64
 
-try:
-    from email.header import decode_header
-    from email.parser import BytesParser as Parser
-except ImportError:
-    from email.Header import decode_header
-    from email.Parser import Parser
+from email.header import decode_header
+from email.parser import BytesParser as Parser
 
 from email.utils import parseaddr, formataddr, parsedate_tz, getaddresses
 import imaplib
 import re
 
 from io import BytesIO
+from typing import Iterator, Optional, Tuple, Union
 
-import pytz
+from django.utils import timezone
 
 
 def get_unread_mails(host, port, user, password, ssl=True):
@@ -152,7 +149,9 @@ class EmailParser:
         offset = date_tuple[9]
         if offset is not None:
             date = date - timedelta(seconds=offset)
-        return pytz.utc.localize(date)
+        # Convert naive datetime to UTC.
+        #return pytz.utc.localize(date)
+        return date.astimezone(UTC)
 
     def parse_body(self, parts, attachments, body, html):
         for part in parts:

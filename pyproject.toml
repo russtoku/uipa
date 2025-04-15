@@ -9,7 +9,7 @@ dependencies = [
   "django-appconf",
   "Markdown",
   "importlib-metadata<5.0",
-  "celery<5.0",
+  "celery",
   "celery-haystack",
   "django-haystack",
   "django-celery-email",
