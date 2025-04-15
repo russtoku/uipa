@@ -1,6 +1,6 @@
 # Roadmap to updgrade UIPA to supported versions of Django and Python
 
-*Last update: 04/14/2025*
+*Last update: 04/15/2025*
 
 ## Goal
 
@@ -11,7 +11,7 @@ time to work on things to keep UIPA.org running with currently supported version
 
 | Item   | Working Version | Production Version |
 | ---    | ---:            | ---: |
-| Django | 4.2.20 | 1.9 |
+| Django | 5.2 | 1.9 |
 | Python |  3.12.8 | 2.7 |
 
 Repo: https://github.com/CodeWithAloha/uipa/tree/master
@@ -20,6 +20,8 @@ Froide source merged into UIPA.org in update branch of russtoku's fork of UIPA.o
 
 ### Change Log
 
+- **04/15/2025:** Upgraded to Django 5.2 but search and make request broken. Need patches to some
+  dependencies.
 - **04/14/2025:** Upgraded to Django 4.2.20 and Python 3.12.8.
 - **04/13/2025:** Upgraded to Django 3.2.25 and Python 3.9.21.
 - **01/11/2025:** Added site map based on update branch of russtoku fork.
