@@ -1,6 +1,6 @@
 # Roadmap to updgrade UIPA to supported versions of Django and Python
 
-*Last update: 04/14/2025*  
+*Last update: 04/14/2025*
 
 ## Goal
 
@@ -11,8 +11,8 @@ time to work on things to keep UIPA.org running with currently supported version
 
 | Item   | Working Version | Production Version |
 | ---    | ---:            | ---: |
-| Django | 4.2.20            | 1.9 |
-| Python |  3.10.16            | 2.7 |
+| Django | 4.2.20 | 1.9 |
+| Python |  3.12.8 | 2.7 |
 
 Repo: https://github.com/CodeWithAloha/uipa/tree/master
 
@@ -20,7 +20,7 @@ Froide source merged into UIPA.org in update branch of russtoku's fork of UIPA.o
 
 ### Change Log
 
-- **04/14/2025:** Upgraded to Django 4.2.20 and Python 3.10.16.
+- **04/14/2025:** Upgraded to Django 4.2.20 and Python 3.12.8.
 - **04/13/2025:** Upgraded to Django 3.2.25 and Python 3.9.21.
 - **01/11/2025:** Added site map based on update branch of russtoku fork.
 - **12/23/2024:** Fixed some broken things. Removed django-overextends
@@ -215,7 +215,8 @@ version supported for Django 1.11.29).
      - undocumented django.http.multipartparser.parse_header() function is
        removed. Use django.utils.http.parse_header_parameters() instead
 
- 18. Upgrade Python to 3.12 (highest supported by Django 5.0).
+ 18. ✅ Upgrade Python to 3.12 (highest supported by Django 5.0).
+     - **Completed.:** 04/14/2025
 
  19. Upgrade Django to 5.0 (needs Python 3.10+, supports 3.12)
      - https://docs.djangoproject.com/en/5.2/releases/5.0/#features-removed-in-5-0
@@ -426,6 +427,83 @@ cb21c3a9 (tag: v5.0.0) (Stefan Wehrmeyer 2018-09-03, Bump version to 5.0.0)
 | :---         | :--- | :---   |
 | UIPA   | https://github.com/CodeWithAloha/uipa   | master |
 | Froide | https://github.com/CodeWithAloha/froide | master |
+
+## Error loading User model (04/14/2025)
+
+***Temporary FIX!***
+
+### The FIX
+This problem persists from Django 2.0. The fix appears to required that the
+django/forms/boundfield.py be edited to exclude the `renderer` kwarg in the call to `widget.render`.
+
+``` python
+107         return widget.render(
+108             name=self.html_initial_name if only_initial else self.html_name,
+109             value=value,
+110             attrs=attrs,
+111             #renderer=self.form.renderer,
+112         )
+```
+
+However, this isn't a good fix because it would need to be applied after installing a part of
+Django for any virtual environment that's created.
+
+See:
+- https://github.com/yourlabs/django-autocomplete-light/issues/1026#issuecomment-610500530
+- https://stackoverflow.com/a/63288321
+
+### The problem
+When accessing a request or signing in to the website, this error is encountered. It appears to be
+related to the use of floppyforms.
+
+```
+TypeError at /request/test-5/
+
+PublicBodySelect.render() got an unexpected keyword argument 'renderer'
+
+Request Method:       GET
+Request URL:          http://127.0.0.1:8000/request/test-5/
+Django Version:       4.2.20
+Exception Type:       TypeError
+Exception Value:      PublicBodySelect.render() got an unexpected keyword argument 'renderer'
+Exception Location:   /Users/russ/Projects/Code_With_Aloha/Code_for_Hawaii/Update_orig/uipa/.venv/lib/python3.12/site-packages/django/forms/boundfield.py, line 107, in as_widget
+Raised during:        froide.foirequest.views.show
+Python Executable:    /Users/russ/Projects/Code_With_Aloha/Code_for_Hawaii/Update_orig/uipa/.venv/bin/python
+Python Version:       3.12.8
+Python Path:          ['/Users/russ/Projects/Code_With_Aloha/Code_for_Hawaii/Update_orig/uipa',
+                       '/Users/russ/Projects/Code_With_Aloha/Code_for_Hawaii/Update_orig/uipa',
+                       '/Users/russ/.local/share/uv/python/cpython-3.12.8-macos-aarch64-none/lib/python312.zip',
+                       '/Users/russ/.local/share/uv/python/cpython-3.12.8-macos-aarch64-none/lib/python3.12',
+                       '/Users/russ/.local/share/uv/python/cpython-3.12.8-macos-aarch64-none/lib/python3.12/lib-dynload',
+                       '/Users/russ/Projects/Code_With_Aloha/Code_for_Hawaii/Update_orig/uipa/.venv/lib/python3.12/site-packages']
+Server time:          Mon, 14 Apr 2025 21:33:52 -1000
+```
+
+The error when rendering the template is:
+
+```
+In template
+
+/Users/russ/Projects/Code_With_Aloha/Code_for_Hawaii/Update_orig/uipa/froide/templates/bootstrap/horizontal_row.html,
+error at line 9
+
+PublicBodySelect.render() got an unexpected keyword argument 'renderer'
+ 1       {% load floppyforms %}{% block row %}{% for field in fields %}
+ 2       {% with classes=field.css_classes label=label|default:field.label help_text=help_text|default:field.help_text      ↳ %}
+ 3       {% block field %}
+ 4       {% block errors %}{% include "floppyforms/errors.html" with errors=field.errors %}{% endblock %}
+ 5
+ 6        <div class="form-group{% if classes %} {{ classes }}{% endif %}">
+ 7           {% block label %}{% if field|id %}<label class="col-lg-4 control-label" for="{{ field|id }}">{% endif %}{      ↳{ label }}{% if label|last not in ".:!?" %}:{% endif %}{% if field|id %}</label>{% endif %}{% endblock %}
+ 8           <div class="col-lg-8">
+ 9           {% block widget %}{% formfield field %}{% endblock %}
+10           {% block help_text %}{% if help_text %}<span class="help-block">{{ help_text }}</span>{% endif %}{% endbl     ↳ock %}
+11           {% block hidden_fields %}{% for field in hidden_fields %}{{ field.as_hidden }}{% endfor %}{% endblock %}
+12           </div>
+13       </div>{% endblock %}
+14       {% endwith %}{% endfor %}{% endblock %}
+15
+```
 
 ## Error loading User model (06/04/2024)
 
