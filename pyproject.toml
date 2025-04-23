@@ -10,7 +10,7 @@ dependencies = [
   "Markdown",
   "importlib-metadata",
   "celery",
-  "celery-haystack",
+  "celery-haystack-ng",
   "django-haystack",
   "django-celery-email",
   "django-taggit",
