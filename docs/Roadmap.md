@@ -1,6 +1,6 @@
 # Roadmap to updgrade UIPA to supported versions of Django and Python
 
-*Last update: 04/15/2025*
+*Last update: 04/24/2025*
 
 ## Goal
 
@@ -20,6 +20,7 @@ Froide source merged into UIPA.org in update branch of russtoku's fork of UIPA.o
 
 ### Change Log
 
+- **04/24/2025:** Search and make request are working but still need to patch some dependencies.
 - **04/15/2025:** Upgraded to Django 5.2 but search and make request broken. Need patches to some
   dependencies.
 - **04/14/2025:** Upgraded to Django 4.2.20 and Python 3.12.8.
@@ -220,13 +221,13 @@ version supported for Django 1.11.29).
  18. ✅ Upgrade Python to 3.12 (highest supported by Django 5.0).
      - **Completed.:** 04/14/2025
 
- 19. Upgrade Django to 5.0 (needs Python 3.10+, supports 3.12)
+ 19. ✅ Upgrade Django to 5.0 (needs Python 3.10+, supports 3.12)
      - https://docs.djangoproject.com/en/5.2/releases/5.0/#features-removed-in-5-0
 
- 20. Upgrade Django to 5.1 (needs Python 3.10+, supports 3.13)
+ 20. ✅ Upgrade Django to 5.1 (needs Python 3.10+, supports 3.13)
      - https://docs.djangoproject.com/en/5.2/releases/5.1/#features-removed-in-5-1
 
- 21. Upgrade Django to 5.2 (needs Python 3.10+, supports 3.13)
+ 21. ✅ Upgrade Django to 5.2 (needs Python 3.10+, supports 3.13)
      - https://docs.djangoproject.com/en/5.2/releases/5.2/#features-deprecated-in-5-2
 
  22. Pull incoming email to UIPA and process it (Celery tasks).

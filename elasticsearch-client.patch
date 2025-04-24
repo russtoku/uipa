@@ -1,0 +1,11 @@
+--- .venv/lib/python3.12/site-packages/elasticsearch/client/__init__.py.orig	2025-04-15 08:54:20
++++ .venv/lib/python3.12/site-packages/elasticsearch/client/__init__.py	2025-04-24 08:24:09
+@@ -460,7 +460,7 @@
+         'suggest_size', 'suggest_text', 'terminate_after', 'timeout',
+         'track_scores', 'version')
+     def search(self, index=None, doc_type=None, body=None, params=None):
+-        """
++        r"""
+         Execute a search query and get back search hits that match the query.
+         `<http://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html>`_
+ 

@@ -1,0 +1,11 @@
+--- .venv/lib/python3.12/site-packages/django/forms/boundfield.py.orig	2025-04-15 08:05:02
++++ .venv/lib/python3.12/site-packages/django/forms/boundfield.py	2025-04-24 08:18:41
+@@ -109,7 +109,7 @@
+             name=self.html_initial_name if only_initial else self.html_name,
+             value=value,
+             attrs=attrs,
+-            renderer=self.form.renderer,
++            #renderer=self.form.renderer,
+         )
+ 
+     def as_text(self, attrs=None, **kwargs):
