@@ -1,5 +1,5 @@
 # UIPA.org - Uniform Information Practices Act portal
-
+**08/25/2025: Archiving this repo because I'm not spending any more time working on a upgrade for UIPA.org on this update branch.**
 > This branch is a departure from the main branch. It seeks to satisfy the goal
 > of upgrading UIPA.org to currently supported versions of Python and Django
 > without upgrading Froide to a newer upstream version.
